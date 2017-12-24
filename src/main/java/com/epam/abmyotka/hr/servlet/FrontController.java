@@ -1,5 +1,6 @@
 package com.epam.abmyotka.hr.servlet;
 
+import com.epam.abmyotka.hr.creator.AdminCreator;
 import com.epam.abmyotka.hr.entity.Account;
 
 import javax.servlet.RequestDispatcher;
@@ -9,6 +10,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
+import java.io.PrintWriter;
 
 public class FrontController extends HttpServlet{
 
@@ -26,28 +28,31 @@ public class FrontController extends HttpServlet{
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
 
-        HttpSession sesion = request.getSession(true);
-        Account userBean = (Account) sesion.getAttribute("userbean");
+        HttpSession session = request.getSession(true);
+        Account user = (Account) session.getAttribute("role");
 
-        if(userBean == null){
-
+        if(user == null){
             String username = request.getParameter("Username");
             String password = request.getParameter("Password");
-            userBean = new Account(username, password);
+            user = new Account(username, password);
         }
-        String nexPage;
-        String user = "log";
-        String pass = "123";
-        boolean result = false;
 
-        if(user.equals(userBean.getLogin()) && pass.equals(userBean.getPassword())){
+        AdminCreator creator = new AdminCreator();
+        Account admin = creator.createAdmin();
 
-            nexPage = "/Welcom.jsp";
+        String message = "";
+
+        if(admin.getLogin().equals(user.getLogin()) && admin.getPassword().equals(user.getPassword())){
+            session.setAttribute("role", "admin");
+            message = "ADMIN";
         } else {
-
-            nexPage = "/Error.jsp";
+            message = "NOT ADMIN";
         }
-        dispatch(request, response, nexPage);
+
+        PrintWriter out = response.getWriter();
+        out.print(message);
+        request.getRequestDispatcher("/index.jsp").include(request, response);
+        //dispatch(request, response, nexPage);
     }
 
     protected void dispatch(HttpServletRequest request, HttpServletResponse response, String page)

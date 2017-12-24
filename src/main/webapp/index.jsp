@@ -8,10 +8,16 @@
 <body>
 <form name="Login" action="FrontController" method="post">
     <p align="center">
-        Username <input type="text" name="Username" value="" size="20"/>
+        <label>
+            Username
+            <input type="text" name="Username" value="" size="20"/>
+        </label>
         <br/>
         <br/>
-        Password <input type="password" name="Password" value="" size="20"/>
+        <label>
+            Password
+            <input type="password" name="Password" value="" size="20"/>
+        </label>
         <br/>
         <br/>
         <input type="submit" name="Submit" value="Submit"/>
