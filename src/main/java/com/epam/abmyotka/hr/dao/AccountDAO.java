@@ -1,11 +1,21 @@
 package com.epam.abmyotka.hr.dao;
 
 import com.epam.abmyotka.hr.entity.Account;
+import org.apache.logging.log4j.Level;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import java.sql.Connection;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
+import java.util.ArrayList;
 import java.util.List;
 
 public class AccountDAO extends AbstractDAO<Account> {
+    private final static Logger LOGGER = LogManager.getLogger(AccountDAO.class);
+
+    private static final String SQL_SELECT_ALL_ACCOUNT = "SELECT * FROM account";
 
     public AccountDAO(Connection connection) {
         super(connection);
@@ -13,7 +23,26 @@ public class AccountDAO extends AbstractDAO<Account> {
 
     @Override
     public List<Account> findAll() {
-        return null;
+        List<Account> accounts = new ArrayList<>();
+        Statement statement = null;
+        try {
+            statement = this.getStatement();
+            ResultSet resultSet = statement.executeQuery(SQL_SELECT_ALL_ACCOUNT);
+            while(resultSet.next()) {
+                Account account = new Account();
+                account.setAccountId(resultSet.getInt("idAccount"));
+                account.setLogin(resultSet.getString("login"));
+                account.setPassword(resultSet.getString("password"));
+                account.setAttachment(resultSet.getString("attachment"));
+                accounts.add(account);
+            }
+        } catch (SQLException e) {
+            LOGGER.log(Level.ERROR, "SQL exception (request or table failed)!");
+        } finally {
+            this.closeStatement(statement);
+        }
+
+        return accounts;
     }
 
     @Override

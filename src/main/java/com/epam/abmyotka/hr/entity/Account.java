@@ -4,6 +4,10 @@ public class Account extends Entity{
     private int accountId;
     private String login;
     private String password;
+    private String attachment;
+
+    public Account() {
+    }
 
     public Account(String login, String password) {
         this.login = login;
@@ -34,6 +38,14 @@ public class Account extends Entity{
         this.password = password;
     }
 
+    public String getAttachment() {
+        return attachment;
+    }
+
+    public void setAttachment(String attachment) {
+        this.attachment = attachment;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) {
@@ -45,9 +57,9 @@ public class Account extends Entity{
 
         Account account = (Account) o;
 
-        return accountId == account.accountId &&
-                (login != null ? login.equals(account.login) : account.login == null) &&
-                (password != null ? password.equals(account.password) : account.password == null);
+        return accountId == account.accountId && (login != null ? login.equals(account.login) : account.login == null)
+                && (password != null ? password.equals(account.password) : account.password == null)
+                && (attachment != null ? attachment.equals(account.attachment) : account.attachment == null);
     }
 
     @Override
@@ -55,6 +67,7 @@ public class Account extends Entity{
         int result = accountId;
         result = 31 * result + (login != null ? login.hashCode() : 0);
         result = 31 * result + (password != null ? password.hashCode() : 0);
+        result = 31 * result + (attachment != null ? attachment.hashCode() : 0);
         return result;
     }
 }

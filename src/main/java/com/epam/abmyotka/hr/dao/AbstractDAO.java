@@ -7,6 +7,7 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.List;
@@ -35,6 +36,16 @@ public abstract class AbstractDAO <T extends Entity> {
             }
         }
         throw new SQLTechnicalException("Connection or Statement is null");
+    }
+
+    public PreparedStatement getPreparedStatement(String query) throws SQLException {
+        if (connection != null) {
+            PreparedStatement statement = connection.prepareStatement(query);
+            if (statement != null) {
+                return statement;
+            }
+        }
+        throw new SQLTechnicalException("Connection or PreparedStatement is null");
     }
 
     public void closeStatement(Statement statement) {

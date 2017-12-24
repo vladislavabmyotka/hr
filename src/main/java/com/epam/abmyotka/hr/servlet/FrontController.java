@@ -1,5 +1,6 @@
 package com.epam.abmyotka.hr.servlet;
 
+import com.epam.abmyotka.hr.authentication.AdminAuthentication;
 import com.epam.abmyotka.hr.creator.AdminCreator;
 import com.epam.abmyotka.hr.entity.Account;
 
@@ -37,16 +38,13 @@ public class FrontController extends HttpServlet{
             user = new Account(username, password);
         }
 
-        AdminCreator creator = new AdminCreator();
-        Account admin = creator.createAdmin();
-
         String message = "";
 
-        if(admin.getLogin().equals(user.getLogin()) && admin.getPassword().equals(user.getPassword())){
+        if (AdminAuthentication.isAdmin(user)) {
             session.setAttribute("role", "admin");
             message = "ADMIN";
         } else {
-            message = "NOT ADMIN";
+
         }
 
         PrintWriter out = response.getWriter();
