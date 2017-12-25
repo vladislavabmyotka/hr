@@ -16,6 +16,8 @@
           <element id="library" level="project" name="Maven: org.beanshell:bsh:2.0b4" />
           <element id="library" level="project" name="Maven: com.beust:jcommander:1.27" />
           <element id="library" level="project" name="Maven: org.yaml:snakeyaml:1.6" />
+          <element id="library" level="project" name="Maven: org.apache.tomcat:tomcat-jdbc:8.5.11" />
+          <element id="library" level="project" name="Maven: org.apache.tomcat:tomcat-juli:8.5.11" />
         </element>
       </element>
       <element id="directory" name="META-INF">
