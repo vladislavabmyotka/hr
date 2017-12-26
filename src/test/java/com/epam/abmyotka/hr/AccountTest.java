@@ -6,9 +6,6 @@ import com.epam.abmyotka.hr.service.AccountService;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
-import javax.naming.NamingException;
-import java.sql.SQLException;
-
 public class AccountTest {
 
     @Test
@@ -21,16 +18,9 @@ public class AccountTest {
 
     @Test
     public void findAccountTest() {
-        Account expectedUser = new Account("KingOfTheDot", "qwerty1234");
+        Account expectedUser = new Account(3, "KingOfTheDot", "qwerty1234", "c");
         AccountService service = new AccountService();
-        Account actualUser = null;
-        try {
-            actualUser = service.findAccount(expectedUser);
-        } catch (NamingException | SQLException e) {
-            e.printStackTrace();
-        }
-        System.out.println(actualUser.getLogin() + "    " + actualUser.getPassword());
+        Account actualUser = service.findAccount(expectedUser);
+        Assert.assertEquals(actualUser, expectedUser);
     }
-
-    //TODO: сделать тест на аутентификацию админа
 }

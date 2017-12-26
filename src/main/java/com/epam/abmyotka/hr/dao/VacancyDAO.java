@@ -42,7 +42,7 @@ public class VacancyDAO extends AbstractDAO<Vacancy> {
                 vacancies.add(vacancy);
             }
         } catch (SQLException e) {
-            LOGGER.log(Level.ERROR, "SQL exception (request or table failed)!");
+            LOGGER.log(Level.ERROR, "SQL exception (request or table failed)! Detail: " + e.getMessage());
         } finally {
             this.closeStatement(statement);
         }

@@ -3,11 +3,6 @@ package com.epam.abmyotka.hr.servlet;
 import com.epam.abmyotka.hr.creator.AdminCreator;
 import com.epam.abmyotka.hr.entity.Account;
 import com.epam.abmyotka.hr.service.AccountService;
-import org.apache.logging.log4j.Level;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
-
-import javax.naming.NamingException;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -16,10 +11,8 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.sql.SQLException;
 
 public class FrontController extends HttpServlet{
-    private final static Logger LOGGER = LogManager.getLogger(FrontController.class);
 
     public FrontController() {
         super();
@@ -31,7 +24,7 @@ public class FrontController extends HttpServlet{
         processRequest(request, response);
     }
 
-    protected void processRequest(HttpServletRequest request, HttpServletResponse response)
+    private void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
 
@@ -53,12 +46,7 @@ public class FrontController extends HttpServlet{
             message = "ADMIN";
         } else {
             AccountService accountService = new AccountService();
-            Account role = null;
-            try {
-                role = accountService.findAccount(user);
-            } catch (NamingException | SQLException e) {
-                LOGGER.log(Level.ERROR, "Error while taking connection from the database!");
-            }
+            Account role = accountService.findAccount(user);
             if (role != null) {
                 session.setAttribute("role", role);
                 message = role.getAttachment();

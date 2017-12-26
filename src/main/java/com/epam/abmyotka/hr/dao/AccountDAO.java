@@ -37,7 +37,7 @@ public class AccountDAO extends AbstractDAO<Account> {
                 accounts.add(account);
             }
         } catch (SQLException e) {
-            LOGGER.log(Level.ERROR, "SQL exception (request or table failed)!");
+            LOGGER.log(Level.ERROR, "SQL exception (request or table failed)! Detail: " + e.getMessage());
         } finally {
             this.closeStatement(statement);
         }

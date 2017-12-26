@@ -31,7 +31,7 @@ public class EmployerDAO extends AbstractDAO<Employer> {
                 employers.add(employer);
             }
         } catch (SQLException e) {
-            LOGGER.log(Level.ERROR, "SQL exception (request or table failed)!");
+            LOGGER.log(Level.ERROR, "SQL exception (request or table failed)! Detail: " + e.getMessage());
         } finally {
             this.closeStatement(statement);
         }
@@ -50,7 +50,7 @@ public class EmployerDAO extends AbstractDAO<Employer> {
                 employer = createEmployerByResultSet(resultSet);
             }
         } catch (SQLException e) {
-            LOGGER.log(Level.ERROR, "SQL exception (request or table failed)!");
+            LOGGER.log(Level.ERROR, "SQL exception (request or table failed)! Detail: " + e.getMessage());
         } finally {
             this.closeStatement(preparedStatement);
         }
