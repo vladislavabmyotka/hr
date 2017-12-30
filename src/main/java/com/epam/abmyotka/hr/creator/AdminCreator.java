@@ -10,6 +10,7 @@ public class AdminCreator {
         ResourceBundle resource = ResourceBundle.getBundle("admin");
         String login = resource.getString("admin.username");
         String password = resource.getString("admin.password");
-        return new Account(login, password);
+        String attachment = resource.getString("admin.attachment");
+        return new Account(login, password, attachment);
     }
 }

@@ -28,6 +28,14 @@ public class FrontController extends HttpServlet{
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
 
+        PrintWriter out = response.getWriter();
+        out.print("qqqqqqqqqqqqqqqqqqqq");
+        out.print("qqqqqqqqqqqqqqqqqqqq");
+        out.print("qqqqqqqqqqqqqqqqqqqq");
+        out.print("qqqqqqqqqqqqqqqqqqqq");
+        out.print("qqqqqqqqqqqqqqqqqqqq");
+        out.print("qqqqqqqqqqqqqqqqqqqq");
+
         HttpSession session = request.getSession(true);
         Account user = (Account) session.getAttribute("role");
 
@@ -55,9 +63,23 @@ public class FrontController extends HttpServlet{
             }
         }
 
-        PrintWriter out = response.getWriter();
         out.print(message);
-        request.getRequestDispatcher("/index.jsp").include(request, response);
+        out.print(message);
+        out.print(message);
+        out.print(message);
+        out.print(message);
+        out.print(message);
+        out.print(message);
+        out.print(message);
+        out.print("sdffffffffffffffffff");
+        out.print("sdffffffffffffffffff");
+        out.print("sdffffffffffffffffff");
+        out.print("sdffffffffffffffffff");
+        out.print("sdffffffffffffffffff");
+        out.print("sdffffffffffffffffff");
+        out.print("sdffffffffffffffffff");
+        out.print("sdffffffffffffffffff");
+        //request.getRequestDispatcher("/index.jsp").include(request, response);
         //dispatch(request, response, nexPage);
     }
 

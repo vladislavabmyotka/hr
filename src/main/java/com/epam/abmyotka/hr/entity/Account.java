@@ -14,6 +14,12 @@ public class Account extends Entity{
         this.password = password;
     }
 
+    public Account(String login, String password, String attachment) {
+        this.login = login;
+        this.password = password;
+        this.attachment = attachment;
+    }
+
     public Account(int accountId, String login, String password, String attachment) {
         this.accountId = accountId;
         this.login = login;

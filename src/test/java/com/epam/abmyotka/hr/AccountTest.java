@@ -12,7 +12,7 @@ public class AccountTest {
     public void createAdminTest() {
         AdminCreator creator = new AdminCreator();
         Account admin = creator.createAdmin();
-        Account expectedAdmin = new Account("admin", "admin123");
+        Account expectedAdmin = new Account("admin", "admin123", "a");
         Assert.assertEquals(admin, expectedAdmin);
     }
 

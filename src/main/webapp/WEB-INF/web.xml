@@ -4,14 +4,25 @@
 
 <web-app>
   <display-name>HR Web Application</display-name>
+
   <servlet>
     <servlet-name>FrontController</servlet-name>
     <servlet-class>com.epam.abmyotka.hr.servlet.FrontController</servlet-class>
   </servlet>
 
+  <servlet>
+    <servlet-name>Register</servlet-name>
+    <jsp-file>/WEB-INF/jsp/register.jsp</jsp-file>
+  </servlet>
+
   <servlet-mapping>
     <servlet-name>FrontController</servlet-name>
     <url-pattern>/</url-pattern>
+  </servlet-mapping>
+
+  <servlet-mapping>
+    <servlet-name>Register</servlet-name>
+    <url-pattern>/register</url-pattern>
   </servlet-mapping>
 
   <welcome-file-list>
