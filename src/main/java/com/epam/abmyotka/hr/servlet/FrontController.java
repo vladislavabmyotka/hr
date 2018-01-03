@@ -5,6 +5,7 @@ import com.epam.abmyotka.hr.entity.Account;
 import com.epam.abmyotka.hr.service.AccountService;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -12,29 +13,46 @@ import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.io.PrintWriter;
 
+import static com.epam.abmyotka.hr.constant.AccountAttachmentConstant.ADMIN_ATTACHMENT;
+import static com.epam.abmyotka.hr.constant.AccountAttachmentConstant.CANDIDATE_ATTACHMENT;
+import static com.epam.abmyotka.hr.constant.AccountAttachmentConstant.EMPLOYER_ATTACHMENT;
+
+@WebServlet(urlPatterns = { "/"})
 public class FrontController extends HttpServlet{
+    private static final long serialVersionUID = 1L;
 
     public FrontController() {
         super();
     }
 
     @Override
+    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+
+    }
+
+    @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+        String path = request.getRequestURI();
+        PrintWriter out = response.getWriter();
+
+        String username = request.getParameter("Username");
+        String password = request.getParameter("Password");
+
+        out.print(username + "\n" + password);
     }
 
     private void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        response.setContentType("text/html;charset=UTF-8");
 
+        /*String path = request.getRequestURI();
         PrintWriter out = response.getWriter();
-        out.print("qqqqqqqqqqqqqqqqqqqq");
-        out.print("qqqqqqqqqqqqqqqqqqqq");
-        out.print("qqqqqqqqqqqqqqqqqqqq");
-        out.print("qqqqqqqqqqqqqqqqqqqq");
-        out.print("qqqqqqqqqqqqqqqqqqqq");
-        out.print("qqqqqqqqqqqqqqqqqqqq");
+
+        String username = request.getParameter("Username");
+        String password = request.getParameter("Password");
+
+        out.print(username + "\n" + password);*/
+        /*response.setContentType("text/html;charset=UTF-8");
 
         HttpSession session = request.getSession(true);
         Account user = (Account) session.getAttribute("role");
@@ -45,47 +63,33 @@ public class FrontController extends HttpServlet{
             user = new Account(username, password);
         }
 
-        String message;
         AdminCreator creator = new AdminCreator();
         Account admin = creator.createAdmin();
 
-        if (admin.equals(user)) {
-            session.setAttribute("role", admin);
-            message = "ADMIN";
+        Account potentialAdmin = new Account(user.getLogin(), user.getPassword(), ADMIN_ATTACHMENT);
+
+        if (admin.equals(potentialAdmin)) {
+            session.setAttribute("role", potentialAdmin);
+            dispatch(request, response, "/adminHome");
         } else {
-            AccountService accountService = new AccountService();
+            request.getRequestDispatcher("/WEB-INF/jsp/wrongLoginOrPassword.jsp").include(request, response);*/
+            /*AccountService accountService = new AccountService();
             Account role = accountService.findAccount(user);
             if (role != null) {
                 session.setAttribute("role", role);
-                message = role.getAttachment();
+                if (role.getAttachment().equals(CANDIDATE_ATTACHMENT))  {
+                    dispatch(request, response, "/candidateHome");
+                } else if (role.getAttachment().equals(EMPLOYER_ATTACHMENT)) {
+                    dispatch(request, response, "/employerHome");
+                }
             } else {
-                message = "NULL";
-            }
-        }
-
-        out.print(message);
-        out.print(message);
-        out.print(message);
-        out.print(message);
-        out.print(message);
-        out.print(message);
-        out.print(message);
-        out.print(message);
-        out.print("sdffffffffffffffffff");
-        out.print("sdffffffffffffffffff");
-        out.print("sdffffffffffffffffff");
-        out.print("sdffffffffffffffffff");
-        out.print("sdffffffffffffffffff");
-        out.print("sdffffffffffffffffff");
-        out.print("sdffffffffffffffffff");
-        out.print("sdffffffffffffffffff");
-        //request.getRequestDispatcher("/index.jsp").include(request, response);
-        //dispatch(request, response, nexPage);
+                request.getRequestDispatcher("/WEB-INF/jsp/wrongLoginOrPassword.jsp").include(request, response);
+            }*/
     }
 
-    protected void dispatch(HttpServletRequest request, HttpServletResponse response, String page)
+    private void dispatch(HttpServletRequest request, HttpServletResponse response, String page)
             throws  javax.servlet.ServletException,java.io.IOException {
-        RequestDispatcher dispatcher = getServletContext().getRequestDispatcher(page);
+        RequestDispatcher dispatcher = request.getRequestDispatcher(page);
         dispatcher.forward(request, response);
     }
 }

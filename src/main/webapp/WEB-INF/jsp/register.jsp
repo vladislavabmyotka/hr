@@ -46,7 +46,7 @@
             <input type="hidden" name="recognition" value="register">
 
             <label for="inputLogin" class="sr-only"></label>
-            <input name="Login" type="text" id="inputLogin" class="form-control" placeholder="Login" required=""
+            <input name="Username" type="text" id="inputLogin" class="form-control" placeholder="Login" required=""
                    autofocus="">
 
             <label for="inputPassword" class="sr-only"></label>

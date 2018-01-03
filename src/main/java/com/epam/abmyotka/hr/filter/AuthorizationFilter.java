@@ -6,19 +6,22 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 
+import com.epam.abmyotka.hr.constant.AccountAttachmentConstant;
 import com.epam.abmyotka.hr.entity.Account;
 import org.apache.commons.lang3.StringUtils;
 
+import static com.epam.abmyotka.hr.constant.AccountAttachmentConstant.ADMIN_ATTACHMENT;
+import static com.epam.abmyotka.hr.constant.AccountAttachmentConstant.CANDIDATE_ATTACHMENT;
+import static com.epam.abmyotka.hr.constant.AccountAttachmentConstant.EMPLOYER_ATTACHMENT;
+
 //@WebFilter(servletNames = {"FrontController"})
+@WebFilter(filterName = "AuthFilter", urlPatterns = { "/*" })
 public class AuthorizationFilter implements Filter {
-    private static final String ADMIN_ATTACHMENT = "a";
-    private static final String CANDIDATE_ATTACHMENT = "c";
-    private static final String EMPLOYER_ATTACHMENT = "e";
-    private List<String> pathFilters = Collections.singletonList("index.jsp");
 
     public AuthorizationFilter() {
     }
@@ -31,7 +34,7 @@ public class AuthorizationFilter implements Filter {
     @Override
     public void doFilter(ServletRequest request, ServletResponse response, FilterChain filterChain)
             throws IOException, ServletException {
-        String uri = ((HttpServletRequest) request).getRequestURI();
+
         HttpSession session = ((HttpServletRequest) request).getSession();
 
         Account user = (Account)session.getAttribute("role");
@@ -39,22 +42,24 @@ public class AuthorizationFilter implements Filter {
         if (user != null) {
             switch (user.getAttachment()) {
                 case ADMIN_ATTACHMENT:
-                    ((HttpServletResponse)response).sendRedirect("/adminHome.jsp");
+                    dispatch(request, response, "/adminHome");
                     break;
                 case CANDIDATE_ATTACHMENT:
-                    ((HttpServletResponse)response).sendRedirect("/candidateHome.jsp");
+                    dispatch(request, response, "/candidateHome");
                     break;
                 case EMPLOYER_ATTACHMENT:
-                    ((HttpServletResponse)response).sendRedirect("/employerHome.jsp");
+                    dispatch(request, response, "/employerHome");
                     break;
             }
-        } else {
-            filterChain.doFilter(request, response);
         }
 
-        //RequestDispatcher requestDispatcher = request.getRequestDispatcher("/WEB-INF/jsp/register.jsp");
-        //requestDispatcher.forward(request, response);
-        //((HttpServletResponse) response).sendRedirect("/WEB-INF/jsp/register.jsp");
+        filterChain.doFilter(request, response);
+    }
+
+    private void dispatch(ServletRequest request, ServletResponse response, String page)
+            throws  ServletException, IOException {
+        RequestDispatcher dispatcher = request.getServletContext().getRequestDispatcher(page);
+        dispatcher.forward(request, response);
     }
 
     @Override
