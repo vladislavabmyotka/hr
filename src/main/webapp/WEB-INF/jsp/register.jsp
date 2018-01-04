@@ -1,9 +1,16 @@
 <%@ page contentType="text/html; charset=UTF-8" language="java" pageEncoding="UTF-8" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<c:set var="language"
+       value="${not empty param.language ? param.language : not empty language ? language : pageContext.request.locale}"
+       scope="session" />
+<fmt:setLocale value="${language}" />
+<fmt:setBundle basename="lang.app" />
 <!DOCTYPE html>
-<html lang="en">
+<html lang="${language}">
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-    <title>Register</title>
+    <title><fmt:message key="index.nav.register" /></title>
     <style>
         <%@include file='../css/bootstrap.min.css' %>
         <%@include file='../css/signin.css' %>
@@ -13,7 +20,8 @@
 
     <nav class="navbar navbar-expand-md navbar-dark bg-dark fixed-top">
         <a class="navbar-brand" href="#">HR System</a>
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault" aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault"
+                aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
 
@@ -21,18 +29,18 @@
 
             <ul class="navbar-nav mr-auto">
                 <li class="nav-item active">
-                    <a class="nav-link" href="#">Register<span class="sr-only">(current)</span></a>
+                    <a class="nav-link" href="#"><fmt:message key="index.nav.register" />
+                        <span class="sr-only">(current)</span></a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="index.jsp">Authorization</a>
+                    <a class="nav-link" href="index.jsp"><fmt:message key="index.nav.authorization" /></a>
                 </li>
             </ul>
             <ul class="nav navbar-nav navbar-right">
                 <form>
-                    <select class="form-control">
-                        <option>Русский</option>
-                        <option>English</option>
-                        <option>Беларускi</option>
+                    <select class="form-control" title="language" id="language" name="language" onchange="submit()">
+                        <option value="ru" ${language == 'ru' ? 'selected' : ''}>Русский</option>
+                        <option value="en" ${language == 'en' ? 'selected' : ''}>English</option>
                     </select>
                 </form>
             </ul>
@@ -41,37 +49,37 @@
 
     <div class="container">
         <form class="form-signin">
-            <h1 class="form-signin-heading">Please sign in</h1>
+            <h1 class="form-signin-heading"><fmt:message key="register.container.h1" /></h1>
 
             <input type="hidden" name="recognition" value="register">
 
             <label for="inputLogin" class="sr-only"></label>
-            <input name="Username" type="text" id="inputLogin" class="form-control" placeholder="Login" required=""
-                   autofocus="">
+            <input name="Username" type="text" id="inputLogin" class="form-control"
+                   placeholder=<fmt:message key="index.container.login" /> required="" autofocus="">
 
             <label for="inputPassword" class="sr-only"></label>
-            <input name="Password" type="password" id="inputPassword" class="form-control" placeholder="Password"
-                   required="">
+            <input name="Password" type="password" id="inputPassword" class="form-control"
+                   placeholder=<fmt:message key="index.container.password" /> required="">
 
             <div class="radio">
-                <label>Please choose your attachment:</label>
+                <label><fmt:message key="register.container.attachment" /></label>
                 <label>
                     <input type="radio" name="optionsRadios" id="optionsRadios1" value="option1" checked>
-                    Candidate
+                    <fmt:message key="register.container.attachment.candidate" />
                 </label>
             </div>
             <div class="radio">
                 <label>
                     <input type="radio" name="optionsRadios" id="optionsRadios2" value="option2">
-                    Employer
+                    <fmt:message key="register.container.attachment.employer" />
                 </label>
             </div>
 
-            <button class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
+            <button class="btn btn-lg btn-primary btn-block" type="submit"><fmt:message key="register.container.sign" />
+            </button>
+            <button class="btn btn-lg btn-primary btn-block" type="reset"><fmt:message key="index.container.reset" />
+            </button>
         </form>
     </div>
-
-    <%--<script src="../js/jquery.com_jquery-3.2.1.slim.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
-    <script src="../js/bootstrap.min.js"></script>--%>
 </body>
 </html>
