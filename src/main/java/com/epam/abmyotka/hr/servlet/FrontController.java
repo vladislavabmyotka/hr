@@ -3,6 +3,8 @@ package com.epam.abmyotka.hr.servlet;
 import com.epam.abmyotka.hr.creator.AdminCreator;
 import com.epam.abmyotka.hr.entity.Account;
 import com.epam.abmyotka.hr.service.AccountService;
+import com.sun.org.apache.xerces.internal.impl.io.UTF8Reader;
+
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -33,33 +35,21 @@ public class FrontController extends HttpServlet{
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        String path = request.getRequestURI();
-        PrintWriter out = response.getWriter();
-
-        String username = request.getParameter("Username");
-        String password = request.getParameter("Password");
-
-        out.print(username + "\n" + password);
+        processRequest(request, response);
     }
 
     private void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-
-        /*String path = request.getRequestURI();
-        PrintWriter out = response.getWriter();
-
-        String username = request.getParameter("Username");
-        String password = request.getParameter("Password");
-
-        out.print(username + "\n" + password);*/
-        /*response.setContentType("text/html;charset=UTF-8");
+        request.setCharacterEncoding("UTF-8");
+        response.setCharacterEncoding("UTF-8");
+        response.setContentType("text/html; charset=UTF-8");
 
         HttpSession session = request.getSession(true);
         Account user = (Account) session.getAttribute("role");
 
         if(user == null){
-            String username = request.getParameter("Username");
-            String password = request.getParameter("Password");
+            String username = request.getParameter("username");
+            String password = request.getParameter("password");
             user = new Account(username, password);
         }
 
@@ -72,8 +62,7 @@ public class FrontController extends HttpServlet{
             session.setAttribute("role", potentialAdmin);
             dispatch(request, response, "/adminHome");
         } else {
-            request.getRequestDispatcher("/WEB-INF/jsp/wrongLoginOrPassword.jsp").include(request, response);*/
-            /*AccountService accountService = new AccountService();
+            AccountService accountService = new AccountService();
             Account role = accountService.findAccount(user);
             if (role != null) {
                 session.setAttribute("role", role);
@@ -83,8 +72,10 @@ public class FrontController extends HttpServlet{
                     dispatch(request, response, "/employerHome");
                 }
             } else {
-                request.getRequestDispatcher("/WEB-INF/jsp/wrongLoginOrPassword.jsp").include(request, response);
-            }*/
+                PrintWriter out = response.getWriter();
+                out.println(user.getLogin() + "\n" + user.getPassword());
+            }
+        }
     }
 
     private void dispatch(HttpServletRequest request, HttpServletResponse response, String page)

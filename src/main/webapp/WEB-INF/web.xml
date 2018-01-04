@@ -7,12 +7,11 @@
     <display-name>HR Web Application</display-name>
 
     <filter-mapping>
-        <filter-name>AuthFilter</filter-name>
+        <filter-name>encodingFilter</filter-name>
         <url-pattern>/*</url-pattern>
     </filter-mapping>
-
     <filter-mapping>
-        <filter-name>encodingFilter</filter-name>
+        <filter-name>AuthFilter</filter-name>
         <url-pattern>/*</url-pattern>
     </filter-mapping>
 

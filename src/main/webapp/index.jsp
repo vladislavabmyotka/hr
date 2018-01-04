@@ -47,17 +47,17 @@
     </nav>
 
     <div class="container">
-        <form class="form-signin" name="Login" action="FrontController" method="post">
+        <form class="form-signin" name="Login" action="FrontController" method="post" onsubmit="return validate(this);">
             <h1 class="form-signin-heading"><fmt:message key="index.container.h1" /></h1>
 
             <input type="hidden" name="recognition" value="autorization">
 
             <label for="inputLogin" class="sr-only"></label>
-            <input name="Username" type="text" id="inputLogin" class="form-control"
+            <input name="username" type="text" id="inputLogin" class="form-control"
                    placeholder=<fmt:message key="index.container.login" /> required="" autofocus="">
 
             <label for="inputPassword" class="sr-only"></label>
-            <input name="Password" type="password" id="inputPassword" class="form-control"
+            <input name="password" type="password" id="inputPassword" class="form-control" minlength="8" maxlength="16"
                    placeholder=<fmt:message key="index.container.password" /> required="" autocomplete="no">
 
             <button class="btn btn-lg btn-primary btn-block" type="submit"><fmt:message key="index.container.log" />
@@ -67,5 +67,9 @@
         </form>
 
     </div>
+
+    <script>
+        <%@include file='WEB-INF/js/validate.js' %>
+    </script>
 </body>
 </html>

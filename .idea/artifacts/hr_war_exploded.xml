@@ -18,7 +18,6 @@
           <element id="library" level="project" name="Maven: org.yaml:snakeyaml:1.6" />
           <element id="library" level="project" name="Maven: org.apache.tomcat:tomcat-jdbc:8.5.11" />
           <element id="library" level="project" name="Maven: org.apache.tomcat:tomcat-juli:8.5.11" />
-          <element id="library" level="project" name="Maven: mysql:mysql-connector-java:5.1.38" />
           <element id="library" level="project" name="Maven: org.apache.commons:commons-lang3:3.4" />
         </element>
       </element>

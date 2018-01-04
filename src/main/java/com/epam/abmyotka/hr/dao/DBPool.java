@@ -15,7 +15,7 @@ public class DBPool {
     private final static Logger LOGGER = LogManager.getLogger(DBPool.class);
 
     private static DBPool instance;
-    private static BlockingQueue<Connection> pool = new ArrayBlockingQueue<>(32, true);
+    private static BlockingQueue<Connection> pool = new ArrayBlockingQueue<>(16, true);
 
     private DBPool() {
         ResourceBundle resource = ResourceBundle.getBundle("database");
@@ -23,7 +23,12 @@ public class DBPool {
         String user = resource.getString("db.user");
         String pass = resource.getString("db.password");
 
-        for (int i = 0; i < 16; i++) {
+        try {
+            Class.forName("com.mysql.jdbc.Driver");
+        } catch (ClassNotFoundException e) {
+            LOGGER.log(Level.ERROR, "Driver not found exception! Detail: " + e.getMessage());
+        }
+        for (int i = 0; i < 8; i++) {
             try {
                 pool.add(DriverManager.getConnection(url, user, pass));
             } catch (SQLException e) {

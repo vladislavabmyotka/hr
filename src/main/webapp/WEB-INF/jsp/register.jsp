@@ -48,17 +48,17 @@
     </nav>
 
     <div class="container">
-        <form class="form-signin">
+        <form class="form-signin" onsubmit="return validate(this);">
             <h1 class="form-signin-heading"><fmt:message key="register.container.h1" /></h1>
 
             <input type="hidden" name="recognition" value="register">
 
             <label for="inputLogin" class="sr-only"></label>
-            <input name="Username" type="text" id="inputLogin" class="form-control"
+            <input name="username" type="text" id="inputLogin" class="form-control"
                    placeholder=<fmt:message key="index.container.login" /> required="" autofocus="">
 
             <label for="inputPassword" class="sr-only"></label>
-            <input name="Password" type="password" id="inputPassword" class="form-control"
+            <input name="password" type="password" id="inputPassword" class="form-control" minlength="8" maxlength="16"
                    placeholder=<fmt:message key="index.container.password" /> required="">
 
             <div class="radio">
@@ -81,5 +81,9 @@
             </button>
         </form>
     </div>
+
+    <script>
+        <%@include file='../js/validate.js' %>
+    </script>
 </body>
 </html>
