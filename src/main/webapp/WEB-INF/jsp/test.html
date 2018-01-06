@@ -5,6 +5,7 @@
     <title>Title</title>
     <link href="../css/bootstrap.min.css" rel="stylesheet">
     <link href="../css/signin.css" rel="stylesheet">
+    <script src="../js/validate.js"></script>
 </head>
 <body>
 
@@ -36,17 +37,17 @@
     </nav>
 
     <div class="container">
-        <form class="form-signin">
+        <form class="form-signin" onsubmit="return validate(this);">
             <h1 class="form-signin-heading">Please sign in</h1>
 
             <input type="hidden" name="recognition" value="register">
 
             <label for="inputLogin" class="sr-only"></label>
-            <input name="Login" type="text" id="inputLogin" class="form-control" placeholder="Login" required=""
+            <input name="login" type="text" id="inputLogin" class="form-control" placeholder="Login" required=""
                    autofocus="">
 
             <label for="inputPassword" class="sr-only"></label>
-            <input name="Password" type="password" id="inputPassword" class="form-control" placeholder="Password"
+            <input name="password" type="password" id="inputPassword" class="form-control" placeholder="Password"
                    required="">
 
             <div class="radio">

@@ -19,7 +19,7 @@
 <body>
 
     <nav class="navbar navbar-expand-md navbar-dark bg-dark fixed-top">
-        <a class="navbar-brand" href="#">HR System</a>
+        <a class="navbar-brand" href="#">HR System. ${user}</a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault"
                 aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
@@ -51,14 +51,14 @@
         <form class="form-signin" onsubmit="return validate(this);">
             <h1 class="form-signin-heading"><fmt:message key="register.container.h1" /></h1>
 
-            <input type="hidden" name="recognition" value="register">
+            <input type="hidden" name="command" value="register">
 
             <label for="inputLogin" class="sr-only"></label>
-            <input name="username" type="text" id="inputLogin" class="form-control"
+            <input name="login" type="text" id="inputLogin" class="form-control"
                    placeholder=<fmt:message key="index.container.login" /> required="" autofocus="">
 
             <label for="inputPassword" class="sr-only"></label>
-            <input name="password" type="password" id="inputPassword" class="form-control" minlength="8" maxlength="16"
+            <input name="password" type="password" id="inputPassword" class="form-control"
                    placeholder=<fmt:message key="index.container.password" /> required="">
 
             <div class="radio">

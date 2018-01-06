@@ -12,6 +12,7 @@ import java.util.Collections;
 import java.util.List;
 
 import com.epam.abmyotka.hr.constant.AccountAttachmentConstant;
+import com.epam.abmyotka.hr.constant.PathConstant;
 import com.epam.abmyotka.hr.entity.Account;
 import org.apache.commons.lang3.StringUtils;
 
@@ -42,13 +43,13 @@ public class AuthorizationFilter implements Filter {
         if (user != null) {
             switch (user.getAttachment()) {
                 case ADMIN_ATTACHMENT:
-                    dispatch(request, response, "/adminHome");
+                    dispatch(request, response, PathConstant.PATH_PAGE_ADMIN);
                     break;
                 case CANDIDATE_ATTACHMENT:
-                    dispatch(request, response, "/candidateHome");
+                    dispatch(request, response, PathConstant.PATH_PAGE_CANDIDATE);
                     break;
                 case EMPLOYER_ATTACHMENT:
-                    dispatch(request, response, "/employerHome");
+                    dispatch(request, response, PathConstant.PATH_PAGE_EMPLOYER);
                     break;
             }
         }

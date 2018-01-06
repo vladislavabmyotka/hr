@@ -18,7 +18,7 @@
 </head>
 <body>
     <nav class="navbar navbar-expand-md navbar-dark bg-dark fixed-top">
-        <a class="navbar-brand" href="#">HR System</a>
+        <a class="navbar-brand" href="#">HR System. ${user}</a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault"
                 aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
@@ -50,15 +50,19 @@
         <form class="form-signin" name="Login" action="FrontController" method="post" onsubmit="return validate(this);">
             <h1 class="form-signin-heading"><fmt:message key="index.container.h1" /></h1>
 
-            <input type="hidden" name="recognition" value="autorization">
+            <input type="hidden" name="command" value="authorization">
 
             <label for="inputLogin" class="sr-only"></label>
-            <input name="username" type="text" id="inputLogin" class="form-control"
+            <input name="login" type="text" id="inputLogin" class="form-control"
                    placeholder=<fmt:message key="index.container.login" /> required="" autofocus="">
 
             <label for="inputPassword" class="sr-only"></label>
-            <input name="password" type="password" id="inputPassword" class="form-control" minlength="8" maxlength="16"
+            <input name="password" type="password" id="inputPassword" class="form-control"
                    placeholder=<fmt:message key="index.container.password" /> required="" autocomplete="no">
+
+            <br/>
+            <h4 class="form-signin-heading"> ${errorLoginPassMessage} </h4>
+            <br/>
 
             <button class="btn btn-lg btn-primary btn-block" type="submit"><fmt:message key="index.container.log" />
             </button>
