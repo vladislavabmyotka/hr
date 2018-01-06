@@ -18,7 +18,7 @@
 </head>
 <body>
     <nav class="navbar navbar-expand-md navbar-dark bg-dark fixed-top">
-        <a class="navbar-brand" href="#">HR System. ${user}</a>
+        <a class="navbar-brand" href="#">HR System. ${pageContext.session.getAttribute("role").login}</a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault"
                 aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
@@ -61,7 +61,7 @@
                    placeholder=<fmt:message key="index.container.password" /> required="" autocomplete="no">
 
             <br/>
-            <h4 class="form-signin-heading"> ${errorLoginPassMessage} </h4>
+            <h6 class="form-signin-heading error"> ${errorLoginPassMessage} </h6>
             <br/>
 
             <button class="btn btn-lg btn-primary btn-block" type="submit"><fmt:message key="index.container.log" />

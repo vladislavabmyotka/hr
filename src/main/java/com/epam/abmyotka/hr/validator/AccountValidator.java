@@ -1,19 +1,29 @@
 package com.epam.abmyotka.hr.validator;
 
+import com.epam.abmyotka.hr.constant.ValidationConstant;
+
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class AccountValidator {
 
-    public boolean checkLogin(String login) {
-        Pattern pattern = Pattern.compile("[a-zA-Z][\\w]{4,20}");
-        Matcher matcher = pattern.matcher(login);
-        return matcher.matches();
+    public static boolean checkLogin(String login) {
+        if (login != null) {
+            Pattern pattern = Pattern.compile(ValidationConstant.LOGIN_REGEX);
+            Matcher matcher = pattern.matcher(login);
+            return matcher.matches();
+        } else {
+            return false;
+        }
     }
 
-    public boolean checkPassword(String password) {
-        Pattern pattern = Pattern.compile("^(?=.*\\d)(?=.*[a-z])[0-9a-z]{8,12}$");
-        Matcher matcher = pattern.matcher(password);
-        return matcher.matches();
+    public static boolean checkPassword(String password) {
+        if (password != null) {
+            Pattern pattern = Pattern.compile(ValidationConstant.PASSWORD_REGEX);
+            Matcher matcher = pattern.matcher(password);
+            return matcher.matches();
+        } else {
+            return false;
+        }
     }
 }

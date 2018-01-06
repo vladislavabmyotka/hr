@@ -1,18 +1,21 @@
 package com.epam.abmyotka.hr.command;
 
+import com.epam.abmyotka.hr.constant.PathConstant;
 import com.epam.abmyotka.hr.service.AccountService;
 
 import javax.servlet.http.HttpServletRequest;
 
 public class RegisterCommand implements Command {
-    private AccountService receiver;
+    private AccountService service;
 
-    public RegisterCommand(AccountService receiver) {
-        this.receiver = receiver;
+    public RegisterCommand(AccountService service) {
+        this.service = service;
     }
 
     @Override
     public String execute(HttpServletRequest request) {
-        return null;
+
+        //TODO: заглушка!!!!
+        return PathConstant.PATH_PAGE_CANDIDATE;
     }
 }

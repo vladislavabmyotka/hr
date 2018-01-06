@@ -19,7 +19,7 @@
 <body>
 
     <nav class="navbar navbar-expand-md navbar-dark bg-dark fixed-top">
-        <a class="navbar-brand" href="#">HR System. ${user}</a>
+        <a class="navbar-brand" href="#">HR System. ${pageContext.session.getAttribute("role").login}</a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault"
                 aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
@@ -48,7 +48,7 @@
     </nav>
 
     <div class="container">
-        <form class="form-signin" onsubmit="return validate(this);">
+        <form class="form-signin" action="FrontController" onsubmit="return validate(this);">
             <h1 class="form-signin-heading"><fmt:message key="register.container.h1" /></h1>
 
             <input type="hidden" name="command" value="register">
