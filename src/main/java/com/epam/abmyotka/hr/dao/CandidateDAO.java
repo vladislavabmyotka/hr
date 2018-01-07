@@ -1,5 +1,6 @@
 package com.epam.abmyotka.hr.dao;
 
+import com.epam.abmyotka.hr.constant.SQLConstant;
 import com.epam.abmyotka.hr.entity.Candidate;
 import org.apache.logging.log4j.Level;
 import org.apache.logging.log4j.LogManager;
@@ -12,9 +13,6 @@ import java.util.List;
 public class CandidateDAO extends AbstractDAO<Candidate> {
     private final static Logger LOGGER = LogManager.getLogger(CandidateDAO.class);
 
-    private static final String SQL_SELECT_ALL_CANDIDATE = "SELECT * FROM candidate";
-    private static final String SQL_SELECT_CANDIDATE_BY_ACCOUNT_ID = "SELECT * FROM candidate WHERE c_idAccount = ?";
-
     public CandidateDAO(Connection connection) {
         super(connection);
     }
@@ -25,7 +23,7 @@ public class CandidateDAO extends AbstractDAO<Candidate> {
         Statement statement = null;
         try {
             statement = this.getStatement();
-            ResultSet resultSet = statement.executeQuery(SQL_SELECT_ALL_CANDIDATE);
+            ResultSet resultSet = statement.executeQuery(SQLConstant.SQL_SELECT_ALL_CANDIDATE);
             while(resultSet.next()) {
                 Candidate candidate = createCandidateByResultSet(resultSet);
                 candidates.add(candidate);
@@ -43,7 +41,7 @@ public class CandidateDAO extends AbstractDAO<Candidate> {
         Candidate candidate = null;
         PreparedStatement preparedStatement = null;
         try {
-            preparedStatement = this.getPreparedStatement(SQL_SELECT_CANDIDATE_BY_ACCOUNT_ID);
+            preparedStatement = this.getPreparedStatement(SQLConstant.SQL_SELECT_CANDIDATE_BY_ACCOUNT_ID);
             preparedStatement.setInt(1, accountId);
             ResultSet resultSet = preparedStatement.executeQuery();
             if (resultSet.next()) {

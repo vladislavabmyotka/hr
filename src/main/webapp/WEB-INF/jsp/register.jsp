@@ -64,16 +64,20 @@
             <div class="radio">
                 <label><fmt:message key="register.container.attachment" /></label>
                 <label>
-                    <input type="radio" name="optionsRadios" id="optionsRadios1" value="option1" checked>
+                    <input type="radio" name="attachment" id="candidate" value="option1" checked>
                     <fmt:message key="register.container.attachment.candidate" />
                 </label>
             </div>
             <div class="radio">
                 <label>
-                    <input type="radio" name="optionsRadios" id="optionsRadios2" value="option2">
+                    <input type="radio" name="attachment" id="employer" value="option2">
                     <fmt:message key="register.container.attachment.employer" />
                 </label>
             </div>
+
+            <br/>
+            <h6 class="form-signin-heading error"> ${errorLoginPassMessage} </h6>
+            <br/>
 
             <button class="btn btn-lg btn-primary btn-block" type="submit"><fmt:message key="register.container.sign" />
             </button>

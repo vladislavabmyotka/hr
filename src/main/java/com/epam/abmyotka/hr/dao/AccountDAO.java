@@ -1,5 +1,6 @@
 package com.epam.abmyotka.hr.dao;
 
+import com.epam.abmyotka.hr.constant.SQLConstant;
 import com.epam.abmyotka.hr.entity.Account;
 import org.apache.logging.log4j.Level;
 import org.apache.logging.log4j.LogManager;
@@ -15,8 +16,6 @@ import java.util.List;
 public class AccountDAO extends AbstractDAO<Account> {
     private final static Logger LOGGER = LogManager.getLogger(AccountDAO.class);
 
-    private static final String SQL_SELECT_ALL_ACCOUNT = "SELECT * FROM account";
-
     public AccountDAO(Connection connection) {
         super(connection);
     }
@@ -27,7 +26,7 @@ public class AccountDAO extends AbstractDAO<Account> {
         Statement statement = null;
         try {
             statement = this.getStatement();
-            ResultSet resultSet = statement.executeQuery(SQL_SELECT_ALL_ACCOUNT);
+            ResultSet resultSet = statement.executeQuery(SQLConstant.SQL_SELECT_ALL_ACCOUNT);
             while(resultSet.next()) {
                 Account account = new Account();
                 account.setAccountId(resultSet.getInt("idAccount"));

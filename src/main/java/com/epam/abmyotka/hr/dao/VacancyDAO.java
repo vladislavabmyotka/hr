@@ -1,5 +1,6 @@
 package com.epam.abmyotka.hr.dao;
 
+import com.epam.abmyotka.hr.constant.SQLConstant;
 import com.epam.abmyotka.hr.entity.Vacancy;
 import org.apache.logging.log4j.Level;
 import org.apache.logging.log4j.LogManager;
@@ -15,8 +16,6 @@ import java.util.List;
 public class VacancyDAO extends AbstractDAO<Vacancy> {
     private final static Logger LOGGER = LogManager.getLogger(VacancyDAO.class);
 
-    private static final String SQL_SELECT_ALL_VACANCY = "SELECT * FROM vacancy";
-
     public VacancyDAO(Connection connection) {
         super(connection);
     }
@@ -27,7 +26,7 @@ public class VacancyDAO extends AbstractDAO<Vacancy> {
         Statement statement = null;
         try {
             statement = this.getStatement();
-            ResultSet resultSet = statement.executeQuery(SQL_SELECT_ALL_VACANCY);
+            ResultSet resultSet = statement.executeQuery(SQLConstant.SQL_SELECT_ALL_VACANCY);
             while(resultSet.next()) {
                 Vacancy vacancy = new Vacancy();
                 vacancy.setVacancyId(resultSet.getInt("idvacancy"));

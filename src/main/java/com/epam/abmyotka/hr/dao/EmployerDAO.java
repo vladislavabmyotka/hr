@@ -1,5 +1,6 @@
 package com.epam.abmyotka.hr.dao;
 
+import com.epam.abmyotka.hr.constant.SQLConstant;
 import com.epam.abmyotka.hr.entity.Employer;
 import org.apache.logging.log4j.Level;
 import org.apache.logging.log4j.LogManager;
@@ -12,9 +13,6 @@ import java.util.List;
 public class EmployerDAO extends AbstractDAO<Employer> {
     private final static Logger LOGGER = LogManager.getLogger(EmployerDAO.class);
 
-    private static final String SQL_SELECT_ALL_EMPLOYER = "SELECT * FROM employer";
-    private static final String SQL_SELECT_EMPLOYER_BY_ACCOUNT_ID = "SELECT * FROM employer WHERE e_idAccount = ?";
-
     public EmployerDAO(Connection connection) {
         super(connection);
     }
@@ -25,7 +23,7 @@ public class EmployerDAO extends AbstractDAO<Employer> {
         Statement statement = null;
         try {
             statement = this.getStatement();
-            ResultSet resultSet = statement.executeQuery(SQL_SELECT_ALL_EMPLOYER);
+            ResultSet resultSet = statement.executeQuery(SQLConstant.SQL_SELECT_ALL_EMPLOYER);
             while(resultSet.next()) {
                 Employer employer = createEmployerByResultSet(resultSet);
                 employers.add(employer);
@@ -43,7 +41,7 @@ public class EmployerDAO extends AbstractDAO<Employer> {
         Employer employer = null;
         PreparedStatement preparedStatement = null;
         try {
-            preparedStatement = this.getPreparedStatement(SQL_SELECT_EMPLOYER_BY_ACCOUNT_ID);
+            preparedStatement = this.getPreparedStatement(SQLConstant.SQL_SELECT_EMPLOYER_BY_ACCOUNT_ID);
             preparedStatement.setInt(1, accountId);
             ResultSet resultSet = preparedStatement.executeQuery();
             if (resultSet.next()) {
