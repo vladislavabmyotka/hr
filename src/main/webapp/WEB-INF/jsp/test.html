@@ -26,12 +26,34 @@
                 </li>
             </ul>
             <ul class="nav navbar-nav navbar-right">
-                <form>
-                    <select class="form-control" title="language" id="language" name="language">
-                        <option>Русский</option>
-                        <option>English</option>
-                    </select>
-                </form>
+                <li>
+                    <div class="dropdown personal-account">
+                        <a href="#" data-toggle="dropdown" class="dropdown-toggle">
+                            Личный кабинет
+                            <b class="caret"></b>
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li><a href="#">Изменить данные</a></li>
+                            <li><a href="#">Удалить аккаунт</a></li>
+                        </ul>
+                    </div>
+                </li>
+                <li>
+                    <form class="margin">
+                        <select class="form-control" title="language" id="language" name="language">
+                            <option value="http://localhost:8080/hr/adminHome?language=ru">Русский</option>
+                            <option value="http://localhost:8080/hr/adminHome?language=en">English</option>
+                        </select>
+                    </form>
+                </li>
+
+                <li>
+                    <form class="form-signin" action="FrontController" method="post">
+                        <input type="hidden" name="command" value="">
+                        <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Exit</button>
+                    </form>
+
+                </li>
             </ul>
         </div>
     </nav>

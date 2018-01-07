@@ -21,3 +21,15 @@ function validate(form) {
         return false;
     }
 }
+
+function checkPasswordsMatch(form) {
+    var password = form.password.value;
+    var repeatPassword = form.repeatPassword.value;
+
+    if (password === repeatPassword) {
+        return true;
+    } else {
+        alert("Entered passwords do not match!");
+        return false;
+    }
+}

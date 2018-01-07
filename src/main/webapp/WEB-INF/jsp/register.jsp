@@ -48,7 +48,7 @@
     </nav>
 
     <div class="container">
-        <form class="form-signin" action="FrontController" onsubmit="return validate(this);">
+        <form class="form-signin" action="FrontController" onsubmit="return (validate(this) && checkPasswordsMatch(this));">
             <h1 class="form-signin-heading"><fmt:message key="register.container.h1" /></h1>
 
             <input type="hidden" name="command" value="register">
@@ -61,16 +61,20 @@
             <input name="password" type="password" id="inputPassword" class="form-control"
                    placeholder=<fmt:message key="index.container.password" /> required="">
 
+            <label for="repeatPassword" class="sr-only"></label>
+            <input name="repeatPassword" type="password" id="repeatPassword" class="form-control"
+                   placeholder="<fmt:message key="register.repeat.password" />" required="">
+
             <div class="radio">
                 <label><fmt:message key="register.container.attachment" /></label>
                 <label>
-                    <input type="radio" name="attachment" id="candidate" value="option1" checked>
+                    <input type="radio" name="attachment" id="optionsRadios1" value="c" checked>
                     <fmt:message key="register.container.attachment.candidate" />
                 </label>
             </div>
             <div class="radio">
                 <label>
-                    <input type="radio" name="attachment" id="employer" value="option2">
+                    <input type="radio" name="attachment" id="optionsRadios2" value="e">
                     <fmt:message key="register.container.attachment.employer" />
                 </label>
             </div>

@@ -11,9 +11,7 @@ public class AccountService {
 
     public Account findAccount(Account user) {
         DBPool pool = DBPool.getInstance();
-
         Connection connection = pool.getConnection();
-
         AccountDAO accountDAO = new AccountDAO(connection);
         List<Account> accounts = accountDAO.findAll();
 
@@ -27,5 +25,25 @@ public class AccountService {
 
         pool.putConnection(connection);
         return role;
+    }
+
+    public boolean checkCoincidenceByLogin(String login) {
+        boolean isExist;
+        DBPool pool = DBPool.getInstance();
+        Connection connection = pool.getConnection();
+        AccountDAO accountDAO = new AccountDAO(connection);
+        isExist = accountDAO.checkCoincidenceByLogin(login);
+        pool.putConnection(connection);
+        return isExist;
+    }
+
+    public boolean addAccount(Account account) {
+        boolean isSuccessful;
+        DBPool pool = DBPool.getInstance();
+        Connection connection = pool.getConnection();
+        AccountDAO accountDAO = new AccountDAO(connection);
+        isSuccessful = accountDAO.add(account);
+        pool.putConnection(connection);
+        return isSuccessful;
     }
 }

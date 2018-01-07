@@ -18,7 +18,7 @@ import static com.epam.abmyotka.hr.constant.AccountAttachmentConstant.EMPLOYER_A
 public class AuthorizationCommand implements Command {
     private AccountService service;
 
-    public AuthorizationCommand(AccountService service) {
+    AuthorizationCommand(AccountService service) {
         this.service = service;
     }
 

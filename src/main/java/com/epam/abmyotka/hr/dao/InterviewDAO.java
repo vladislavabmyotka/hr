@@ -32,7 +32,7 @@ public class InterviewDAO extends AbstractDAO<Interview>{
     }
 
     @Override
-    public boolean create(Interview entity) {
+    public boolean add(Interview entity) {
         return false;
     }
 

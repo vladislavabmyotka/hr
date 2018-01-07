@@ -20,7 +20,7 @@ import static com.epam.abmyotka.hr.constant.AccountAttachmentConstant.ADMIN_ATTA
 import static com.epam.abmyotka.hr.constant.AccountAttachmentConstant.CANDIDATE_ATTACHMENT;
 import static com.epam.abmyotka.hr.constant.AccountAttachmentConstant.EMPLOYER_ATTACHMENT;
 
-//@WebFilter(filterName = "AuthFilter", urlPatterns = { "/*" })
+@WebFilter(filterName = "AuthFilter", urlPatterns = { "/index.jsp" })
 public class AuthorizationFilter implements Filter {
 
     public AuthorizationFilter() {

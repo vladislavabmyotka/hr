@@ -6,10 +6,7 @@ import org.apache.logging.log4j.Level;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-import java.sql.Connection;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
+import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -44,6 +41,19 @@ public class AccountDAO extends AbstractDAO<Account> {
         return accounts;
     }
 
+    public boolean checkCoincidenceByLogin(String login) {
+        boolean isCoincidence = true;
+        try {
+            PreparedStatement statement = this.getPreparedStatement(SQLConstant.SQL_SELECT_SINGLE_LOGIN);
+            statement.setString(1, login);
+            ResultSet resultSet = statement.executeQuery();
+            isCoincidence = resultSet.next();
+        } catch (SQLException e) {
+            LOGGER.log(Level.ERROR, "Error while trying find coincidence login! Detail: " + e.getMessage());
+        }
+        return isCoincidence;
+    }
+
     @Override
     public Account findEntityById(int id) {
         return null;
@@ -55,17 +65,33 @@ public class AccountDAO extends AbstractDAO<Account> {
     }
 
     @Override
-    public boolean delete(Account entity) {
+    public boolean delete(Account account) {
         return false;
     }
 
     @Override
-    public boolean create(Account entity) {
-        return false;
+    public boolean add(Account account) {
+        int countRowsAffected = 0;
+        try {
+            PreparedStatement statement = this.getPreparedStatement(SQLConstant.SQL_SELECT_ADD_ACCOUNT);
+            statement.setString(1, account.getLogin());
+            statement.setString(2, account.getPassword());
+            statement.setString(3, account.getAttachment());
+            countRowsAffected = statement.executeUpdate();
+        } catch (SQLException e) {
+            LOGGER.log(Level.ERROR, "Error while trying add account into database! Detail: " + e.getMessage());
+        }
+
+        if (countRowsAffected != 0) {
+            return true;
+        } else {
+            LOGGER.log(Level.ERROR, "The error occurred! Account was not added!");
+            return false;
+        }
     }
 
     @Override
-    public Account update(Account entity) {
+    public Account update(Account account) {
         return null;
     }
 }

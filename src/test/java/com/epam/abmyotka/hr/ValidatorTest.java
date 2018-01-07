@@ -1,5 +1,8 @@
 package com.epam.abmyotka.hr;
 
+import com.epam.abmyotka.hr.constant.AccountAttachmentConstant;
+import com.epam.abmyotka.hr.constant.ParameterConstant;
+import com.epam.abmyotka.hr.entity.Account;
 import com.epam.abmyotka.hr.validator.AccountValidator;
 import org.testng.Assert;
 import org.testng.annotations.Test;
@@ -40,5 +43,22 @@ public class ValidatorTest {
     public void nullPasswordTest() {
         String password = null;
         Assert.assertFalse(AccountValidator.checkLogin(password));
+    }
+
+    @Test
+    public void checkAttachmentTrueTest() {
+        String candidateAttachment = AccountAttachmentConstant.CANDIDATE_ATTACHMENT;
+        String employerAttachment = AccountAttachmentConstant.EMPLOYER_ATTACHMENT;
+        Assert.assertTrue(AccountValidator.checkAttachment(candidateAttachment));
+        Assert.assertTrue(AccountValidator.checkAttachment(employerAttachment));
+    }
+
+    @Test
+    public void checkAttachmentFalseTest() {
+        String candidateAttachment = "candidateFalse";
+        String employerAttachment = "employerFalse";
+        Assert.assertFalse(AccountValidator.checkAttachment(candidateAttachment));
+        Assert.assertFalse(AccountValidator.checkAttachment(employerAttachment));
+        Assert.assertFalse(AccountValidator.checkAttachment(null));
     }
 }

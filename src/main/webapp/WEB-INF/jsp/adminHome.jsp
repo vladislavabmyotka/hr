@@ -28,7 +28,7 @@
 
             <ul class="navbar-nav mr-auto">
                 <li class="nav-item active">
-                    <a class="nav-link" href="#"><fmt:message key="admin.home" />
+                    <a class="nav-link" href="#"><fmt:message key="home" />
                         <span class="sr-only">(current)</span></a>
                 </li>
             </ul>
@@ -46,11 +46,15 @@
 
                 <form class="form-signin" action="FrontController" method="post">
                     <input type="hidden" name="command" value="">
-                    <button class="btn btn-lg btn-primary btn-block" type="submit"><fmt:message key="exit" />
+                    <button class="btn btn-outline-success my-2 my-sm-0" type="submit"><fmt:message key="exit" />
                     </button>
                 </form>
             </ul>
         </div>
     </nav>
+
+    <div class="container">
+        ADMIN HOME
+    </div>
 </body>
 </html>

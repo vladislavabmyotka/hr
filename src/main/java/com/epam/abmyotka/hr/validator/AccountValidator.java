@@ -1,5 +1,6 @@
 package com.epam.abmyotka.hr.validator;
 
+import com.epam.abmyotka.hr.constant.AccountAttachmentConstant;
 import com.epam.abmyotka.hr.constant.ValidationConstant;
 
 import java.util.regex.Matcher;
@@ -25,5 +26,10 @@ public class AccountValidator {
         } else {
             return false;
         }
+    }
+
+    public static boolean checkAttachment(String attachment) {
+        return attachment != null && (attachment.equals(AccountAttachmentConstant.CANDIDATE_ATTACHMENT) ||
+                attachment.equals(AccountAttachmentConstant.EMPLOYER_ATTACHMENT));
     }
 }

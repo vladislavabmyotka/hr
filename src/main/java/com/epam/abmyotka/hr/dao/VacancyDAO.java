@@ -65,7 +65,7 @@ public class VacancyDAO extends AbstractDAO<Vacancy> {
     }
 
     @Override
-    public boolean create(Vacancy entity) {
+    public boolean add(Vacancy entity) {
         return false;
     }
 
