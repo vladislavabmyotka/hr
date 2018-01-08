@@ -25,8 +25,7 @@ public abstract class AbstractDAO <T extends Entity> {
     public abstract T findEntityById(int id);
     public abstract boolean delete(int id);
     public abstract boolean delete(T entity);
-    public abstract boolean add(T entity);
-    public abstract T update(T entity);
+    public abstract int add(T entity);
 
     Statement getStatement() throws SQLException {
         if (connection != null) {

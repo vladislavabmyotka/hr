@@ -1,4 +1,6 @@
-package com.epam.abmyotka.hr.command;
+package com.epam.abmyotka.hr.command.impl;
+
+import com.epam.abmyotka.hr.command.Command;
 
 import javax.servlet.http.HttpServletRequest;
 

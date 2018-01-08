@@ -1,5 +1,6 @@
-package com.epam.abmyotka.hr.command;
+package com.epam.abmyotka.hr.command.impl;
 
+import com.epam.abmyotka.hr.command.Command;
 import com.epam.abmyotka.hr.constant.AccountAttachmentConstant;
 import com.epam.abmyotka.hr.constant.MessageConstant;
 import com.epam.abmyotka.hr.constant.ParameterConstant;
@@ -20,7 +21,7 @@ public class RegisterCommand implements Command {
 
     @Override
     public String execute(HttpServletRequest request) {
-        String page = null;
+        String page = PathConstant.PATH_PAGE_REGISTER;
         String login = request.getParameter(ParameterConstant.PARAM_LOGIN);
         String password = request.getParameter(ParameterConstant.PARAM_PASSWORD);
         String repeatPassword = request.getParameter(ParameterConstant.PARAM_REPEAT_PASSWORD);
@@ -39,14 +40,14 @@ public class RegisterCommand implements Command {
                     } else {
                         page = PathConstant.PATH_PAGE_EMPLOYER;
                     }
+                } else {
+                    request.setAttribute("errorMessage", MessageConstant.ERROR_INTO_DB);
                 }
             } else {
-                request.setAttribute("errorLoginPassMessage", MessageConstant.USED_LOGIN_MESSAGE);
-                page = PathConstant.PATH_PAGE_REGISTER;
+                request.setAttribute("errorMessage", MessageConstant.USED_LOGIN_MESSAGE);
             }
         } else {
-            request.setAttribute("errorLoginPassMessage", MessageConstant.INCORRECT_LOGIN_PASSWORD_MESSAGE);
-            page = PathConstant.PATH_PAGE_REGISTER;
+            request.setAttribute("errorMessage", MessageConstant.INCORRECT_LOGIN_PASSWORD_MESSAGE);
         }
 
         return page;

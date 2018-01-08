@@ -34,17 +34,13 @@
             </ul>
 
             <ul class="nav navbar-nav navbar-right">
-                <li>
-                    <div class="dropdown personal-account">
-                        <a href="#" data-toggle="dropdown" class="dropdown-toggle">
-                            <fmt:message key="general.personal.cabinet" />
-                            <b class="caret"></b>
-                        </a>
-                        <ul class="dropdown-menu">
-                            <li><a href="#"><fmt:message key="general.personal.cabinet.edit" /></a></li>
-                            <li><a href="#"><fmt:message key="general.personal.cabinet.delete" /></a></li>
-                        </ul>
-                    </div>
+                <li class="dropdown personal-account">
+                    <a href="#" data-toggle="dropdown" class="dropdown-toggle">
+                        <fmt:message key="general.personal.cabinet" /><b class="caret"></b></a>
+                    <ul id="menu1" class="dropdown-menu">
+                        <li><a href="editAccount"><fmt:message key="general.personal.cabinet.edit" /></a></li>
+                        <li><a href="deleteAccount"><fmt:message key="general.personal.cabinet.delete" /></a></li>
+                    </ul>
                 </li>
                 <li>
                     <form class="margin">
@@ -71,5 +67,9 @@
     <div class="container">
         CANDIDATE HOME
     </div>
+
+    <script>
+        <%@include file='../js/bootstrapDropdown.js' %>
+    </script>
 </body>
 </html>

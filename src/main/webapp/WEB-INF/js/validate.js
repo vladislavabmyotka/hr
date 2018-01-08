@@ -33,3 +33,16 @@ function checkPasswordsMatch(form) {
         return false;
     }
 }
+
+function validateOldPassword(form) {
+    var oldPassword = form.oldPassword.value;
+
+    var regPassword = /^(?=.*\d)(?=.*[a-z])[0-9a-z]{8,12}$/i;
+    if(regPassword.test(oldPassword)) {
+        return true;
+    } else {
+        alert("Wrong password! The password must contain letters and numbers and be at least 8" +
+            " and not more than 12 characters\n");
+        return false;
+    }
+}

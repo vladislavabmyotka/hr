@@ -92,12 +92,12 @@ public class CandidateDAO extends AbstractDAO<Candidate> {
     }
 
     @Override
-    public boolean add(Candidate entity) {
+    public int add(Candidate entity) {
         return false;
     }
 
     @Override
-    public Candidate update(Candidate entity) {
+    public Candidate update(String field) {
         return null;
     }
 }

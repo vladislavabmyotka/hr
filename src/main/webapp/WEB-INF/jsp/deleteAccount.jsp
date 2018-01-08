@@ -1,4 +1,4 @@
-<%@ page contentType="text/html; charset=UTF-8" language="java" pageEncoding="UTF-8" %>
+<%@ page contentType="text/html; charset=UTF-8" language="java" pageEncoding="UTF-8" isErrorPage="true" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <c:set var="language"
@@ -6,17 +6,27 @@
        scope="session" />
 <fmt:setLocale value="${language}" />
 <fmt:setBundle basename="lang.app" />
-<!DOCTYPE html>
-<html lang="${language}">
+<html>
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-    <title><fmt:message key="employer.home" /></title>
+    <title><fmt:message key="delete.title" /></title>
     <style>
         <%@include file='../css/bootstrap.min.css' %>
         <%@include file='../css/signin.css' %>
     </style>
 </head>
 <body>
+
+    <c:set var="attachment" value="${pageContext.session.getAttribute(\"role\").attachment}"/>
+    <c:choose>
+        <c:when test="${attachment == 'c'}">
+            <c:set var="page" value="candidateHome"/>
+        </c:when>
+        <c:otherwise>
+            <c:set var="page" value="employerHome"/>
+        </c:otherwise>
+    </c:choose>
+
     <nav class="navbar navbar-expand-md navbar-dark bg-dark fixed-top">
         <a class="navbar-brand" href="#">HR System. ${pageContext.session.getAttribute("role").login}</a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault"
@@ -28,7 +38,7 @@
 
             <ul class="navbar-nav mr-auto">
                 <li class="nav-item active">
-                    <a class="nav-link" href="#"><fmt:message key="home" />
+                    <a class="nav-link" href="${page}"><fmt:message key="home" />
                         <span class="sr-only">(current)</span></a>
                 </li>
             </ul>
@@ -39,16 +49,16 @@
                         <fmt:message key="general.personal.cabinet" /><b class="caret"></b></a>
                     <ul id="menu1" class="dropdown-menu">
                         <li><a href="editAccount"><fmt:message key="general.personal.cabinet.edit" /></a></li>
-                        <li><a href="deleteAccount"><fmt:message key="general.personal.cabinet.delete" /></a></li>
+                        <li><a href="#"><fmt:message key="general.personal.cabinet.delete" /></a></li>
                     </ul>
                 </li>
                 <li>
                     <form class="margin">
                         <select class="form-control" title="language" id="language" name="language"
                                 onchange="location=this.options[this.selectedIndex].value">
-                            <option value="http://localhost:8080/hr/employerHome?language=ru"
+                            <option value="http://localhost:8080/hr/deleteAccount?language=ru"
                             ${language == 'ru' ? 'selected' : ''}>Русский</option>
-                            <option value="http://localhost:8080/hr/employerHome?language=en"
+                            <option value="http://localhost:8080/hr/deleteAccount?language=en"
                             ${language == 'en' ? 'selected' : ''}>English</option>
                         </select>
                     </form>
@@ -63,9 +73,19 @@
             </ul>
         </div>
     </nav>
-
+    <br><br>
     <div class="container">
-        EMPLOYER HOME
+        <form class="form-signin" action="FrontController">
+            <h1 class="form-signin-heading"><fmt:message key="delete.h1" /></h1>
+            <h4 class="form-signin-heading"><fmt:message key="delete.undone" /></h4>
+
+            <input type="hidden" name="command" value="delete_account">
+
+            <button class="btn btn-lg btn-primary btn-block" type="submit"><fmt:message key="delete.delete" />
+            </button>
+            <a href="${page}"><button class="btn btn-lg btn-primary btn-block" type="button">
+                <fmt:message key="delete.cancel" /></button></a>
+        </form>
     </div>
 
     <script>

@@ -80,7 +80,7 @@
             </div>
 
             <br/>
-            <h6 class="form-signin-heading error"> ${errorLoginPassMessage} </h6>
+            <h6 class="form-signin-heading error"> ${errorMessage} </h6>
             <br/>
 
             <button class="btn btn-lg btn-primary btn-block" type="submit"><fmt:message key="register.container.sign" />

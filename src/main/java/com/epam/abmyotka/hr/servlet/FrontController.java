@@ -2,7 +2,7 @@ package com.epam.abmyotka.hr.servlet;
 
 import com.epam.abmyotka.hr.command.ActionFactory;
 import com.epam.abmyotka.hr.command.Command;
-import com.epam.abmyotka.hr.command.ExitCommand;
+import com.epam.abmyotka.hr.command.impl.ExitCommand;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;

@@ -87,12 +87,12 @@ public class EmployerDAO extends AbstractDAO<Employer> {
     }
 
     @Override
-    public boolean add(Employer entity) {
+    public int add(Employer entity) {
         return false;
     }
 
     @Override
-    public Employer update(Employer entity) {
+    public Employer update(String field) {
         return null;
     }
 }

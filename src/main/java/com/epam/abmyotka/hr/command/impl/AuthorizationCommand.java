@@ -1,5 +1,6 @@
-package com.epam.abmyotka.hr.command;
+package com.epam.abmyotka.hr.command.impl;
 
+import com.epam.abmyotka.hr.command.Command;
 import com.epam.abmyotka.hr.constant.MessageConstant;
 import com.epam.abmyotka.hr.constant.ParameterConstant;
 import com.epam.abmyotka.hr.constant.PathConstant;

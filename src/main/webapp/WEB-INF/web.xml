@@ -68,6 +68,24 @@
         <servlet-name>Admin</servlet-name>
         <url-pattern>/adminHome</url-pattern>
     </servlet-mapping>
+
+    <servlet>
+        <servlet-name>Edit Account</servlet-name>
+        <jsp-file>/WEB-INF/jsp/editAccount.jsp</jsp-file>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>Edit Account</servlet-name>
+        <url-pattern>/editAccount</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>Delete Account</servlet-name>
+        <jsp-file>/WEB-INF/jsp/deleteAccount.jsp</jsp-file>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>Delete Account</servlet-name>
+        <url-pattern>/deleteAccount</url-pattern>
+    </servlet-mapping>
     
     <welcome-file-list>
         <welcome-file>home</welcome-file>

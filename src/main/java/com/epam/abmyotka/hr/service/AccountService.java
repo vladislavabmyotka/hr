@@ -38,12 +38,29 @@ public class AccountService {
     }
 
     public boolean addAccount(Account account) {
-        boolean isSuccessful;
         DBPool pool = DBPool.getInstance();
         Connection connection = pool.getConnection();
         AccountDAO accountDAO = new AccountDAO(connection);
-        isSuccessful = accountDAO.add(account);
+        int countRowsAffected = accountDAO.add(account);
         pool.putConnection(connection);
-        return isSuccessful;
+        return countRowsAffected != 0;
+    }
+
+    public int findAccountIdByPassword(String password) {
+        DBPool pool = DBPool.getInstance();
+        Connection connection = pool.getConnection();
+        AccountDAO accountDAO = new AccountDAO(connection);
+        int countRowsAffected = accountDAO.findAccountIdByPassword(password);
+        pool.putConnection(connection);
+        return countRowsAffected;
+    }
+
+    public boolean updateAccount(Account account, int accountId) {
+        DBPool pool = DBPool.getInstance();
+        Connection connection = pool.getConnection();
+        AccountDAO accountDAO = new AccountDAO(connection);
+        int countRowsAffected = accountDAO.update(account, accountId);
+        pool.putConnection(connection);
+        return countRowsAffected != 0;
     }
 }

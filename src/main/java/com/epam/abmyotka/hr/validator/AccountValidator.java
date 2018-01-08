@@ -1,7 +1,7 @@
 package com.epam.abmyotka.hr.validator;
 
 import com.epam.abmyotka.hr.constant.AccountAttachmentConstant;
-import com.epam.abmyotka.hr.constant.ValidationConstant;
+import com.epam.abmyotka.hr.constant.ValidationRegExConstant;
 
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -10,7 +10,7 @@ public class AccountValidator {
 
     public static boolean checkLogin(String login) {
         if (login != null) {
-            Pattern pattern = Pattern.compile(ValidationConstant.LOGIN_REGEX);
+            Pattern pattern = Pattern.compile(ValidationRegExConstant.LOGIN_REGEX);
             Matcher matcher = pattern.matcher(login);
             return matcher.matches();
         } else {
@@ -20,7 +20,7 @@ public class AccountValidator {
 
     public static boolean checkPassword(String password) {
         if (password != null) {
-            Pattern pattern = Pattern.compile(ValidationConstant.PASSWORD_REGEX);
+            Pattern pattern = Pattern.compile(ValidationRegExConstant.PASSWORD_REGEX);
             Matcher matcher = pattern.matcher(password);
             return matcher.matches();
         } else {

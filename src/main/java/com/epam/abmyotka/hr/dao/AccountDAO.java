@@ -13,6 +13,11 @@ import java.util.List;
 public class AccountDAO extends AbstractDAO<Account> {
     private final static Logger LOGGER = LogManager.getLogger(AccountDAO.class);
 
+    private static final String ID_ACCOUNT = "idAccount";
+    private static final String LOGIN = "login";
+    private static final String PASSWORD = "password";
+    private static final String ATTACHMENT = "attachment";
+
     public AccountDAO(Connection connection) {
         super(connection);
     }
@@ -26,10 +31,10 @@ public class AccountDAO extends AbstractDAO<Account> {
             ResultSet resultSet = statement.executeQuery(SQLConstant.SQL_SELECT_ALL_ACCOUNT);
             while(resultSet.next()) {
                 Account account = new Account();
-                account.setAccountId(resultSet.getInt("idAccount"));
-                account.setLogin(resultSet.getString("login"));
-                account.setPassword(resultSet.getString("password"));
-                account.setAttachment(resultSet.getString("attachment"));
+                account.setAccountId(resultSet.getInt(ID_ACCOUNT));
+                account.setLogin(resultSet.getString(LOGIN));
+                account.setPassword(resultSet.getString(PASSWORD));
+                account.setAttachment(resultSet.getString(ATTACHMENT));
                 accounts.add(account);
             }
         } catch (SQLException e) {
@@ -70,7 +75,7 @@ public class AccountDAO extends AbstractDAO<Account> {
     }
 
     @Override
-    public boolean add(Account account) {
+    public int add(Account account) {
         int countRowsAffected = 0;
         try {
             PreparedStatement statement = this.getPreparedStatement(SQLConstant.SQL_SELECT_ADD_ACCOUNT);
@@ -82,16 +87,37 @@ public class AccountDAO extends AbstractDAO<Account> {
             LOGGER.log(Level.ERROR, "Error while trying add account into database! Detail: " + e.getMessage());
         }
 
-        if (countRowsAffected != 0) {
-            return true;
-        } else {
-            LOGGER.log(Level.ERROR, "The error occurred! Account was not added!");
-            return false;
-        }
+        return countRowsAffected;
     }
 
-    @Override
-    public Account update(Account account) {
-        return null;
+    public int findAccountIdByPassword(String password) {
+        int accountId = 0;
+        try {
+            PreparedStatement statement = this.getPreparedStatement(SQLConstant.SQL_SELECT_FIND_ACCOUNT_ID_BY_PASSWORD);
+            statement.setString(1, password);
+            ResultSet resultSet = statement.executeQuery();
+            if (resultSet.next()) {
+                accountId = resultSet.getInt(ID_ACCOUNT);
+            }
+        } catch (SQLException e) {
+            LOGGER.log(Level.ERROR, "Error while trying find account id by password into database! Detail: " +
+                    e.getMessage());
+        }
+        return accountId;
+    }
+
+    public int update(Account user, int accountId) {
+        int countRowsAffected = 0;
+        try {
+            PreparedStatement statement = this.getPreparedStatement(SQLConstant.SQL_SELECT_UPDATE_ACCOUNT);
+            statement.setString(1, user.getLogin());
+            statement.setString(2, user.getPassword());
+            statement.setInt(3, accountId);
+            countRowsAffected = statement.executeUpdate();
+        } catch (SQLException e) {
+            LOGGER.log(Level.ERROR, "Error while trying update account! Detail: " + e.getMessage());
+        }
+
+        return countRowsAffected;
     }
 }

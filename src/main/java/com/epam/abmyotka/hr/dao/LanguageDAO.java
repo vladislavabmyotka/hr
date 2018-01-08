@@ -32,12 +32,12 @@ public class LanguageDAO extends AbstractDAO<Language> {
     }
 
     @Override
-    public boolean add(Language entity) {
+    public int add(Language entity) {
         return false;
     }
 
     @Override
-    public Language update(Language entity) {
+    public Language update(String field) {
         return null;
     }
 }
