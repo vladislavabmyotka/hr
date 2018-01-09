@@ -1,4 +1,4 @@
-package com.epam.abmyotka.hr.servlet;
+package com.epam.abmyotka.hr.controller;
 
 import com.epam.abmyotka.hr.command.ActionFactory;
 import com.epam.abmyotka.hr.command.Command;
@@ -40,11 +40,16 @@ public class FrontController extends HttpServlet{
 
         Optional<Command> commandOptional = ActionFactory.defineCommand(request.getParameter("command"));
         Command command = commandOptional.orElse(new ExitCommand());
-        String page = command.execute(request);
+        Router router = command.execute(request);
 
-        if (page != null) {
-            RequestDispatcher dispatcher = request.getRequestDispatcher(page);
-            dispatcher.forward(request, response);
+        if (router != null) {
+            String page = router.getPagePath();
+            if (router.getRoute() == Router.RouteType.FORWARD) {
+                RequestDispatcher dispatcher = request.getRequestDispatcher(page);
+                dispatcher.forward(request, response);
+            } else {
+                response.sendRedirect(request.getContextPath() + page);
+            }
         } else {
             request.getSession().invalidate();
             response.sendRedirect(request.getContextPath() + "/index.jsp");

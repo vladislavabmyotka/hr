@@ -22,22 +22,17 @@ public class InterviewDAO extends AbstractDAO<Interview>{
     }
 
     @Override
-    public boolean delete(int id) {
-        return false;
+    public int delete(int id) {
+        return 0;
     }
 
     @Override
-    public boolean delete(Interview entity) {
-        return false;
+    public int delete(Interview entity) {
+        return 0;
     }
 
     @Override
     public int add(Interview entity) {
-        return false;
-    }
-
-    @Override
-    public Interview update(String field) {
-        return null;
+        return 0;
     }
 }

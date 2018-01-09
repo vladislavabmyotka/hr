@@ -4,6 +4,7 @@ import com.epam.abmyotka.hr.command.Command;
 import com.epam.abmyotka.hr.constant.MessageConstant;
 import com.epam.abmyotka.hr.constant.ParameterConstant;
 import com.epam.abmyotka.hr.constant.PathConstant;
+import com.epam.abmyotka.hr.controller.Router;
 import com.epam.abmyotka.hr.creator.AdminCreator;
 import com.epam.abmyotka.hr.entity.Account;
 import com.epam.abmyotka.hr.service.AccountService;
@@ -19,13 +20,13 @@ import static com.epam.abmyotka.hr.constant.AccountAttachmentConstant.EMPLOYER_A
 public class AuthorizationCommand implements Command {
     private AccountService service;
 
-    AuthorizationCommand(AccountService service) {
+    public AuthorizationCommand(AccountService service) {
         this.service = service;
     }
 
     @Override
-    public String execute(HttpServletRequest request) {
-        String page = null;
+    public Router execute(HttpServletRequest request) {
+        Router router = new Router();
         String login = request.getParameter(ParameterConstant.PARAM_LOGIN);
         String password = request.getParameter(ParameterConstant.PARAM_PASSWORD);
 
@@ -40,26 +41,28 @@ public class AuthorizationCommand implements Command {
 
             if (admin.equals(potentialAdmin)) {
                 session.setAttribute("role", potentialAdmin);
-                page = PathConstant.PATH_PAGE_ADMIN;
+                router.setPagePath(PathConstant.PATH_PAGE_ADMIN);
+                router.setRoute(Router.RouteType.FORWARD);
             } else {
-                Account role = service.findAccount(user);
+                Account role = service.find(user);
+                router.setRoute(Router.RouteType.FORWARD);
                 if (role != null) {
                     session.setAttribute("role", role);
                     if (role.getAttachment().equals(CANDIDATE_ATTACHMENT))  {
-                        page = PathConstant.PATH_PAGE_CANDIDATE;
+                        router.setPagePath(PathConstant.PATH_PAGE_CANDIDATE);
                     } else if (role.getAttachment().equals(EMPLOYER_ATTACHMENT)) {
-                        page = PathConstant.PATH_PAGE_EMPLOYER;
+                        router.setPagePath(PathConstant.PATH_PAGE_EMPLOYER);
                     }
                 } else {
                     request.setAttribute("errorLoginPassMessage", MessageConstant.INCORRECT_LOGIN_PASSWORD_MESSAGE);
-                    page = PathConstant.PATH_PAGE_MAIN;
+                    router.setPagePath(PathConstant.PATH_PAGE_MAIN);
                 }
             }
         } else {
             request.setAttribute("errorLoginPassMessage", MessageConstant.INCORRECT_LOGIN_PASSWORD_MESSAGE);
-            page = PathConstant.PATH_PAGE_MAIN;
+            router.setPagePath(PathConstant.PATH_PAGE_MAIN);
         }
 
-        return page;
+        return router;
     }
 }

@@ -1,7 +1,9 @@
 package com.epam.abmyotka.hr.command;
 
+import com.epam.abmyotka.hr.controller.Router;
+
 import javax.servlet.http.HttpServletRequest;
 
 public interface Command {
-    String execute(HttpServletRequest request);
+    Router execute(HttpServletRequest request);
 }

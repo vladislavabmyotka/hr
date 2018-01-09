@@ -55,22 +55,17 @@ public class VacancyDAO extends AbstractDAO<Vacancy> {
     }
 
     @Override
-    public boolean delete(int id) {
-        return false;
+    public int delete(int id) {
+        return 0;
     }
 
     @Override
-    public boolean delete(Vacancy entity) {
-        return false;
+    public int delete(Vacancy entity) {
+        return 0;
     }
 
     @Override
     public int add(Vacancy entity) {
-        return false;
-    }
-
-    @Override
-    public Vacancy update(String field) {
-        return null;
+        return 0;
     }
 }

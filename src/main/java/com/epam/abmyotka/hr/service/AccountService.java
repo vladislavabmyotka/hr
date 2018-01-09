@@ -1,6 +1,7 @@
 package com.epam.abmyotka.hr.service;
 
 import com.epam.abmyotka.hr.dao.AccountDAO;
+import com.epam.abmyotka.hr.dao.CandidateDAO;
 import com.epam.abmyotka.hr.dao.DBPool;
 import com.epam.abmyotka.hr.entity.Account;
 
@@ -9,7 +10,7 @@ import java.util.List;
 
 public class AccountService {
 
-    public Account findAccount(Account user) {
+    public Account find(Account user) {
         DBPool pool = DBPool.getInstance();
         Connection connection = pool.getConnection();
         AccountDAO accountDAO = new AccountDAO(connection);
@@ -37,7 +38,7 @@ public class AccountService {
         return isExist;
     }
 
-    public boolean addAccount(Account account) {
+    public boolean add(Account account) {
         DBPool pool = DBPool.getInstance();
         Connection connection = pool.getConnection();
         AccountDAO accountDAO = new AccountDAO(connection);
@@ -55,11 +56,20 @@ public class AccountService {
         return countRowsAffected;
     }
 
-    public boolean updateAccount(Account account, int accountId) {
+    public boolean update(Account account, int accountId) {
         DBPool pool = DBPool.getInstance();
         Connection connection = pool.getConnection();
         AccountDAO accountDAO = new AccountDAO(connection);
         int countRowsAffected = accountDAO.update(account, accountId);
+        pool.putConnection(connection);
+        return countRowsAffected != 0;
+    }
+
+    public boolean delete(Account account) {
+        DBPool pool = DBPool.getInstance();
+        Connection connection = pool.getConnection();
+        AccountDAO accountDAO = new AccountDAO(connection);
+        int countRowsAffected = accountDAO.delete(account);
         pool.putConnection(connection);
         return countRowsAffected != 0;
     }

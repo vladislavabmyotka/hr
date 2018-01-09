@@ -5,6 +5,7 @@ import com.epam.abmyotka.hr.constant.AccountAttachmentConstant;
 import com.epam.abmyotka.hr.constant.MessageConstant;
 import com.epam.abmyotka.hr.constant.ParameterConstant;
 import com.epam.abmyotka.hr.constant.PathConstant;
+import com.epam.abmyotka.hr.controller.Router;
 import com.epam.abmyotka.hr.entity.Account;
 import com.epam.abmyotka.hr.service.AccountService;
 import com.epam.abmyotka.hr.validator.AccountValidator;
@@ -20,29 +21,33 @@ public class EditAccountDataCommand implements Command {
     }
 
     @Override
-    public String execute(HttpServletRequest request) {
-        String page = PathConstant.PATH_PAGE_EDIT_ACCOUNT;
+    public Router execute(HttpServletRequest request) {
+        Router router = new Router(PathConstant.PATH_PAGE_EDIT_ACCOUNT);
         String login = request.getParameter(ParameterConstant.PARAM_LOGIN);
         String oldPassword = request.getParameter(ParameterConstant.PARAM_OLD_PASSWORD);
         String password = request.getParameter(ParameterConstant.PARAM_PASSWORD);
         String repeatPassword = request.getParameter(ParameterConstant.PARAM_REPEAT_PASSWORD);
 
         HttpSession session = request.getSession(true);
+        String attachment = ((Account) session.getAttribute("role")).getAttachment();
 
         if(AccountValidator.checkLogin(login) && AccountValidator.checkPassword(oldPassword) &&
                 AccountValidator.checkPassword(password) && password.equals(repeatPassword)) {
-            Account user = new Account(login, password);
+            Account user = new Account(login, password, attachment);
             int accountId = service.findAccountIdByPassword(oldPassword);
             if (accountId != 0) {
-                if (service.updateAccount(user, accountId)) {
-                    String attachment = ((Account) session.getAttribute("role")).getAttachment();
+                if (service.update(user, accountId)) {
+                    session.setAttribute("role", user);
+                    attachment = ((Account) session.getAttribute("role")).getAttachment();
                     if (attachment.equals(AccountAttachmentConstant.CANDIDATE_ATTACHMENT)) {
-                        page = PathConstant.PATH_PAGE_CANDIDATE;
+                        router.setPagePath(PathConstant.PATH_PAGE_CANDIDATE);
+                        router.setRoute(Router.RouteType.REDIRECT);
                     } else {
-                        page = PathConstant.PATH_PAGE_EMPLOYER;
+                        router.setPagePath(PathConstant.PATH_PAGE_EMPLOYER);
+                        router.setRoute(Router.RouteType.REDIRECT);
                     }
                 } else {
-                    request.setAttribute("errorLoginPassMessage", MessageConstant.ERROR_INTO_DB);
+                    request.setAttribute("errorLoginPassMessage", MessageConstant.ERROR_ON_WEBSITE);
                 }
             } else {
                 request.setAttribute("errorLoginPassMessage", MessageConstant.INCORRECT_PASSWORD_MESSAGE);
@@ -50,6 +55,6 @@ public class EditAccountDataCommand implements Command {
         } else {
             request.setAttribute("errorLoginPassMessage", MessageConstant.INCORRECT_LOGIN_PASSWORD_MESSAGE);
         }
-        return page;
+        return router;
     }
 }

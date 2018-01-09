@@ -5,6 +5,8 @@ import com.epam.abmyotka.hr.command.impl.DeleteAccountCommand;
 import com.epam.abmyotka.hr.command.impl.EditAccountDataCommand;
 import com.epam.abmyotka.hr.command.impl.RegisterCommand;
 import com.epam.abmyotka.hr.service.AccountService;
+import com.epam.abmyotka.hr.service.CandidateService;
+import com.epam.abmyotka.hr.service.EmployerService;
 
 public enum CommandType {
     AUTHORIZATION(new AuthorizationCommand(new AccountService())),

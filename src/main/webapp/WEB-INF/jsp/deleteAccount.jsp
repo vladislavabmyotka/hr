@@ -85,6 +85,9 @@
             </button>
             <a href="${page}"><button class="btn btn-lg btn-primary btn-block" type="button">
                 <fmt:message key="delete.cancel" /></button></a>
+
+            <br/>
+            <h6 class="form-signin-heading error"> ${errorMessage} </h6>
         </form>
     </div>
 

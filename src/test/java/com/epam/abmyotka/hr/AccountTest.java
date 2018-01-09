@@ -20,7 +20,7 @@ public class AccountTest {
     public void findAccountTest() {
         Account expectedUser = new Account(3, "KingOfTheDot", "qwerty1234", "c");
         AccountService service = new AccountService();
-        Account actualUser = service.findAccount(expectedUser);
+        Account actualUser = service.find(expectedUser);
         Assert.assertEquals(actualUser, expectedUser);
     }
 }

@@ -5,6 +5,7 @@ import com.epam.abmyotka.hr.constant.AccountAttachmentConstant;
 import com.epam.abmyotka.hr.constant.MessageConstant;
 import com.epam.abmyotka.hr.constant.ParameterConstant;
 import com.epam.abmyotka.hr.constant.PathConstant;
+import com.epam.abmyotka.hr.controller.Router;
 import com.epam.abmyotka.hr.entity.Account;
 import com.epam.abmyotka.hr.service.AccountService;
 import com.epam.abmyotka.hr.validator.AccountValidator;
@@ -15,13 +16,13 @@ import javax.servlet.http.HttpSession;
 public class RegisterCommand implements Command {
     private AccountService service;
 
-    RegisterCommand(AccountService service) {
+    public RegisterCommand(AccountService service) {
         this.service = service;
     }
 
     @Override
-    public String execute(HttpServletRequest request) {
-        String page = PathConstant.PATH_PAGE_REGISTER;
+    public Router execute(HttpServletRequest request) {
+        Router router = new Router(PathConstant.PATH_PAGE_REGISTER);
         String login = request.getParameter(ParameterConstant.PARAM_LOGIN);
         String password = request.getParameter(ParameterConstant.PARAM_PASSWORD);
         String repeatPassword = request.getParameter(ParameterConstant.PARAM_REPEAT_PASSWORD);
@@ -33,15 +34,17 @@ public class RegisterCommand implements Command {
                 AccountValidator.checkAttachment(attachment) && password.equals(repeatPassword)) {
             Account user = new Account(login, password, attachment);
             if (!service.checkCoincidenceByLogin(login)) {
-                if(service.addAccount(user)) {
+                if(service.add(user)) {
                     session.setAttribute("role", user);
                     if (attachment.equals(AccountAttachmentConstant.CANDIDATE_ATTACHMENT)) {
-                        page = PathConstant.PATH_PAGE_CANDIDATE;
+                        router.setRoute(Router.RouteType.REDIRECT);
+                        router.setPagePath(PathConstant.PATH_PAGE_CANDIDATE);
                     } else {
-                        page = PathConstant.PATH_PAGE_EMPLOYER;
+                        router.setRoute(Router.RouteType.REDIRECT);
+                        router.setPagePath(PathConstant.PATH_PAGE_EMPLOYER);
                     }
                 } else {
-                    request.setAttribute("errorMessage", MessageConstant.ERROR_INTO_DB);
+                    request.setAttribute("errorMessage", MessageConstant.ERROR_ON_WEBSITE);
                 }
             } else {
                 request.setAttribute("errorMessage", MessageConstant.USED_LOGIN_MESSAGE);
@@ -50,6 +53,6 @@ public class RegisterCommand implements Command {
             request.setAttribute("errorMessage", MessageConstant.INCORRECT_LOGIN_PASSWORD_MESSAGE);
         }
 
-        return page;
+        return router;
     }
 }

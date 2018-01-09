@@ -82,22 +82,25 @@ public class CandidateDAO extends AbstractDAO<Candidate> {
     }
 
     @Override
-    public boolean delete(int id) {
-        return false;
+    public int delete(int accountId) {
+        int countRowsAffected = 0;
+        try {
+            PreparedStatement statement = this.getPreparedStatement(SQLConstant.SQL_DELETE_CANDIDATE_BY_ACCOUNT_ID);
+            statement.setInt(1, accountId);
+            countRowsAffected = statement.executeUpdate();
+        } catch (SQLException e) {
+            LOGGER.log(Level.ERROR, "Error while trying delete candidate from database! Detail: " + e.getMessage());
+        }
+        return countRowsAffected;
     }
 
     @Override
-    public boolean delete(Candidate entity) {
-        return false;
+    public int delete(Candidate entity) {
+        return 0;
     }
 
     @Override
     public int add(Candidate entity) {
-        return false;
-    }
-
-    @Override
-    public Candidate update(String field) {
-        return null;
+        return 0;
     }
 }

@@ -65,20 +65,29 @@ public class AccountDAO extends AbstractDAO<Account> {
     }
 
     @Override
-    public boolean delete(int id) {
-        return false;
+    public int delete(int id) {
+        return 0;
     }
 
     @Override
-    public boolean delete(Account account) {
-        return false;
+    public int delete(Account account) {
+        int countRowsAffected = 0;
+        try {
+            PreparedStatement statement = this.getPreparedStatement(SQLConstant.SQL_DELETE_ACCOUNT);
+            statement.setString(1, account.getLogin());
+            statement.setString(2, account.getPassword());
+            countRowsAffected = statement.executeUpdate();
+        } catch (SQLException e) {
+            LOGGER.log(Level.ERROR, "Error while trying delete account from database! Detail: " + e.getMessage());
+        }
+        return countRowsAffected;
     }
 
     @Override
     public int add(Account account) {
         int countRowsAffected = 0;
         try {
-            PreparedStatement statement = this.getPreparedStatement(SQLConstant.SQL_SELECT_ADD_ACCOUNT);
+            PreparedStatement statement = this.getPreparedStatement(SQLConstant.SQL_INSERT_ADD_ACCOUNT);
             statement.setString(1, account.getLogin());
             statement.setString(2, account.getPassword());
             statement.setString(3, account.getAttachment());
@@ -109,7 +118,7 @@ public class AccountDAO extends AbstractDAO<Account> {
     public int update(Account user, int accountId) {
         int countRowsAffected = 0;
         try {
-            PreparedStatement statement = this.getPreparedStatement(SQLConstant.SQL_SELECT_UPDATE_ACCOUNT);
+            PreparedStatement statement = this.getPreparedStatement(SQLConstant.SQL_UPDATE_ACCOUNT);
             statement.setString(1, user.getLogin());
             statement.setString(2, user.getPassword());
             statement.setInt(3, accountId);

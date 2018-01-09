@@ -27,9 +27,12 @@
             <ul class="navbar-nav mr-auto"></ul>
             <ul class="nav navbar-nav navbar-right">
                 <form>
-                    <select class="form-control" title="language" id="language" name="language" onchange="submit()">
-                        <option value="ru" ${language == 'ru' ? 'selected' : ''}>Русский</option>
-                        <option value="en" ${language == 'en' ? 'selected' : ''}>English</option>
+                    <select class="form-control" title="language" id="language" name="language"
+                            onchange="location=this.options[this.selectedIndex].value">
+                        <option value="http://localhost:8080/hr/error?language=ru"
+                        ${language == 'ru' ? 'selected' : ''}>Русский</option>
+                        <option value="http://localhost:8080/hr/error?language=en"
+                        ${language == 'en' ? 'selected' : ''}>English</option>
                     </select>
                 </form>
             </ul>
