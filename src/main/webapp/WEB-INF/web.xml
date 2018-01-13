@@ -70,6 +70,15 @@
     </servlet-mapping>
 
     <servlet>
+        <servlet-name>Admin Candidate</servlet-name>
+        <jsp-file>/WEB-INF/jsp/adminCandidate.jsp</jsp-file>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>Admin Candidate</servlet-name>
+        <url-pattern>/adminCandidate</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
         <servlet-name>Edit Account</servlet-name>
         <jsp-file>/WEB-INF/jsp/editAccount.jsp</jsp-file>
     </servlet>
