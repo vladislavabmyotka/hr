@@ -13,6 +13,22 @@ import java.util.List;
 public class CandidateDAO extends AbstractDAO<Candidate> {
     private final static Logger LOGGER = LogManager.getLogger(CandidateDAO.class);
 
+    private static final String CANDIDATE_ID = "idCandidate";
+    private static final String SURNAME = "surname";
+    private static final String NAME = "name";
+    private static final String LASTNAME = "lastname";
+    private static final String AGE = "age";
+    private static final String EMAIL = "email";
+    private static final String ADDRESS = "address";
+    private static final String CITIZENSHIP = "citizenship";
+    private static final String PHONE = "phone";
+    private static final String POST = "post";
+    private static final String EDUCATION = "education";
+    private static final String EXPERIENCE = "experience";
+    private static final String ENGLISH = "english";
+    private static final String SKILL = "skill";
+    private static final String C_ID_ACCOUNT = "c_idAccount";
+
     public CandidateDAO(Connection connection) {
         super(connection);
     }
@@ -58,31 +74,55 @@ public class CandidateDAO extends AbstractDAO<Candidate> {
 
     private Candidate createCandidateByResultSet(ResultSet resultSet) throws SQLException {
         Candidate candidate = new Candidate();
-        candidate.setCandidateId(resultSet.getInt("idCandidate"));
-        candidate.setSurname(resultSet.getString("surname"));
-        candidate.setName(resultSet.getString("name"));
-        candidate.setLastname(resultSet.getString("lastname"));
-        candidate.setAge(resultSet.getInt("age"));
-        candidate.setEmail(resultSet.getString("email"));
-        candidate.setAddress(resultSet.getString("address"));
-        candidate.setCitizenship(resultSet.getString("citizenship"));
-        candidate.setPhone(resultSet.getString("phone"));
-        candidate.setPost(resultSet.getString("post"));
-        candidate.setEducation(resultSet.getString("education"));
-        candidate.setExperience(resultSet.getInt("experience"));
-        candidate.setSkill(resultSet.getString("skill"));
-        candidate.setAccountId(resultSet.getInt("c_idAccount"));
-
+        candidate.setCandidateId(resultSet.getInt(CANDIDATE_ID));
+        candidate.setSurname(resultSet.getString(SURNAME));
+        candidate.setName(resultSet.getString(NAME));
+        candidate.setLastname(resultSet.getString(LASTNAME));
+        candidate.setAge(resultSet.getInt(AGE));
+        candidate.setEmail(resultSet.getString(EMAIL));
+        candidate.setAddress(resultSet.getString(ADDRESS));
+        candidate.setCitizenship(resultSet.getString(CITIZENSHIP));
+        candidate.setPhone(resultSet.getString(PHONE));
+        candidate.setPost(resultSet.getString(POST));
+        candidate.setEducation(resultSet.getString(EDUCATION));
+        candidate.setExperience(resultSet.getInt(EXPERIENCE));
+        candidate.setEnglish(resultSet.getString(ENGLISH));
+        candidate.setSkill(resultSet.getString(SKILL));
+        candidate.setAccountId(resultSet.getInt(C_ID_ACCOUNT));
         return candidate;
     }
 
     @Override
-    public Candidate findEntityById(int id) {
-        return null;
+    public Candidate findById(int candidateId) {
+        Candidate candidate = null;
+        try {
+            PreparedStatement statement = this.getPreparedStatement(SQLConstant.SQL_SELECT_CANDIDATE_BY_CANDIDATE_ID);
+            statement.setInt(1, candidateId);
+            ResultSet resultSet = statement.executeQuery();
+            if (resultSet.next()) {
+                candidate = createCandidateByResultSet(resultSet);
+            }
+        } catch (SQLException e) {
+            LOGGER.log(Level.ERROR, "Error while trying find candidate by candidate id in database! Detail: " +
+                    e.getMessage());
+        }
+        return candidate;
     }
 
     @Override
-    public int delete(int accountId) {
+    public int delete(int candidateId) {
+        int countRowsAffected = 0;
+        try {
+            PreparedStatement statement = this.getPreparedStatement(SQLConstant.SQL_DELETE_CANDIDATE_BY_CANDIDATE_ID);
+            statement.setInt(1, candidateId);
+            countRowsAffected = statement.executeUpdate();
+        } catch (SQLException e) {
+            LOGGER.log(Level.ERROR, "Error while trying delete candidate from database! Detail: " + e.getMessage());
+        }
+        return countRowsAffected;
+    }
+
+    public int deleteByAccountId(int accountId) {
         int countRowsAffected = 0;
         try {
             PreparedStatement statement = this.getPreparedStatement(SQLConstant.SQL_DELETE_CANDIDATE_BY_ACCOUNT_ID);
@@ -91,6 +131,32 @@ public class CandidateDAO extends AbstractDAO<Candidate> {
         } catch (SQLException e) {
             LOGGER.log(Level.ERROR, "Error while trying delete candidate from database! Detail: " + e.getMessage());
         }
+        return countRowsAffected;
+    }
+
+    public int update(Candidate candidate) {
+        int countRowsAffected = 0;
+        try {
+            PreparedStatement statement = this.getPreparedStatement(SQLConstant.SQL_UPDATE_CANDIDATE);
+            statement.setString(1, candidate.getSurname());
+            statement.setString(2, candidate.getName());
+            statement.setString(3, candidate.getLastname());
+            statement.setInt(4, candidate.getAge());
+            statement.setString(5, candidate.getEmail());
+            statement.setString(6,candidate.getAddress());
+            statement.setString(7, candidate.getCitizenship());
+            statement.setString(8, candidate.getPhone());
+            statement.setString(9, candidate.getPost());
+            statement.setString(10, candidate.getEducation());
+            statement.setInt(11, candidate.getExperience());
+            statement.setString(12, candidate.getEnglish());
+            statement.setString(13, candidate.getSkill());
+            statement.setInt(14, candidate.getCandidateId());
+            countRowsAffected = statement.executeUpdate();
+        } catch (SQLException e) {
+            LOGGER.log(Level.ERROR, "Error while trying update candidate! Detail: " + e.getMessage());
+        }
+
         return countRowsAffected;
     }
 

@@ -55,7 +55,8 @@
     </nav>
     <br/><br/>
     <div class="container">
-        <table class="table table-bordered table-hover table-sm">
+        <h6 class="form-signin-heading error"> ${errorMessage} </h6> <br/>
+        <table class="table table-bordered table-hover table-sm table-mrgn">
             <thead class="thead-default">
             <tr>
                 <th>#</th>
@@ -70,6 +71,7 @@
                 <th><fmt:message key="admin.candidate.post" /></th>
                 <th><fmt:message key="admin.candidate.education" /></th>
                 <th><fmt:message key="admin.candidate.experience" /></th>
+                <th><fmt:message key="admin.candidate.english" /></th>
                 <th><fmt:message key="admin.candidate.skill" /></th>
                 <th><fmt:message key="admin.candidate.action" /></th>
             </tr>
@@ -89,9 +91,19 @@
                     <td><c:out value="${candidate.post}"/></td>
                     <td><c:out value="${candidate.education}"/></td>
                     <td><c:out value="${candidate.experience}"/></td>
+                    <td><c:out value="${candidate.english}"/></td>
                     <td><c:out value="${candidate.skill}"/></td>
-                    <td><a href="#"><fmt:message key="admin.candidate.action.delete" /></a> |
-                        <a href="#"><fmt:message key="admin.candidate.action.edit" /></a></td>
+                    <td><form action="FrontController" method="post">
+                        <input type="hidden" name="command" value="admin_candidate_delete">
+                        <button name="adminCandidateDelete" class="btn btn-link" type="submit"
+                                value="${candidate.candidateId}"><fmt:message key="admin.candidate.action.delete" />
+                        </button></form>
+                        <form action="FrontController" method="post">
+                            <input type="hidden" name="command" value="admin_candidate_edit">
+                        <button name="adminCandidateEdit" class="btn btn-link" type="submit"
+                                value="${candidate.candidateId}"><fmt:message key="admin.candidate.action.edit" />
+                        </button></form>
+                    </td>
                 </tr>
             </c:forEach>
             </tbody>

@@ -16,6 +16,17 @@ import java.util.List;
 public class VacancyDAO extends AbstractDAO<Vacancy> {
     private final static Logger LOGGER = LogManager.getLogger(VacancyDAO.class);
 
+    private static final String VACANCY_ID = "idvacancy";
+    private static final String POST = "post";
+    private static final String COMPANY = "company";
+    private static final String SALARY = "salary";
+    private static final String LOCATION = "location";
+    private static final String EXPERIENCE = "experience";
+    private static final String ENGLISH = "english";
+    private static final String TEXT = "text";
+    private static final String IS_OPEN = "isOpen";
+    private static final String V_EMPLOYER_ID = "v_idEmployer";
+
     public VacancyDAO(Connection connection) {
         super(connection);
     }
@@ -29,15 +40,17 @@ public class VacancyDAO extends AbstractDAO<Vacancy> {
             ResultSet resultSet = statement.executeQuery(SQLConstant.SQL_SELECT_ALL_VACANCY);
             while(resultSet.next()) {
                 Vacancy vacancy = new Vacancy();
-                vacancy.setVacancyId(resultSet.getInt("idvacancy"));
-                vacancy.setPost(resultSet.getString("post"));
-                vacancy.setCompany(resultSet.getString("company"));
-                vacancy.setSalary(resultSet.getBigDecimal("salary"));
-                vacancy.setLocation(resultSet.getString("location"));
-                vacancy.setExperience(resultSet.getInt("experience"));
-                vacancy.setText(resultSet.getString("text"));
-                vacancy.setOpen(resultSet.getBoolean("isOpen"));
-                vacancy.setEmployerId(resultSet.getInt("v_idEmployer"));
+                vacancy.setVacancyId(resultSet.getInt(VACANCY_ID));
+                vacancy.setPost(resultSet.getString(POST));
+                vacancy.setCompany(resultSet.getString(COMPANY));
+                vacancy.setSalary(resultSet.getBigDecimal(SALARY));
+                vacancy.setLocation(resultSet.getString(LOCATION));
+                vacancy.setExperience(resultSet.getInt(EXPERIENCE));
+                vacancy.setEnglish(resultSet.getString(ENGLISH));
+                vacancy.setText(resultSet.getString(TEXT));
+                vacancy.setOpen(resultSet.getBoolean(IS_OPEN));
+                vacancy.setEmployerId(resultSet.getInt(V_EMPLOYER_ID));
+
                 vacancies.add(vacancy);
             }
         } catch (SQLException e) {
@@ -50,7 +63,7 @@ public class VacancyDAO extends AbstractDAO<Vacancy> {
     }
 
     @Override
-    public Vacancy findEntityById(int id) {
+    public Vacancy findById(int id) {
         return null;
     }
 

@@ -79,6 +79,15 @@
     </servlet-mapping>
 
     <servlet>
+        <servlet-name>Admin Candidate Edit</servlet-name>
+        <jsp-file>/WEB-INF/jsp/adminCandidateEdit.jsp</jsp-file>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>Admin Candidate Edit</servlet-name>
+        <url-pattern>/adminCandidateEdit</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
         <servlet-name>Edit Account</servlet-name>
         <jsp-file>/WEB-INF/jsp/editAccount.jsp</jsp-file>
     </servlet>

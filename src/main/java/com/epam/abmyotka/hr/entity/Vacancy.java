@@ -9,6 +9,7 @@ public class Vacancy extends Entity {
     private BigDecimal salary;
     private String location;
     private int experience;
+    private String english;
     private String text;
     private boolean isOpen;
     private int employerId;
@@ -61,6 +62,14 @@ public class Vacancy extends Entity {
         this.experience = experience;
     }
 
+    public String getEnglish() {
+        return english;
+    }
+
+    public void setEnglish(String english) {
+        this.english = english;
+    }
+
     public String getText() {
         return text;
     }
@@ -87,8 +96,12 @@ public class Vacancy extends Entity {
 
     @Override
     public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
+        if (this == o) {
+            return true;
+        }
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
 
         Vacancy vacancy = (Vacancy) o;
 
@@ -97,6 +110,7 @@ public class Vacancy extends Entity {
                 (company != null ? company.equals(vacancy.company) : vacancy.company == null) &&
                 (salary != null ? salary.equals(vacancy.salary) : vacancy.salary == null) &&
                 (location != null ? location.equals(vacancy.location) : vacancy.location == null) &&
+                (english != null ? english.equals(vacancy.english) : vacancy.english == null) &&
                 (text != null ? text.equals(vacancy.text) : vacancy.text == null);
     }
 
@@ -108,6 +122,7 @@ public class Vacancy extends Entity {
         result = 31 * result + (salary != null ? salary.hashCode() : 0);
         result = 31 * result + (location != null ? location.hashCode() : 0);
         result = 31 * result + experience;
+        result = 31 * result + (english != null ? english.hashCode() : 0);
         result = 31 * result + (text != null ? text.hashCode() : 0);
         result = 31 * result + (isOpen ? 1 : 0);
         result = 31 * result + employerId;

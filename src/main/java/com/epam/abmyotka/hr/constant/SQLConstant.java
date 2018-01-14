@@ -13,14 +13,16 @@ public class SQLConstant {
 
     public static final String SQL_SELECT_ALL_CANDIDATE = "SELECT * FROM candidate";
     public static final String SQL_SELECT_CANDIDATE_BY_ACCOUNT_ID = "SELECT * FROM candidate WHERE c_idAccount = ?";
+    public static final String SQL_SELECT_CANDIDATE_BY_CANDIDATE_ID = "SELECT * FROM candidate WHERE idCandidate = ?";
     public static final String SQL_DELETE_CANDIDATE_BY_ACCOUNT_ID = "DELETE FROM candidate WHERE c_idAccount = ?";
+    public static final String SQL_DELETE_CANDIDATE_BY_CANDIDATE_ID = "DELETE FROM candidate WHERE idCandidate = ?";
+    public static final String SQL_UPDATE_CANDIDATE = "UPDATE candidate SET surname = ?, name = ?, lastname = ?, " +
+            "age = ?, email = ?, address = ?, citizenship = ?, phone = ?, post = ?, education = ?, experience = ?, " +
+            "english = ?, skill = ? WHERE idCandidate = ?";
 
     public static final String SQL_SELECT_ALL_EMPLOYER = "SELECT * FROM employer";
     public static final String SQL_SELECT_EMPLOYER_BY_ACCOUNT_ID = "SELECT * FROM employer WHERE e_idAccount = ?";
     public static final String SQL_DELETE_EMPLOYER_BY_ACCOUNT_ID = "DELETE FROM employer WHERE e_idAccount = ?";
 
     public static final String SQL_SELECT_ALL_VACANCY = "SELECT * FROM vacancy";
-
-    public static final String SQL_DELETE_CANDIDATE_HAS_LANGUAGE_BY_CANDIDATE_ID =
-            "DELETE FROM candidate_has_language WHERE idCandidate = ?";
 }

@@ -7,7 +7,7 @@ import com.epam.abmyotka.hr.validator.AccountValidator;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
-public class ValidatorTest {
+public class AccountValidatorTest {
 
     @Test
     public void correctLoginTest() {

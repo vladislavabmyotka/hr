@@ -60,7 +60,7 @@ public class AccountDAO extends AbstractDAO<Account> {
     }
 
     @Override
-    public Account findEntityById(int id) {
+    public Account findById(int id) {
         return null;
     }
 

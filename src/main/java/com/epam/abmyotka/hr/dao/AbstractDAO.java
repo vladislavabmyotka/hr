@@ -22,7 +22,7 @@ public abstract class AbstractDAO <T extends Entity> {
     }
 
     public abstract List<T> findAll();
-    public abstract T findEntityById(int id);
+    public abstract T findById(int id);
     public abstract int delete(int id);
     public abstract int delete(T entity);
     public abstract int add(T entity);

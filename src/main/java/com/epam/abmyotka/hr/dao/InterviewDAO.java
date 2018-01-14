@@ -17,7 +17,7 @@ public class InterviewDAO extends AbstractDAO<Interview>{
     }
 
     @Override
-    public Interview findEntityById(int id) {
+    public Interview findById(int id) {
         return null;
     }
 

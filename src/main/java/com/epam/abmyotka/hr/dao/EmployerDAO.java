@@ -13,6 +13,16 @@ import java.util.List;
 public class EmployerDAO extends AbstractDAO<Employer> {
     private final static Logger LOGGER = LogManager.getLogger(EmployerDAO.class);
 
+    private static final String EMPLOYER_ID = "idEmployer";
+    private static final String SURNAME = "surname";
+    private static final String NAME = "name";
+    private static final String LASTNAME = "lastname";
+    private static final String ADDRESS = "address";
+    private static final String PHONE = "phone";
+    private static final String EMAIL = "email";
+    private static final String COMPANY = "company";
+    private static final String E_ACCOUNT_ID = "e_idAccount";
+
     public EmployerDAO(Connection connection) {
         super(connection);
     }
@@ -58,21 +68,21 @@ public class EmployerDAO extends AbstractDAO<Employer> {
 
     private Employer createEmployerByResultSet(ResultSet resultSet) throws SQLException {
         Employer employer = new Employer();
-        employer.setEmployerId(resultSet.getInt("idEmployer"));
-        employer.setSurname(resultSet.getString("surname"));
-        employer.setName(resultSet.getString("name"));
-        employer.setLastname(resultSet.getString("lastname"));
-        employer.setAddress(resultSet.getString("address"));
-        employer.setPhone(resultSet.getString("phone"));
-        employer.setEmail(resultSet.getString("email"));
-        employer.setCompany(resultSet.getString("company"));
-        employer.setAccountId(resultSet.getInt("e_idAccount"));
+        employer.setEmployerId(resultSet.getInt(EMPLOYER_ID));
+        employer.setSurname(resultSet.getString(SURNAME));
+        employer.setName(resultSet.getString(NAME));
+        employer.setLastname(resultSet.getString(LASTNAME));
+        employer.setAddress(resultSet.getString(ADDRESS));
+        employer.setPhone(resultSet.getString(PHONE));
+        employer.setEmail(resultSet.getString(EMAIL));
+        employer.setCompany(resultSet.getString(COMPANY));
+        employer.setAccountId(resultSet.getInt(E_ACCOUNT_ID));
 
         return employer;
     }
 
     @Override
-    public Employer findEntityById(int id) {
+    public Employer findById(int id) {
         return null;
     }
 

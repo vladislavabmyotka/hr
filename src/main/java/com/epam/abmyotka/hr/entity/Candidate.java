@@ -13,8 +13,31 @@ public class Candidate extends Entity {
     private String post;
     private String education;
     private int experience;
+    private String english;
     private String skill;
     private int accountId;
+
+    public Candidate() {
+    }
+
+    public Candidate(int candidateId, String surname, String name, String lastname, int age, String email,
+                     String address, String citizenship, String phone, String post, String education, int experience,
+                     String english, String skill) {
+        this.candidateId = candidateId;
+        this.surname = surname;
+        this.name = name;
+        this.lastname = lastname;
+        this.age = age;
+        this.email = email;
+        this.address = address;
+        this.citizenship = citizenship;
+        this.phone = phone;
+        this.post = post;
+        this.education = education;
+        this.experience = experience;
+        this.english = english;
+        this.skill = skill;
+    }
 
     public int getCandidateId() {
         return candidateId;
@@ -128,6 +151,14 @@ public class Candidate extends Entity {
         this.accountId = accountId;
     }
 
+    public String getEnglish() {
+        return english;
+    }
+
+    public void setEnglish(String english) {
+        this.english = english;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) {
@@ -150,7 +181,8 @@ public class Candidate extends Entity {
                 (phone != null ? phone.equals(candidate.phone) : candidate.phone == null) &&
                 (post != null ? post.equals(candidate.post) : candidate.post == null) &&
                 (education != null ? education.equals(candidate.education) : candidate.education == null) &&
-                (skill != null ? skill.equals(candidate.skill) : candidate.skill == null);
+                (skill != null ? skill.equals(candidate.skill) : candidate.skill == null) &&
+                (english != null ? english.equals(candidate.english) : candidate.english == null);
     }
 
     @Override
@@ -169,6 +201,7 @@ public class Candidate extends Entity {
         result = 31 * result + experience;
         result = 31 * result + (skill != null ? skill.hashCode() : 0);
         result = 31 * result + accountId;
+        result = 31 * result + (english != null ? english.hashCode() : 0);
         return result;
     }
 }

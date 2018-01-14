@@ -9,7 +9,10 @@ public enum CommandType {
     REGISTER(new RegisterCommand(new AccountService())),
     EDIT_ACCOUNT_DATA(new EditAccountDataCommand(new AccountService())),
     DELETE_ACCOUNT(new DeleteAccountCommand(new AccountService())),
-    ADMIN_CANDIDATE_VIEW(new AdminCandidateViewCommand(new CandidateService()));
+    ADMIN_CANDIDATE_VIEW(new AdminCandidateViewCommand(new CandidateService())),
+    ADMIN_CANDIDATE_DELETE(new AdminCandidateDeleteCommand(new CandidateService())),
+    ADMIN_CANDIDATE_EDIT(new AdminCandidateEditCommand(new CandidateService())),
+    ADMIN_CANDIDATE_EDIT_SAVE(new AdminCandidateEditSaveCommand(new CandidateService()));
 
     private Command command;
 

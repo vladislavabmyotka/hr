@@ -1,6 +1,5 @@
 package com.epam.abmyotka.hr.service;
 
-import com.epam.abmyotka.hr.dao.AccountDAO;
 import com.epam.abmyotka.hr.dao.CandidateDAO;
 import com.epam.abmyotka.hr.dao.DBPool;
 import com.epam.abmyotka.hr.entity.Candidate;
@@ -19,11 +18,29 @@ public class CandidateService {
         return candidates;
     }
 
-    public boolean deleteByAccountId(int accountId) {
+    public Candidate findById(int candidateId) {
         DBPool pool = DBPool.getInstance();
         Connection connection = pool.getConnection();
         CandidateDAO candidateDAO = new CandidateDAO(connection);
-        int countRowsAffected = candidateDAO.delete(accountId);
+        Candidate candidate = candidateDAO.findById(candidateId);
+        pool.putConnection(connection);
+        return candidate;
+    }
+
+    public boolean delete(int candidateId) {
+        DBPool pool = DBPool.getInstance();
+        Connection connection = pool.getConnection();
+        CandidateDAO candidateDAO = new CandidateDAO(connection);
+        int countRowsAffected = candidateDAO.delete(candidateId);
+        pool.putConnection(connection);
+        return countRowsAffected != 0;
+    }
+
+    public boolean update(Candidate candidate) {
+        DBPool pool = DBPool.getInstance();
+        Connection connection = pool.getConnection();
+        CandidateDAO candidateDAO = new CandidateDAO(connection);
+        int countRowsAffected = candidateDAO.update(candidate);
         pool.putConnection(connection);
         return countRowsAffected != 0;
     }
