@@ -13,7 +13,7 @@
     <title><fmt:message key="index.nav.authorization" /></title>
     <style>
         <%@include file='WEB-INF/css/bootstrap.min.css' %>
-        <%@include file='WEB-INF/css/signin.css' %>
+        <%@include file='WEB-INF/css/main.css' %>
     </style>
 </head>
 <body>
@@ -37,9 +37,10 @@
             </ul>
             <ul class="nav navbar-nav navbar-right">
                 <form>
-                    <select class="form-control" title="language" id="language" name="language" onchange="submit()">
-                        <option value="ru" ${language == 'ru' ? 'selected' : ''}>Русский</option>
-                        <option value="en" ${language == 'en' ? 'selected' : ''}>English</option>
+                    <select class="form-control" title="language" id="language" name="language"
+                            onchange="location=this.options[this.selectedIndex].value">
+                        <option value="http://localhost:8080/hr/index.jsp?language=ru" ${language == 'ru' ? 'selected' : ''}>Русский</option>
+                        <option value="http://localhost:8080/hr/index.jsp?language=en" ${language == 'en' ? 'selected' : ''}>English</option>
                     </select>
                 </form>
             </ul>

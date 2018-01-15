@@ -12,24 +12,26 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import javax.servlet.http.HttpServletRequest;
-
+import javax.servlet.http.HttpSession;
 import java.util.List;
 
 import static com.epam.abmyotka.hr.validator.CandidateEmployerValidator.*;
+import static com.epam.abmyotka.hr.validator.CandidateEmployerValidator.checkExperience;
 
-public class AdminCandidateEditSaveCommand implements Command {
-    private final static Logger LOGGER = LogManager.getLogger(AdminCandidateEditSaveCommand.class);
+public class CandidateAddSaveCommand implements Command {
+    private final static Logger LOGGER = LogManager.getLogger(CandidateAddSaveCommand.class);
     private CandidateService service;
 
-    public AdminCandidateEditSaveCommand(CandidateService service) {
+    public CandidateAddSaveCommand(CandidateService service) {
         this.service = service;
     }
 
     @Override
     public Router execute(HttpServletRequest request) {
-        Router router = new Router(PathConstant.PATH_PAGE_ADMIN_CANDIDATE, Router.RouteType.FORWARD);
+        Router router = new Router(PathConstant.PATH_PAGE_CANDIDATE, Router.RouteType.FORWARD);
 
-        String stringCandidateId = request.getParameter(ParameterConstant.PARAM_CANDIDATE_ID);
+        HttpSession session = request.getSession(true);
+
         String surname = request.getParameter(ParameterConstant.PARAM_SURNAME);
         String name = request.getParameter(ParameterConstant.PARAM_NAME);
         String lastname = request.getParameter(ParameterConstant.PARAM_LASTNAME);
@@ -43,36 +45,18 @@ public class AdminCandidateEditSaveCommand implements Command {
         String experience = request.getParameter(ParameterConstant.PARAM_EXPERIENCE);
         String english = request.getParameter(ParameterConstant.PARAM_ENGLISH);
         String skill = request.getParameter(ParameterConstant.PARAM_SKILL);
+        int accountId = (int)session.getAttribute("candidateId");
 
-        if(checkID(stringCandidateId) && checkNames(surname) && checkNames(name) && checkLastname(lastname) &&
-                checkAge(age) && checkEmail(email) && checkCitizenship(citizenship) && checkPhone(phone) &&
-                checkExperience(experience)) {
-            Candidate candidate = new Candidate(Integer.parseInt(stringCandidateId), surname, name, lastname,
-                    Integer.parseInt(age), email, address, citizenship, phone, post, education,
-                    Integer.parseInt(experience), english, skill);
-            if (service.update(candidate)) {
-                List<Candidate> candidates = service.takeAll();
-                request.setAttribute("candidateList", candidates);
-            } else {
+        if(checkNames(surname) && checkNames(name) && checkLastname(lastname) && checkAge(age) && checkEmail(email) &&
+                checkCitizenship(citizenship) && checkPhone(phone) && checkExperience(experience)) {
+            Candidate candidate = new Candidate(surname, name, lastname, Integer.parseInt(age), email, address,
+                    citizenship, phone, post, education, Integer.parseInt(experience), english, skill, accountId);
+            if (!service.add(candidate)) {
                 request.setAttribute("errorMessage", MessageConstant.ERROR_ON_WEBSITE);
             }
         } else {
             request.setAttribute("errorMessage", MessageConstant.INCORRECT_DATA);
-            router.setPagePath(PathConstant.PATH_PAGE_ADMIN_CANDIDATE_EDIT);
-            int candidateId = 0;
-            try {
-                candidateId = Integer.parseInt(stringCandidateId);
-            } catch (NumberFormatException e) {
-                LOGGER.log(Level.ERROR, "Error while parsing string value candidateId to integer! Detail: " +
-                        e.getMessage());
-            }
-            Candidate candidate = service.findById(candidateId);
-            if (candidate != null) {
-                request.setAttribute("candidate", candidate);
-            } else {
-                router.setPagePath(PathConstant.PATH_PAGE_ADMIN_CANDIDATE);
-                request.setAttribute("errorMessage", MessageConstant.ERROR_ON_WEBSITE);
-            }
+            router.setPagePath(PathConstant.PATH_PAGE_CANDIDATE_ADD);
         }
 
         return router;

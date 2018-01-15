@@ -1,18 +1,46 @@
 package com.epam.abmyotka.hr.service;
 
-import com.epam.abmyotka.hr.dao.CandidateDAO;
 import com.epam.abmyotka.hr.dao.DBPool;
 import com.epam.abmyotka.hr.dao.EmployerDAO;
+import com.epam.abmyotka.hr.entity.Employer;
 
 import java.sql.Connection;
+import java.util.List;
 
 public class EmployerService {
 
-    public boolean deleteByAccountId(int accountId) {
+    public List<Employer> takeAll() {
         DBPool pool = DBPool.getInstance();
         Connection connection = pool.getConnection();
         EmployerDAO employerDAO = new EmployerDAO(connection);
-        int countRowsAffected = employerDAO.delete(accountId);
+        List<Employer> employers = employerDAO.findAll();
+        pool.putConnection(connection);
+        return employers;
+    }
+
+    public Employer findById(int employerId) {
+        DBPool pool = DBPool.getInstance();
+        Connection connection = pool.getConnection();
+        EmployerDAO employerDAO = new EmployerDAO(connection);
+        Employer employer = employerDAO.findById(employerId);
+        pool.putConnection(connection);
+        return employer;
+    }
+
+    public boolean delete(int employerId) {
+        DBPool pool = DBPool.getInstance();
+        Connection connection = pool.getConnection();
+        EmployerDAO employerDAO = new EmployerDAO(connection);
+        int countRowsAffected = employerDAO.delete(employerId);
+        pool.putConnection(connection);
+        return countRowsAffected != 0;
+    }
+
+    public boolean update(Employer employer) {
+        DBPool pool = DBPool.getInstance();
+        Connection connection = pool.getConnection();
+        EmployerDAO employerDAO = new EmployerDAO(connection);
+        int countRowsAffected = employerDAO.update(employer);
         pool.putConnection(connection);
         return countRowsAffected != 0;
     }

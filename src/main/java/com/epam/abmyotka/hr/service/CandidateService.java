@@ -44,4 +44,22 @@ public class CandidateService {
         pool.putConnection(connection);
         return countRowsAffected != 0;
     }
+
+    public boolean add(Candidate candidate) {
+        DBPool pool = DBPool.getInstance();
+        Connection connection = pool.getConnection();
+        CandidateDAO candidateDAO = new CandidateDAO(connection);
+        int countRowsAffected = candidateDAO.add(candidate);
+        pool.putConnection(connection);
+        return countRowsAffected != 0;
+    }
+
+    public boolean isExistCandidateByAccountId(int accountId) {
+        DBPool pool = DBPool.getInstance();
+        Connection connection = pool.getConnection();
+        CandidateDAO candidateDAO = new CandidateDAO(connection);
+        Candidate candidate = candidateDAO.findByAccountId(accountId);
+        pool.putConnection(connection);
+        return candidate != null;
+    }
 }

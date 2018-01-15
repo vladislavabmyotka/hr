@@ -28,14 +28,22 @@ public class AccountService {
         return role;
     }
 
-    public boolean checkCoincidenceByLogin(String login) {
-        boolean isExist;
+    public int findAccountIdByPassword(String password) {
         DBPool pool = DBPool.getInstance();
         Connection connection = pool.getConnection();
         AccountDAO accountDAO = new AccountDAO(connection);
-        isExist = accountDAO.checkCoincidenceByLogin(login);
+        int accountId = accountDAO.findAccountIdByPassword(password);
         pool.putConnection(connection);
-        return isExist;
+        return accountId;
+    }
+
+    public int findAccountIdByLoginPasswordAttachment(Account account) {
+        DBPool pool = DBPool.getInstance();
+        Connection connection = pool.getConnection();
+        AccountDAO accountDAO = new AccountDAO(connection);
+        int accountId = accountDAO.findAccountIdByLoginPasswordAttachment(account);
+        pool.putConnection(connection);
+        return accountId;
     }
 
     public boolean add(Account account) {
@@ -45,15 +53,6 @@ public class AccountService {
         int countRowsAffected = accountDAO.add(account);
         pool.putConnection(connection);
         return countRowsAffected != 0;
-    }
-
-    public int findAccountIdByPassword(String password) {
-        DBPool pool = DBPool.getInstance();
-        Connection connection = pool.getConnection();
-        AccountDAO accountDAO = new AccountDAO(connection);
-        int countRowsAffected = accountDAO.findAccountIdByPassword(password);
-        pool.putConnection(connection);
-        return countRowsAffected;
     }
 
     public boolean update(Account account, int accountId) {
@@ -72,5 +71,15 @@ public class AccountService {
         int countRowsAffected = accountDAO.delete(account);
         pool.putConnection(connection);
         return countRowsAffected != 0;
+    }
+
+    public boolean checkCoincidenceByLogin(String login) {
+        boolean isExist;
+        DBPool pool = DBPool.getInstance();
+        Connection connection = pool.getConnection();
+        AccountDAO accountDAO = new AccountDAO(connection);
+        isExist = accountDAO.checkCoincidenceByLogin(login);
+        pool.putConnection(connection);
+        return isExist;
     }
 }

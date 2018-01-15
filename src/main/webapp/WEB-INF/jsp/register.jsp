@@ -13,7 +13,7 @@
     <title><fmt:message key="index.nav.register" /></title>
     <style>
         <%@include file='../css/bootstrap.min.css' %>
-        <%@include file='../css/signin.css' %>
+        <%@include file='../css/main.css' %>
     </style>
 </head>
 <body>
@@ -89,7 +89,7 @@
             </button>
         </form>
     </div>
-
+    <c:import url="/WEB-INF/jsp/footer.jsp"/>
     <script>
         <%@include file='../js/validate.js' %>
     </script>

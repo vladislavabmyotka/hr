@@ -46,17 +46,44 @@ public class AccountDAO extends AbstractDAO<Account> {
         return accounts;
     }
 
-    public boolean checkCoincidenceByLogin(String login) {
-        boolean isCoincidence = true;
+    public int findAccountIdByPassword(String password) {
+        int accountId = 0;
+        PreparedStatement statement = null;
         try {
-            PreparedStatement statement = this.getPreparedStatement(SQLConstant.SQL_SELECT_SINGLE_LOGIN);
-            statement.setString(1, login);
+            statement = this.getPreparedStatement(SQLConstant.SQL_SELECT_FIND_ACCOUNT_ID_BY_PASSWORD);
+            statement.setString(1, password);
             ResultSet resultSet = statement.executeQuery();
-            isCoincidence = resultSet.next();
+            if (resultSet.next()) {
+                accountId = resultSet.getInt(ID_ACCOUNT);
+            }
         } catch (SQLException e) {
-            LOGGER.log(Level.ERROR, "Error while trying find coincidence login! Detail: " + e.getMessage());
+            LOGGER.log(Level.ERROR, "Error while trying find idAccount by password into database! Detail: " +
+                    e.getMessage());
+        } finally {
+            this.closeStatement(statement);
         }
-        return isCoincidence;
+        return accountId;
+    }
+
+    public int findAccountIdByLoginPasswordAttachment(Account account) {
+        int accountId = 0;
+        PreparedStatement statement = null;
+        try {
+            statement = this.getPreparedStatement(SQLConstant.SQL_SELECT_FIND_ACCOUNT_ID_BY_LOGIN_PASSWORD_ATTACHMENT);
+            statement.setString(1, account.getLogin());
+            statement.setString(2, account.getPassword());
+            statement.setString(3, account.getAttachment());
+            ResultSet resultSet = statement.executeQuery();
+            if (resultSet.next()) {
+                accountId = resultSet.getInt(ID_ACCOUNT);
+            }
+        } catch (SQLException e) {
+            LOGGER.log(Level.ERROR, "Error while trying find idAccount by login, password and attachment into " +
+                    "database! Detail: " + e.getMessage());
+        } finally {
+            this.closeStatement(statement);
+        }
+        return accountId;
     }
 
     @Override
@@ -72,13 +99,16 @@ public class AccountDAO extends AbstractDAO<Account> {
     @Override
     public int delete(Account account) {
         int countRowsAffected = 0;
+        PreparedStatement statement = null;
         try {
-            PreparedStatement statement = this.getPreparedStatement(SQLConstant.SQL_DELETE_ACCOUNT);
+            statement = this.getPreparedStatement(SQLConstant.SQL_DELETE_ACCOUNT);
             statement.setString(1, account.getLogin());
             statement.setString(2, account.getPassword());
             countRowsAffected = statement.executeUpdate();
         } catch (SQLException e) {
             LOGGER.log(Level.ERROR, "Error while trying delete account from database! Detail: " + e.getMessage());
+        } finally {
+            this.closeStatement(statement);
         }
         return countRowsAffected;
     }
@@ -86,47 +116,53 @@ public class AccountDAO extends AbstractDAO<Account> {
     @Override
     public int add(Account account) {
         int countRowsAffected = 0;
+        PreparedStatement statement = null;
         try {
-            PreparedStatement statement = this.getPreparedStatement(SQLConstant.SQL_INSERT_ADD_ACCOUNT);
+            statement = this.getPreparedStatement(SQLConstant.SQL_INSERT_ADD_ACCOUNT);
             statement.setString(1, account.getLogin());
             statement.setString(2, account.getPassword());
             statement.setString(3, account.getAttachment());
             countRowsAffected = statement.executeUpdate();
         } catch (SQLException e) {
             LOGGER.log(Level.ERROR, "Error while trying add account into database! Detail: " + e.getMessage());
+        } finally {
+            this.closeStatement(statement);
         }
 
         return countRowsAffected;
     }
 
-    public int findAccountIdByPassword(String password) {
-        int accountId = 0;
-        try {
-            PreparedStatement statement = this.getPreparedStatement(SQLConstant.SQL_SELECT_FIND_ACCOUNT_ID_BY_PASSWORD);
-            statement.setString(1, password);
-            ResultSet resultSet = statement.executeQuery();
-            if (resultSet.next()) {
-                accountId = resultSet.getInt(ID_ACCOUNT);
-            }
-        } catch (SQLException e) {
-            LOGGER.log(Level.ERROR, "Error while trying find account id by password into database! Detail: " +
-                    e.getMessage());
-        }
-        return accountId;
-    }
-
     public int update(Account user, int accountId) {
         int countRowsAffected = 0;
+        PreparedStatement statement = null;
         try {
-            PreparedStatement statement = this.getPreparedStatement(SQLConstant.SQL_UPDATE_ACCOUNT);
+            statement = this.getPreparedStatement(SQLConstant.SQL_UPDATE_ACCOUNT);
             statement.setString(1, user.getLogin());
             statement.setString(2, user.getPassword());
             statement.setInt(3, accountId);
             countRowsAffected = statement.executeUpdate();
         } catch (SQLException e) {
             LOGGER.log(Level.ERROR, "Error while trying update account! Detail: " + e.getMessage());
+        } finally {
+            this.closeStatement(statement);
         }
 
         return countRowsAffected;
+    }
+
+    public boolean checkCoincidenceByLogin(String login) {
+        boolean isCoincidence = true;
+        PreparedStatement statement = null;
+        try {
+            statement = this.getPreparedStatement(SQLConstant.SQL_SELECT_SINGLE_LOGIN);
+            statement.setString(1, login);
+            ResultSet resultSet = statement.executeQuery();
+            isCoincidence = resultSet.next();
+        } catch (SQLException e) {
+            LOGGER.log(Level.ERROR, "Error while trying find coincidence login! Detail: " + e.getMessage());
+        } finally {
+            this.closeStatement(statement);
+        }
+        return isCoincidence;
     }
 }

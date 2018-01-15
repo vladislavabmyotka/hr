@@ -5,7 +5,7 @@ import com.epam.abmyotka.hr.constant.ValidationRegExConstant;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-public class CandidateValidator {
+public class CandidateEmployerValidator {
     private static final String EMPTY_STRING = "";
 
     public static boolean checkID(String stringId) {

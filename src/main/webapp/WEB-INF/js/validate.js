@@ -3,15 +3,15 @@ function validate(form) {
     var password = form.password.value;
 
     var errors="";
-    var regPassword = /^(?=.*\d)(?=.*[a-z])[0-9a-z]{8,12}$/i;
-    var regLogin = /[a-z][\w]{4,20}/i;
+    var regPassword = /^(?=.*\d)(?=.*[a-z])[0-9a-z]{8,25}$/i;
+    var regLogin = /[a-z][\w]{4,25}/i;
     if(!regLogin.test(login)) {
         errors+="Wrong login! The login must begin with a Latin letter, must be at least 5 " +
-            "and not more than 20 characters and can contain Latin letters, digits and '_'\n";
+            "and not more than 25 characters and can contain Latin letters, digits and '_'\n";
     }
     if(!regPassword.test(password)) {
         errors+="Wrong password! The password must contain letters and numbers and be at least 8" +
-            " and not more than 12 characters\n";
+            " and not more than 25 characters\n";
     }
 
     if(errors === "") {

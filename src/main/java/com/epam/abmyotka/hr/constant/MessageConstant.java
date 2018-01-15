@@ -6,4 +6,6 @@ public class MessageConstant {
     public static final String INCORRECT_PASSWORD_MESSAGE = "Incorrect password";
     public static final String ERROR_ON_WEBSITE = "Sorry, there's been some problems on the website, try again later!";
     public static final String INCORRECT_DATA = "The entered data is incorrect!";
+    public static final String CANDIDATE_ALREADY_EXIST =
+            "Your resume already exists, you need to create a separate account to add a new one!";
 }

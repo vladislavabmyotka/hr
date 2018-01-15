@@ -13,7 +13,7 @@
     <title><fmt:message key="admin.title" /></title>
     <style>
         <%@include file='../css/bootstrap.min.css' %>
-        <%@include file='../css/signin.css' %>
+        <%@include file='../css/main.css' %>
     </style>
 </head>
 <body>
@@ -38,6 +38,13 @@
                         </button>
                     </li>
                 </form>
+                <form action="FrontController" method="post">
+                    <input type="hidden" name="command" value="admin_employer_view">
+                    <li class="nav-item">
+                        <button type="submit" class="btn btn-link nav-link cursor"><fmt:message key="admin.employer" />
+                        </button>
+                    </li>
+                </form>
             </ul>
 
             <ul class="nav navbar-nav navbar-right">
@@ -59,9 +66,40 @@
             </ul>
         </div>
     </nav>
+    <br/><br/>
 
-    <div class="container">
-        ADMIN HOME
-    </div>
+    <main role="main">
+
+        <!-- Main jumbotron for a primary marketing message or call to action -->
+        <div class="jumbotron">
+            <div class="container">
+                <h1 class="display-3">Hello, ${pageContext.session.getAttribute("role").login}!</h1>
+                <p><fmt:message key="home.main.title" /></p>
+            </div>
+        </div>
+
+        <div class="container">
+            <!-- Example row of columns -->
+            <div class="row">
+                <div class="col-md-4">
+                    <h2><fmt:message key="admin.candidate" /></h2>
+                    <p><fmt:message key="admin.home.candidate.main" /></p>
+                </div>
+                <div class="col-md-4">
+                    <h2><fmt:message key="admin.employer" /></h2>
+                    <p><fmt:message key="admin.home.employer.main" /></p>
+                </div>
+                <div class="col-md-4">
+                    <h2><fmt:message key="admin.home.general" /></h2>
+                    <p><fmt:message key="admin.home.general.main" /></p>
+                </div>
+            </div>
+
+            <hr>
+
+        </div>
+
+    </main>
+    <c:import url="/WEB-INF/jsp/footer.jsp"/>
 </body>
 </html>

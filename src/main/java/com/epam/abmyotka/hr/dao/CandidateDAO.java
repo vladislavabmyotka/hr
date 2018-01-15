@@ -68,7 +68,26 @@ public class CandidateDAO extends AbstractDAO<Candidate> {
         } finally {
             this.closeStatement(preparedStatement);
         }
+        return candidate;
+    }
 
+    @Override
+    public Candidate findById(int candidateId) {
+        Candidate candidate = null;
+        PreparedStatement statement = null;
+        try {
+            statement = this.getPreparedStatement(SQLConstant.SQL_SELECT_CANDIDATE_BY_CANDIDATE_ID);
+            statement.setInt(1, candidateId);
+            ResultSet resultSet = statement.executeQuery();
+            if (resultSet.next()) {
+                candidate = createCandidateByResultSet(resultSet);
+            }
+        } catch (SQLException e) {
+            LOGGER.log(Level.ERROR, "Error while trying find candidate by idCandidate in database! Detail: " +
+                    e.getMessage());
+        } finally {
+            this.closeStatement(statement);
+        }
         return candidate;
     }
 
@@ -93,51 +112,46 @@ public class CandidateDAO extends AbstractDAO<Candidate> {
     }
 
     @Override
-    public Candidate findById(int candidateId) {
-        Candidate candidate = null;
-        try {
-            PreparedStatement statement = this.getPreparedStatement(SQLConstant.SQL_SELECT_CANDIDATE_BY_CANDIDATE_ID);
-            statement.setInt(1, candidateId);
-            ResultSet resultSet = statement.executeQuery();
-            if (resultSet.next()) {
-                candidate = createCandidateByResultSet(resultSet);
-            }
-        } catch (SQLException e) {
-            LOGGER.log(Level.ERROR, "Error while trying find candidate by candidate id in database! Detail: " +
-                    e.getMessage());
-        }
-        return candidate;
-    }
-
-    @Override
     public int delete(int candidateId) {
         int countRowsAffected = 0;
+        PreparedStatement statement = null;
         try {
-            PreparedStatement statement = this.getPreparedStatement(SQLConstant.SQL_DELETE_CANDIDATE_BY_CANDIDATE_ID);
+            statement = this.getPreparedStatement(SQLConstant.SQL_DELETE_CANDIDATE_BY_CANDIDATE_ID);
             statement.setInt(1, candidateId);
             countRowsAffected = statement.executeUpdate();
         } catch (SQLException e) {
             LOGGER.log(Level.ERROR, "Error while trying delete candidate from database! Detail: " + e.getMessage());
+        } finally {
+            this.closeStatement(statement);
         }
         return countRowsAffected;
     }
 
     public int deleteByAccountId(int accountId) {
         int countRowsAffected = 0;
+        PreparedStatement statement = null;
         try {
-            PreparedStatement statement = this.getPreparedStatement(SQLConstant.SQL_DELETE_CANDIDATE_BY_ACCOUNT_ID);
+            statement = this.getPreparedStatement(SQLConstant.SQL_DELETE_CANDIDATE_BY_ACCOUNT_ID);
             statement.setInt(1, accountId);
             countRowsAffected = statement.executeUpdate();
         } catch (SQLException e) {
             LOGGER.log(Level.ERROR, "Error while trying delete candidate from database! Detail: " + e.getMessage());
+        } finally {
+            this.closeStatement(statement);
         }
         return countRowsAffected;
     }
 
+    @Override
+    public int delete(Candidate entity) {
+        return 0;
+    }
+
     public int update(Candidate candidate) {
         int countRowsAffected = 0;
+        PreparedStatement statement = null;
         try {
-            PreparedStatement statement = this.getPreparedStatement(SQLConstant.SQL_UPDATE_CANDIDATE);
+            statement = this.getPreparedStatement(SQLConstant.SQL_UPDATE_CANDIDATE);
             statement.setString(1, candidate.getSurname());
             statement.setString(2, candidate.getName());
             statement.setString(3, candidate.getLastname());
@@ -155,18 +169,39 @@ public class CandidateDAO extends AbstractDAO<Candidate> {
             countRowsAffected = statement.executeUpdate();
         } catch (SQLException e) {
             LOGGER.log(Level.ERROR, "Error while trying update candidate! Detail: " + e.getMessage());
+        } finally {
+            this.closeStatement(statement);
         }
 
         return countRowsAffected;
     }
 
     @Override
-    public int delete(Candidate entity) {
-        return 0;
-    }
-
-    @Override
-    public int add(Candidate entity) {
-        return 0;
+    public int add(Candidate candidate) {
+        int countRowsAffected = 0;
+        PreparedStatement statement = null;
+        try {
+            statement = this.getPreparedStatement(SQLConstant.SQL_INSERT_CANDIDATE);
+            statement.setString(1, candidate.getSurname());
+            statement.setString(2, candidate.getName());
+            statement.setString(3, candidate.getLastname());
+            statement.setInt(4, candidate.getAge());
+            statement.setString(5, candidate.getEmail());
+            statement.setString(6,candidate.getAddress());
+            statement.setString(7, candidate.getCitizenship());
+            statement.setString(8, candidate.getPhone());
+            statement.setString(9, candidate.getPost());
+            statement.setString(10, candidate.getEducation());
+            statement.setInt(11, candidate.getExperience());
+            statement.setString(12, candidate.getEnglish());
+            statement.setString(13, candidate.getSkill());
+            statement.setInt(14, candidate.getAccountId());
+            countRowsAffected = statement.executeUpdate();
+        } catch (SQLException e) {
+            LOGGER.log(Level.ERROR, "Error while trying add candidate in database! Detail: " + e.getMessage());
+        } finally {
+            this.closeStatement(statement);
+        }
+        return countRowsAffected;
     }
 }

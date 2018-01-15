@@ -10,7 +10,7 @@
 <html lang="${language}">
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-    <title><fmt:message key="admin.candidate.edit.title" /></title>
+    <title><fmt:message key="candidate.add.title" /></title>
     <style>
         <%@include file='../css/bootstrap.min.css' %>
         <%@include file='../css/main.css' %>
@@ -28,29 +28,17 @@
 
             <ul class="navbar-nav mr-auto">
                 <li class="nav-item active">
-                    <a class="nav-link" href="adminHome"><fmt:message key="home" />
+                    <a class="nav-link" href="#"><fmt:message key="candidate.add" />
                         <span class="sr-only">(current)</span></a>
                 </li>
-                <form action="FrontController" method="post">
-                    <input type="hidden" name="command" value="admin_candidate_view">
-                    <li class="nav-item">
-                        <button type="submit" class="btn btn-link nav-link cursor"><fmt:message key="admin.candidate" />
-                        </button>
-                    </li>
-                </form>
-                <form action="FrontController" method="post">
-                    <input type="hidden" name="command" value="admin_employer_view">
-                    <li class="nav-item">
-                        <button type="submit" class="btn btn-link nav-link cursor"><fmt:message key="admin.employer" />
-                        </button>
-                    </li>
-                </form>
+                <li class="nav-item">
+                    <a class="nav-link" href="candidateHome"><fmt:message key="home" /></a>
+                </li>
             </ul>
 
             <ul class="nav navbar-nav navbar-right">
                 <form class="margin" action="FrontController" method="post">
-                    <input type="hidden" name="command" value="admin_candidate_edit">
-                    <input type="hidden" name="adminCandidateEdit" value="${candidate.candidateId}">
+                    <input type="hidden" name="command" value="candidate_add">
                     <select class="form-control" title="language" id="language" name="language" onchange="submit()">
                         <option value="ru" ${language == 'ru' ? 'selected' : ''}>Русский</option>
                         <option value="en" ${language == 'en' ? 'selected' : ''}>English</option>
@@ -68,15 +56,13 @@
     <br/><br/>
     <div class="container">
         <form class="form-horizontal" action="FrontController" method="post">
-            <input type="hidden" name="command" value="admin_candidate_edit_save">
-            <input type="hidden" name="candidateId" value="${candidate.candidateId}">
+            <input type="hidden" name="command" value="candidate_add_save">
             <div class="form-group">
                 <label class="control-label col-sm-2" for="surname"><fmt:message key="surname" />:
                 </label>
                 <div class="col-sm-10">
                     <input name="surname" type="text" class="form-control" id="surname"
-                           pattern="[A-ZА-Я][a-zа-яёA-ZА-ЯЁ-]{1,40}"
-                           placeholder="<fmt:message key="enter.surname" />" value="${candidate.surname}">
+                           pattern="[A-ZА-Я][a-zа-яёA-ZА-ЯЁ-]{1,40}" placeholder="<fmt:message key="enter.surname" />">
                 </div>
             </div>
             <div class="form-group">
@@ -84,8 +70,7 @@
                 </label>
                 <div class="col-sm-10">
                     <input name="name" type="text" class="form-control" id="name"
-                           pattern="[A-ZА-Я][a-zа-яёA-ZА-ЯЁ-]{1,40}"
-                           placeholder="<fmt:message key="enter.name" />" value="${candidate.name}">
+                           pattern="[A-ZА-Я][a-zа-яёA-ZА-ЯЁ-]{1,40}" placeholder="<fmt:message key="enter.name" />">
                 </div>
             </div>
             <div class="form-group">
@@ -93,7 +78,7 @@
                 </label>
                 <div class="col-sm-10">
                     <input name="lastname" type="text" class="form-control" id="lastname"
-                           placeholder="<fmt:message key="enter.lastname" />" value="${candidate.lastname}">
+                           placeholder="<fmt:message key="enter.lastname" />">
                 </div>
             </div>
             <div class="form-group">
@@ -101,7 +86,7 @@
                 </label>
                 <div class="col-sm-10">
                     <input name="age" type="number" class="form-control" id="age" min="1" max="120" required
-                           placeholder="<fmt:message key="enter.age" />" value="${candidate.age}">
+                           placeholder="<fmt:message key="enter.age" />">
                 </div>
             </div>
             <div class="form-group">
@@ -110,7 +95,7 @@
                 <div class="col-sm-10">
                     <input name="email" type="email" class="form-control" id="email"
                            pattern="^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$"
-                           placeholder="<fmt:message key="enter.email" />" value="${candidate.email}">
+                           placeholder="<fmt:message key="enter.email" />">
                 </div>
             </div>
             <div class="form-group">
@@ -118,7 +103,7 @@
                 </label>
                 <div class="col-sm-10">
                     <input name="address" type="text" class="form-control" id="address" required
-                           placeholder="<fmt:message key="enter.address" />" value="${candidate.address}">
+                           placeholder="<fmt:message key="enter.address" />">
                 </div>
             </div>
             <div class="form-group">
@@ -126,8 +111,7 @@
                     <fmt:message key="citizenship" />:</label>
                 <div class="col-sm-10">
                     <input name="citizenship" type="text" class="form-control" id="citizenship"
-                           pattern="[A-ZА-ЯЁa-zа-яё\s]+" placeholder="<fmt:message key="enter.citizenship" />"
-                           value="${candidate.citizenship}">
+                           pattern="[A-ZА-ЯЁa-zа-яё\s]+" placeholder="<fmt:message key="enter.citizenship" />">
                 </div>
             </div>
             <div class="form-group">
@@ -136,7 +120,7 @@
                 <div class="col-sm-10">
                     <input name="phone" type="tel" class="form-control" id="phone"
                            pattern="^[+]?((8|\+7)[\- ]?)?(\(?\d{3}\)?[\- ]?)?[\d\- ]{7,12}$"
-                           placeholder="<fmt:message key="enter.phone" />" value="${candidate.phone}">
+                           placeholder="<fmt:message key="enter.phone" />">
                 </div>
             </div>
             <div class="form-group">
@@ -144,7 +128,7 @@
                 </label>
                 <div class="col-sm-10">
                     <input name="post" type="text" class="form-control" id="post" required
-                           placeholder="<fmt:message key="enter.post" />" value="${candidate.post}">
+                           placeholder="<fmt:message key="enter.post" />">
                 </div>
             </div>
             <div class="form-group">
@@ -152,7 +136,7 @@
                 </label>
                 <div class="col-sm-10">
                     <input name="education" type="text" class="form-control" id="education"
-                           placeholder="<fmt:message key="enter.education" />" value="${candidate.education}">
+                           placeholder="<fmt:message key="enter.education" />">
                 </div>
             </div>
             <div class="form-group">
@@ -160,8 +144,7 @@
                 </label>
                 <div class="col-sm-10">
                     <input name="experience" type="number" class="form-control" id="experience" min="0" max="100"
-                           placeholder="<fmt:message key="enter.experience" />" required
-                           value="${candidate.experience}">
+                           placeholder="<fmt:message key="enter.experience" />" required>
                 </div>
             </div>
             <div class="form-group">
@@ -169,9 +152,7 @@
                 </label>
                 <div class="col-sm-10">
                     <select class="custom-select form-control" name="english" id="english" >
-                        <option selected value="${candidate.english}">
-                            <fmt:message key="enter.english.current"/> ${candidate.english}</option>
-                        <option value="Не указано"><fmt:message key="enter.english.non" /></option>
+                        <option selected value="Не указано"><fmt:message key="enter.english.non" /></option>
                         <option value="A0 (Абсолютный новичок)"><fmt:message key="enter.english.a0" />
                         </option>
                         <option value="A1 (Базовый)"><fmt:message key="enter.english.a1" /></option>
@@ -195,8 +176,8 @@
                 <label class="control-label col-sm-2" for="skill"><fmt:message key="skill" />:
                 </label>
                 <div class="col-sm-10">
-                    <textarea name="skill" class="form-control" id="skill" rows="4"
-                              placeholder="<fmt:message key="enter.skill" />">${candidate.skill}</textarea>
+                        <textarea name="skill" class="form-control" id="skill" rows="4"
+                                  placeholder="<fmt:message key="enter.skill" />"></textarea>
                 </div>
             </div>
 
@@ -205,14 +186,11 @@
             <br/>
 
             <button class="btn btn-lg btn-primary btn-block" type="submit">
-                <fmt:message key="save"/></button>
+                <fmt:message key="add"/></button>
             <button class="btn btn-lg btn-primary btn-block" type="reset">
-                <fmt:message key="return.data" /></button>
-        </form>
-        <form action="FrontController" method="post">
-            <input type="hidden" name="command" value="admin_candidate_view">
-            <button type="submit" class="btn btn-lg btn-primary btn-block cancel-mrgn">
-                <fmt:message key="delete.cancel" /></button>
+                <fmt:message key="reset" /></button>
+            <a href="candidateHome"><button type="button" class="btn btn-lg btn-primary btn-block cancel-mrgn">
+                <fmt:message key="delete.cancel" /></button></a>
         </form>
     </div>
     <c:import url="/WEB-INF/jsp/footer.jsp"/>

@@ -1,6 +1,7 @@
 package com.epam.abmyotka.hr.dao;
 
 import com.epam.abmyotka.hr.constant.SQLConstant;
+import com.epam.abmyotka.hr.entity.Candidate;
 import com.epam.abmyotka.hr.entity.Employer;
 import org.apache.logging.log4j.Level;
 import org.apache.logging.log4j.LogManager;
@@ -49,20 +50,40 @@ public class EmployerDAO extends AbstractDAO<Employer> {
 
     public Employer findByAccountId(int accountId) {
         Employer employer = null;
-        PreparedStatement preparedStatement = null;
+        PreparedStatement statement = null;
         try {
-            preparedStatement = this.getPreparedStatement(SQLConstant.SQL_SELECT_EMPLOYER_BY_ACCOUNT_ID);
-            preparedStatement.setInt(1, accountId);
-            ResultSet resultSet = preparedStatement.executeQuery();
+            statement = this.getPreparedStatement(SQLConstant.SQL_SELECT_EMPLOYER_BY_ACCOUNT_ID);
+            statement.setInt(1, accountId);
+            ResultSet resultSet = statement.executeQuery();
             if (resultSet.next()) {
                 employer = createEmployerByResultSet(resultSet);
             }
         } catch (SQLException e) {
             LOGGER.log(Level.ERROR, "SQL exception (request or table failed)! Detail: " + e.getMessage());
         } finally {
-            this.closeStatement(preparedStatement);
+            this.closeStatement(statement);
         }
 
+        return employer;
+    }
+
+    @Override
+    public Employer findById(int employerId) {
+        Employer employer = null;
+        PreparedStatement statement = null;
+        try {
+            statement = this.getPreparedStatement(SQLConstant.SQL_SELECT_EMPLOYER_BY_EMPLOYER_ID);
+            statement.setInt(1, employerId);
+            ResultSet resultSet = statement.executeQuery();
+            if (resultSet.next()) {
+                employer = createEmployerByResultSet(resultSet);
+            }
+        } catch (SQLException e) {
+            LOGGER.log(Level.ERROR, "Error while trying find employer by idEmployer in database! Detail: " +
+                    e.getMessage());
+        } finally {
+            this.closeStatement(statement);
+        }
         return employer;
     }
 
@@ -81,20 +102,56 @@ public class EmployerDAO extends AbstractDAO<Employer> {
         return employer;
     }
 
-    @Override
-    public Employer findById(int id) {
-        return null;
+    public int update(Employer employer) {
+        int countRowsAffected = 0;
+        PreparedStatement statement = null;
+        try {
+            statement = this.getPreparedStatement(SQLConstant.SQL_UPDATE_EMPLOYER);
+            statement.setString(1, employer.getSurname());
+            statement.setString(2, employer.getName());
+            statement.setString(3, employer.getLastname());
+            statement.setString(4,employer.getAddress());
+            statement.setString(5, employer.getPhone());
+            statement.setString(6, employer.getEmail());
+            statement.setString(7, employer.getCompany());
+            statement.setInt(8, employer.getEmployerId());
+            countRowsAffected = statement.executeUpdate();
+        } catch (SQLException e) {
+            LOGGER.log(Level.ERROR, "Error while trying update employer! Detail: " + e.getMessage());
+        } finally {
+            this.closeStatement(statement);
+        }
+
+        return countRowsAffected;
     }
 
     @Override
-    public int delete(int accountId) {
+    public int delete(int employerId) {
         int countRowsAffected = 0;
+        PreparedStatement statement = null;
         try {
-            PreparedStatement statement = this.getPreparedStatement(SQLConstant.SQL_DELETE_EMPLOYER_BY_ACCOUNT_ID);
+            statement = this.getPreparedStatement(SQLConstant.SQL_DELETE_EMPLOYER_BY_EMPLOYER_ID);
+            statement.setInt(1, employerId);
+            countRowsAffected = statement.executeUpdate();
+        } catch (SQLException e) {
+            LOGGER.log(Level.ERROR, "Error while trying delete employer from database! Detail: " + e.getMessage());
+        } finally {
+            this.closeStatement(statement);
+        }
+        return countRowsAffected;
+    }
+
+    public int deleteByAccountId(int accountId) {
+        int countRowsAffected = 0;
+        PreparedStatement statement = null;
+        try {
+            statement = this.getPreparedStatement(SQLConstant.SQL_DELETE_EMPLOYER_BY_ACCOUNT_ID);
             statement.setInt(1, accountId);
             countRowsAffected = statement.executeUpdate();
         } catch (SQLException e) {
             LOGGER.log(Level.ERROR, "Error while trying delete employer from database! Detail: " + e.getMessage());
+        } finally {
+            this.closeStatement(statement);
         }
         return countRowsAffected;
     }

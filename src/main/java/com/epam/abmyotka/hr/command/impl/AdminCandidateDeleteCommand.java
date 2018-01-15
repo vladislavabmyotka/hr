@@ -7,11 +7,16 @@ import com.epam.abmyotka.hr.constant.PathConstant;
 import com.epam.abmyotka.hr.controller.Router;
 import com.epam.abmyotka.hr.entity.Candidate;
 import com.epam.abmyotka.hr.service.CandidateService;
+import org.apache.logging.log4j.Level;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 
 public class AdminCandidateDeleteCommand implements Command {
+    private final static Logger LOGGER = LogManager.getLogger(AdminCandidateDeleteCommand.class);
+
     private CandidateService service;
 
     public AdminCandidateDeleteCommand(CandidateService service) {
@@ -24,7 +29,13 @@ public class AdminCandidateDeleteCommand implements Command {
 
         String stringCandidateId = request.getParameter(ParameterConstant.PARAM_ADMIN_CANDIDATE_DELETE);
 
-        int candidateId = Integer.parseInt(stringCandidateId);
+        int candidateId = 0;
+        try {
+            candidateId = Integer.parseInt(stringCandidateId);
+        } catch (NumberFormatException e) {
+            LOGGER.log(Level.ERROR, "Error while parsing string value candidate id to integer! Detail: " +
+                    e.getMessage());
+        }
 
         if (!service.delete(candidateId)) {
             request.setAttribute("errorMessage", MessageConstant.ERROR_ON_WEBSITE);

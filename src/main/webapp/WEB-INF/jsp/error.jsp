@@ -12,7 +12,7 @@
     <title><fmt:message key="error.title" /></title>
     <style>
         <%@include file='../css/bootstrap.min.css' %>
-        <%@include file='../css/signin.css' %>
+        <%@include file='../css/main.css' %>
     </style>
 </head>
 <body>
@@ -54,5 +54,6 @@
         <a href="index.jsp"><button class="btn btn-lg btn-primary btn-block" type="submit">
             <fmt:message key="error.back" /></button></a>
     </div>
+    <c:import url="/WEB-INF/jsp/footer.jsp"/>
 </body>
 </html>

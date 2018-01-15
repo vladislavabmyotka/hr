@@ -12,7 +12,7 @@
     <title><fmt:message key="delete.title" /></title>
     <style>
         <%@include file='../css/bootstrap.min.css' %>
-        <%@include file='../css/signin.css' %>
+        <%@include file='../css/main.css' %>
     </style>
 </head>
 <body>
@@ -90,7 +90,7 @@
             <h6 class="form-signin-heading error"> ${errorMessage} </h6>
         </form>
     </div>
-
+    <c:import url="/WEB-INF/jsp/footer.jsp"/>
     <script>
         <%@include file='../js/bootstrapDropdown.js' %>
     </script>

@@ -39,6 +39,25 @@ public class Candidate extends Entity {
         this.skill = skill;
     }
 
+    public Candidate(String surname, String name, String lastname, int age, String email, String address,
+                     String citizenship, String phone, String post, String education, int experience, String english,
+                     String skill, int accountId) {
+        this.surname = surname;
+        this.name = name;
+        this.lastname = lastname;
+        this.age = age;
+        this.email = email;
+        this.address = address;
+        this.citizenship = citizenship;
+        this.phone = phone;
+        this.post = post;
+        this.education = education;
+        this.experience = experience;
+        this.english = english;
+        this.skill = skill;
+        this.accountId = accountId;
+    }
+
     public int getCandidateId() {
         return candidateId;
     }

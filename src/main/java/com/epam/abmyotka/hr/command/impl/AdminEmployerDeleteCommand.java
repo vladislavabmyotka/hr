@@ -5,43 +5,44 @@ import com.epam.abmyotka.hr.constant.MessageConstant;
 import com.epam.abmyotka.hr.constant.ParameterConstant;
 import com.epam.abmyotka.hr.constant.PathConstant;
 import com.epam.abmyotka.hr.controller.Router;
-import com.epam.abmyotka.hr.entity.Candidate;
-import com.epam.abmyotka.hr.service.CandidateService;
+import com.epam.abmyotka.hr.entity.Employer;
+import com.epam.abmyotka.hr.service.EmployerService;
 import org.apache.logging.log4j.Level;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import javax.servlet.http.HttpServletRequest;
+import java.util.List;
 
-public class AdminCandidateEditCommand implements Command {
-    private final static Logger LOGGER = LogManager.getLogger(AdminCandidateEditCommand.class);
+public class AdminEmployerDeleteCommand implements Command {
+    private final static Logger LOGGER = LogManager.getLogger(AdminEmployerDeleteCommand.class);
 
-    private CandidateService service;
+    private EmployerService service;
 
-    public AdminCandidateEditCommand(CandidateService service) {
+    public AdminEmployerDeleteCommand(EmployerService service) {
         this.service = service;
     }
 
     @Override
     public Router execute(HttpServletRequest request) {
-        Router router = new Router(PathConstant.PATH_PAGE_ADMIN_CANDIDATE_EDIT, Router.RouteType.FORWARD);
+        Router router = new Router(PathConstant.PATH_PAGE_ADMIN_EMPLOYER, Router.RouteType.FORWARD);
 
-        String stringCandidateId = request.getParameter(ParameterConstant.PARAM_ADMIN_CANDIDATE_EDIT);
-        int candidateId = 0;
+        String stringEmployerId = request.getParameter(ParameterConstant.PARAM_ADMIN_EMPLOYER_DELETE);
+
+        int employerId = 0;
         try {
-            candidateId = Integer.parseInt(stringCandidateId);
+            employerId = Integer.parseInt(stringEmployerId);
         } catch (NumberFormatException e) {
             LOGGER.log(Level.ERROR, "Error while parsing string value candidate id to integer! Detail: " +
                     e.getMessage());
         }
 
-        Candidate candidate = service.findById(candidateId);
-        if (candidate != null) {
-            request.setAttribute("candidate", candidate);
-        } else {
-            router.setPagePath(PathConstant.PATH_PAGE_ADMIN_CANDIDATE);
+        if (!service.delete(employerId)) {
             request.setAttribute("errorMessage", MessageConstant.ERROR_ON_WEBSITE);
         }
+
+        List<Employer> employers = service.takeAll();
+        request.setAttribute("employerList", employers);
 
         return router;
     }

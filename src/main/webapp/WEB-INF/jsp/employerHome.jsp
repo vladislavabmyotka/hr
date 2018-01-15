@@ -13,7 +13,7 @@
     <title><fmt:message key="employer.home" /></title>
     <style>
         <%@include file='../css/bootstrap.min.css' %>
-        <%@include file='../css/signin.css' %>
+        <%@include file='../css/main.css' %>
     </style>
 </head>
 <body>
@@ -64,10 +64,39 @@
         </div>
     </nav>
 
-    <div class="container">
-        EMPLOYER HOME
-    </div>
+    <main role="main">
 
+        <!-- Main jumbotron for a primary marketing message or call to action -->
+        <div class="jumbotron">
+            <div class="container">
+                <h1 class="display-3">Hello, ${pageContext.session.getAttribute("role").login}!</h1>
+                <p><fmt:message key="home.main.title" /></p>
+            </div>
+        </div>
+
+        <div class="container">
+            <!-- Example row of columns -->
+            <div class="row">
+                <div class="col-md-4">
+                    <h2><fmt:message key="employer.home.title1" /></h2>
+                    <p><fmt:message key="employer.home.title1.main" /></p>
+                </div>
+                <div class="col-md-4">
+                    <h2><fmt:message key="employer.home.title2" /></h2>
+                    <p><fmt:message key="employer.home.title2.main" /></p>
+                </div>
+                <div class="col-md-4">
+                    <h2><fmt:message key="employer.home.title3" /></h2>
+                    <p><fmt:message key="employer.home.title3.main" /></p>
+                </div>
+            </div>
+
+            <hr>
+
+        </div>
+
+    </main>
+    <c:import url="/WEB-INF/jsp/footer.jsp"/>
     <script>
         <%@include file='../js/bootstrapDropdown.js' %>
     </script>

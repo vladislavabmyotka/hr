@@ -10,7 +10,7 @@
 <html lang="${language}">
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-    <title><fmt:message key="admin.candidate.management" /></title>
+    <title><fmt:message key="admin.employer.management" /></title>
     <style>
         <%@include file='../css/bootstrap.min.css' %>
         <%@include file='../css/main.css' %>
@@ -28,16 +28,16 @@
 
             <ul class="navbar-nav mr-auto">
                 <li class="nav-item active">
-                    <a class="nav-link" href="#"><fmt:message key="admin.candidate" />
+                    <a class="nav-link" href="#"><fmt:message key="admin.employer" />
                         <span class="sr-only">(current)</span></a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="adminHome"><fmt:message key="home" /></a>
                 </li>
                 <form action="FrontController" method="post">
-                    <input type="hidden" name="command" value="admin_employer_view">
+                    <input type="hidden" name="command" value="admin_candidate_view">
                     <li class="nav-item">
-                        <button type="submit" class="btn btn-link nav-link cursor"><fmt:message key="admin.employer" />
+                        <button type="submit" class="btn btn-link nav-link cursor"><fmt:message key="admin.candidate" />
                         </button>
                     </li>
                 </form>
@@ -45,7 +45,7 @@
 
             <ul class="nav navbar-nav navbar-right">
                 <form class="margin">
-                    <input type="hidden" name="command" value="admin_candidate_view">
+                    <input type="hidden" name="command" value="admin_employer_view">
                     <select class="form-control" title="language" id="language" name="language" onchange="submit()">
                         <option value="ru" ${language == 'ru' ? 'selected' : ''}>Русский</option>
                         <option value="en" ${language == 'en' ? 'selected' : ''}>English</option>
@@ -63,53 +63,41 @@
     <br/><br/>
     <div class="container">
         <h6 class="form-signin-heading error"> ${errorMessage} </h6> <br/>
-        <table class="table table-bordered table-hover table-sm table-mrgn">
+        <table class="table table-bordered table-hover table-mrgn">
             <thead class="thead-default">
             <tr>
                 <th>#</th>
-                <th><fmt:message key="surname" /></th>
-                <th><fmt:message key="name" /></th>
-                <th><fmt:message key="lastname" /></th>
-                <th><fmt:message key="age" /></th>
-                <th><fmt:message key="email" /></th>
-                <th><fmt:message key="address" /></th>
-                <th><fmt:message key="citizenship" /></th>
-                <th><fmt:message key="phone" /></th>
-                <th><fmt:message key="post" /></th>
-                <th><fmt:message key="education" /></th>
-                <th><fmt:message key="experience" /></th>
-                <th><fmt:message key="english" /></th>
-                <th><fmt:message key="skill" /></th>
+                <th><fmt:message key="admin.employer.surname" /></th>
+                <th><fmt:message key="admin.employer.name" /></th>
+                <th><fmt:message key="admin.employer.lastname" /></th>
+                <th><fmt:message key="admin.employer.address" /></th>
+                <th><fmt:message key="admin.employer.phone" /></th>
+                <th><fmt:message key="admin.employer.email" /></th>
+                <th><fmt:message key="admin.employer.company" /></th>
                 <th><fmt:message key="action" /></th>
             </tr>
             </thead>
             <tbody>
-            <c:forEach var="candidate" items="${candidateList}" varStatus="id">
+            <c:forEach var="employer" items="${employerList}" varStatus="id">
                 <tr>
                     <th scope="row"><c:out value="${id.count}"/></th>
-                    <td><c:out value="${candidate.surname}"/></td>
-                    <td><c:out value="${candidate.name}"/></td>
-                    <td><c:out value="${candidate.lastname}"/></td>
-                    <td><c:out value="${candidate.age}"/></td>
-                    <td><c:out value="${candidate.email}"/></td>
-                    <td><c:out value="${candidate.address}"/></td>
-                    <td><c:out value="${candidate.citizenship}"/></td>
-                    <td><c:out value="${candidate.phone}"/></td>
-                    <td><c:out value="${candidate.post}"/></td>
-                    <td><c:out value="${candidate.education}"/></td>
-                    <td><c:out value="${candidate.experience}"/></td>
-                    <td><c:out value="${candidate.english}"/></td>
-                    <td><c:out value="${candidate.skill}"/></td>
+                    <td><c:out value="${employer.surname}"/></td>
+                    <td><c:out value="${employer.name}"/></td>
+                    <td><c:out value="${employer.lastname}"/></td>
+                    <td><c:out value="${employer.address}"/></td>
+                    <td><c:out value="${employer.phone}"/></td>
+                    <td><c:out value="${employer.email}"/></td>
+                    <td><c:out value="${employer.company}"/></td>
                     <td><form action="FrontController" method="post">
-                        <input type="hidden" name="command" value="admin_candidate_delete">
-                        <button name="adminCandidateDelete" class="btn btn-link" type="submit"
-                                value="${candidate.candidateId}"><fmt:message key="delete.delete" />
+                        <input type="hidden" name="command" value="admin_employer_delete">
+                        <button name="adminEmployerDelete" class="btn btn-link" type="submit"
+                                value="${employer.employerId}"><fmt:message key="delete.delete" />
                         </button></form>
                         <form action="FrontController" method="post">
-                            <input type="hidden" name="command" value="admin_candidate_edit">
-                        <button name="adminCandidateEdit" class="btn btn-link" type="submit"
-                                value="${candidate.candidateId}"><fmt:message key="edit" />
-                        </button></form>
+                            <input type="hidden" name="command" value="admin_employer_edit">
+                            <button name="adminEmployerEdit" class="btn btn-link" type="submit"
+                                    value="${employer.employerId}"><fmt:message key="edit" />
+                            </button></form>
                     </td>
                 </tr>
             </c:forEach>
