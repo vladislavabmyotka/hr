@@ -1,4 +1,4 @@
-package com.epam.abmyotka.hr.command.impl;
+package com.epam.abmyotka.hr.command.impl.adminImpl;
 
 import com.epam.abmyotka.hr.command.Command;
 import com.epam.abmyotka.hr.constant.PathConstant;

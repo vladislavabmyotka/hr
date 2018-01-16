@@ -11,8 +11,25 @@ public class Vacancy extends Entity {
     private int experience;
     private String english;
     private String text;
-    private boolean isOpen;
+    private String conditionVacancy;
     private int employerId;
+    private String employerInfo;
+
+    public Vacancy() {
+    }
+
+    public Vacancy(int vacancyId, String post, String company, BigDecimal salary, String location, int experience,
+                   String english, String text, String conditionVacancy) {
+        this.vacancyId = vacancyId;
+        this.post = post;
+        this.company = company;
+        this.salary = salary;
+        this.location = location;
+        this.experience = experience;
+        this.english = english;
+        this.text = text;
+        this.conditionVacancy = conditionVacancy;
+    }
 
     public int getVacancyId() {
         return vacancyId;
@@ -78,12 +95,12 @@ public class Vacancy extends Entity {
         this.text = text;
     }
 
-    public boolean isOpen() {
-        return isOpen;
+    public String getConditionVacancy() {
+        return conditionVacancy;
     }
 
-    public void setOpen(boolean open) {
-        isOpen = open;
+    public void setConditionVacancy(String conditionVacancy) {
+        this.conditionVacancy = conditionVacancy;
     }
 
     public int getEmployerId() {
@@ -92,6 +109,14 @@ public class Vacancy extends Entity {
 
     public void setEmployerId(int employerId) {
         this.employerId = employerId;
+    }
+
+    public String getEmployerInfo() {
+        return employerInfo;
+    }
+
+    public void setEmployerInfo(String employerInfo) {
+        this.employerInfo = employerInfo;
     }
 
     @Override
@@ -105,13 +130,16 @@ public class Vacancy extends Entity {
 
         Vacancy vacancy = (Vacancy) o;
 
-        return vacancyId == vacancy.vacancyId && experience == vacancy.experience && isOpen == vacancy.isOpen &&
-                employerId == vacancy.employerId && (post != null ? post.equals(vacancy.post) : vacancy.post == null) &&
+        return vacancyId == vacancy.vacancyId && experience == vacancy.experience && employerId == vacancy.employerId &&
+                (post != null ? post.equals(vacancy.post) : vacancy.post == null) &&
                 (company != null ? company.equals(vacancy.company) : vacancy.company == null) &&
                 (salary != null ? salary.equals(vacancy.salary) : vacancy.salary == null) &&
                 (location != null ? location.equals(vacancy.location) : vacancy.location == null) &&
                 (english != null ? english.equals(vacancy.english) : vacancy.english == null) &&
-                (text != null ? text.equals(vacancy.text) : vacancy.text == null);
+                (text != null ? text.equals(vacancy.text) : vacancy.text == null) &&
+                (conditionVacancy != null ? conditionVacancy.equals(vacancy.conditionVacancy) :
+                        vacancy.conditionVacancy == null) &&
+                (employerInfo != null ? employerInfo.equals(vacancy.employerInfo) : vacancy.employerInfo == null);
     }
 
     @Override
@@ -124,8 +152,9 @@ public class Vacancy extends Entity {
         result = 31 * result + experience;
         result = 31 * result + (english != null ? english.hashCode() : 0);
         result = 31 * result + (text != null ? text.hashCode() : 0);
-        result = 31 * result + (isOpen ? 1 : 0);
+        result = 31 * result + (conditionVacancy != null ? conditionVacancy.hashCode() : 0);
         result = 31 * result + employerId;
+        result = 31 * result + (employerInfo != null ? employerInfo.hashCode() : 0);
         return result;
     }
 }

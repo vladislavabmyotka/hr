@@ -38,6 +38,13 @@
                         </button>
                     </li>
                 </form>
+                <form action="FrontController" method="post">
+                    <input type="hidden" name="command" value="candidate_view_edit">
+                    <li class="nav-item">
+                        <button type="submit" class="btn btn-link nav-link cursor">
+                            <fmt:message key="candidate.view.edit" /></button>
+                    </li>
+                </form>
             </ul>
 
             <ul class="nav navbar-nav navbar-right">

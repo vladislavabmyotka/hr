@@ -1,4 +1,4 @@
-package com.epam.abmyotka.hr.command.impl;
+package com.epam.abmyotka.hr.command.impl.accountImpl;
 
 import com.epam.abmyotka.hr.command.Command;
 import com.epam.abmyotka.hr.constant.AccountAttachmentConstant;
@@ -13,10 +13,10 @@ import com.epam.abmyotka.hr.validator.AccountValidator;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
-public class EditAccountDataCommand implements Command {
+public class AccountEditCommand implements Command {
     private AccountService service;
 
-    public EditAccountDataCommand(AccountService service) {
+    public AccountEditCommand(AccountService service) {
         this.service = service;
     }
 

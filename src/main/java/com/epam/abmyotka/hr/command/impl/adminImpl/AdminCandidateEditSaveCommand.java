@@ -1,4 +1,4 @@
-package com.epam.abmyotka.hr.command.impl;
+package com.epam.abmyotka.hr.command.impl.adminImpl;
 
 import com.epam.abmyotka.hr.command.Command;
 import com.epam.abmyotka.hr.constant.MessageConstant;
@@ -15,10 +15,11 @@ import javax.servlet.http.HttpServletRequest;
 
 import java.util.List;
 
-import static com.epam.abmyotka.hr.validator.CandidateEmployerValidator.*;
+import static com.epam.abmyotka.hr.validator.CandidateEmployerVacancyValidator.*;
 
 public class AdminCandidateEditSaveCommand implements Command {
     private final static Logger LOGGER = LogManager.getLogger(AdminCandidateEditSaveCommand.class);
+
     private CandidateService service;
 
     public AdminCandidateEditSaveCommand(CandidateService service) {

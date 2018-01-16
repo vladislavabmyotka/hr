@@ -1,152 +1,152 @@
 package com.epam.abmyotka.hr;
 
-import com.epam.abmyotka.hr.validator.CandidateEmployerValidator;
+import com.epam.abmyotka.hr.validator.CandidateEmployerVacancyValidator;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
-public class CandidateEmployerValidatorTest {
+public class CandidateEmployerVacancyValidatorTest {
 
     @Test
     public void correctIdTest() {
         String id = "4";
-        Assert.assertTrue(CandidateEmployerValidator.checkID(id));
+        Assert.assertTrue(CandidateEmployerVacancyValidator.checkID(id));
     }
 
     @Test
     public void incorrectIdTest() {
         String id = "-1";
-        Assert.assertFalse(CandidateEmployerValidator.checkID(id));
+        Assert.assertFalse(CandidateEmployerVacancyValidator.checkID(id));
     }
 
     @Test
     public void nullIdTest() {
         String id = null;
-        Assert.assertFalse(CandidateEmployerValidator.checkID(id));
+        Assert.assertFalse(CandidateEmployerVacancyValidator.checkID(id));
     }
 
     @Test
     public void correctNamesTest() {
         String name = "Duke";
-        Assert.assertTrue(CandidateEmployerValidator.checkNames(name));
+        Assert.assertTrue(CandidateEmployerVacancyValidator.checkNames(name));
     }
 
     @Test
     public void incorrectNamesTest() {
         String name = "D1Uke21";
-        Assert.assertFalse(CandidateEmployerValidator.checkNames(name));
+        Assert.assertFalse(CandidateEmployerVacancyValidator.checkNames(name));
     }
 
     @Test
     public void nullNamesTest() {
         String name = null;
-        Assert.assertFalse(CandidateEmployerValidator.checkNames(name));
+        Assert.assertFalse(CandidateEmployerVacancyValidator.checkNames(name));
     }
 
     @Test
     public void correctLastnameTest() {
         String lastname = "Duke";
-        Assert.assertTrue(CandidateEmployerValidator.checkLastname(lastname));
+        Assert.assertTrue(CandidateEmployerVacancyValidator.checkLastname(lastname));
     }
 
     @Test
     public void incorrectLastnameTest() {
         String lastname = "D1Uke21";
-        Assert.assertFalse(CandidateEmployerValidator.checkLastname(lastname));
+        Assert.assertFalse(CandidateEmployerVacancyValidator.checkLastname(lastname));
     }
 
     @Test
     public void nullLastnameTest() {
         String lastname = null;
-        Assert.assertTrue(CandidateEmployerValidator.checkLastname(lastname));
+        Assert.assertTrue(CandidateEmployerVacancyValidator.checkLastname(lastname));
     }
 
     @Test
     public void correctAgeTest() {
         String age = "18";
-        Assert.assertTrue(CandidateEmployerValidator.checkAge(age));
+        Assert.assertTrue(CandidateEmployerVacancyValidator.checkAge(age));
     }
 
     @Test
     public void incorrectAgeTest() {
         String age = "225";
-        Assert.assertFalse(CandidateEmployerValidator.checkAge(age));
+        Assert.assertFalse(CandidateEmployerVacancyValidator.checkAge(age));
     }
 
     @Test
     public void nullAgeTest() {
         String age = null;
-        Assert.assertFalse(CandidateEmployerValidator.checkAge(age));
+        Assert.assertFalse(CandidateEmployerVacancyValidator.checkAge(age));
     }
 
     @Test
     public void correctEmailTest() {
         String email = "qwertq23@gmail.com";
-        Assert.assertTrue(CandidateEmployerValidator.checkEmail(email));
+        Assert.assertTrue(CandidateEmployerVacancyValidator.checkEmail(email));
     }
 
     @Test
     public void incorrectEmailTest() {
         String email = "agsfdgds";
-        Assert.assertFalse(CandidateEmployerValidator.checkEmail(email));
+        Assert.assertFalse(CandidateEmployerVacancyValidator.checkEmail(email));
     }
 
     @Test
     public void nullEmailTest() {
         String email = null;
-        Assert.assertFalse(CandidateEmployerValidator.checkEmail(email));
+        Assert.assertFalse(CandidateEmployerVacancyValidator.checkEmail(email));
     }
 
     @Test
     public void correctCitizenshipTest() {
         String citizenship = "Республика Беларусь";
-        Assert.assertTrue(CandidateEmployerValidator.checkCitizenship(citizenship));
+        Assert.assertTrue(CandidateEmployerVacancyValidator.checkCitizenship(citizenship));
     }
 
     @Test
     public void incorrectCitizenshipTest() {
         String citizenship = "523235";
-        Assert.assertFalse(CandidateEmployerValidator.checkCitizenship(citizenship));
+        Assert.assertFalse(CandidateEmployerVacancyValidator.checkCitizenship(citizenship));
     }
 
     @Test
     public void nullCitizenshipTest() {
         String citizenship = null;
-        Assert.assertFalse(CandidateEmployerValidator.checkCitizenship(citizenship));
+        Assert.assertFalse(CandidateEmployerVacancyValidator.checkCitizenship(citizenship));
     }
 
     @Test
     public void correctPhoneTest() {
         String phone = "8 (029) 123-45-67";
-        Assert.assertTrue(CandidateEmployerValidator.checkPhone(phone));
+        Assert.assertTrue(CandidateEmployerVacancyValidator.checkPhone(phone));
     }
 
     @Test
     public void incorrectPhoneTest() {
         String phone = "bsdbdss";
-        Assert.assertFalse(CandidateEmployerValidator.checkPhone(phone));
+        Assert.assertFalse(CandidateEmployerVacancyValidator.checkPhone(phone));
     }
 
     @Test
     public void nullPhoneTest() {
         String phone = null;
-        Assert.assertFalse(CandidateEmployerValidator.checkPhone(phone));
+        Assert.assertFalse(CandidateEmployerVacancyValidator.checkPhone(phone));
     }
 
     @Test
     public void correctExperienceTest() {
         String experience = "8";
-        Assert.assertTrue(CandidateEmployerValidator.checkExperience(experience));
+        Assert.assertTrue(CandidateEmployerVacancyValidator.checkExperience(experience));
     }
 
     @Test
     public void incorrectExperienceTest() {
         String experience = "bsdbdss";
-        Assert.assertFalse(CandidateEmployerValidator.checkExperience(experience));
+        Assert.assertFalse(CandidateEmployerVacancyValidator.checkExperience(experience));
     }
 
     @Test
     public void nullExperienceTest() {
         String experience = null;
-        Assert.assertFalse(CandidateEmployerValidator.checkExperience(experience));
+        Assert.assertFalse(CandidateEmployerVacancyValidator.checkExperience(experience));
     }
 }

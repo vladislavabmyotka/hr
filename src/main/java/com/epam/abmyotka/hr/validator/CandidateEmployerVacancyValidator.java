@@ -5,7 +5,7 @@ import com.epam.abmyotka.hr.constant.ValidationRegExConstant;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-public class CandidateEmployerValidator {
+public class CandidateEmployerVacancyValidator {
     private static final String EMPTY_STRING = "";
 
     public static boolean checkID(String stringId) {
@@ -45,7 +45,7 @@ public class CandidateEmployerValidator {
 
     public static boolean checkAge(String stringAge) {
         if (stringAge != null) {
-            Pattern pattern = Pattern.compile(ValidationRegExConstant.INT_REGEX);
+            Pattern pattern = Pattern.compile(ValidationRegExConstant.AGE_EXPERIENCE_REGEX);
             Matcher matcher = pattern.matcher(stringAge);
             if (matcher.matches()) {
                 int age = Integer.parseInt(stringAge);
@@ -90,7 +90,7 @@ public class CandidateEmployerValidator {
 
     public static boolean checkExperience(String stringExperience) {
         if (stringExperience != null) {
-            Pattern pattern = Pattern.compile(ValidationRegExConstant.INT_REGEX);
+            Pattern pattern = Pattern.compile(ValidationRegExConstant.AGE_EXPERIENCE_REGEX);
             Matcher matcher = pattern.matcher(stringExperience);
             if (matcher.matches()) {
                 int experience = Integer.parseInt(stringExperience);
@@ -98,6 +98,16 @@ public class CandidateEmployerValidator {
             } else {
                 return false;
             }
+        } else {
+            return false;
+        }
+    }
+
+    public static boolean checkSalary(String salary) {
+        if (salary != null) {
+            Pattern pattern = Pattern.compile(ValidationRegExConstant.SALARY_REGEX);
+            Matcher matcher = pattern.matcher(salary);
+            return matcher.matches();
         } else {
             return false;
         }

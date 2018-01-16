@@ -1,4 +1,4 @@
-package com.epam.abmyotka.hr.command.impl;
+package com.epam.abmyotka.hr.command.impl.candidateImpl;
 
 import com.epam.abmyotka.hr.command.Command;
 import com.epam.abmyotka.hr.constant.MessageConstant;
@@ -7,19 +7,14 @@ import com.epam.abmyotka.hr.constant.PathConstant;
 import com.epam.abmyotka.hr.controller.Router;
 import com.epam.abmyotka.hr.entity.Candidate;
 import com.epam.abmyotka.hr.service.CandidateService;
-import org.apache.logging.log4j.Level;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
-import java.util.List;
 
-import static com.epam.abmyotka.hr.validator.CandidateEmployerValidator.*;
-import static com.epam.abmyotka.hr.validator.CandidateEmployerValidator.checkExperience;
+import static com.epam.abmyotka.hr.validator.CandidateEmployerVacancyValidator.*;
+import static com.epam.abmyotka.hr.validator.CandidateEmployerVacancyValidator.checkExperience;
 
 public class CandidateAddSaveCommand implements Command {
-    private final static Logger LOGGER = LogManager.getLogger(CandidateAddSaveCommand.class);
     private CandidateService service;
 
     public CandidateAddSaveCommand(CandidateService service) {
@@ -45,7 +40,7 @@ public class CandidateAddSaveCommand implements Command {
         String experience = request.getParameter(ParameterConstant.PARAM_EXPERIENCE);
         String english = request.getParameter(ParameterConstant.PARAM_ENGLISH);
         String skill = request.getParameter(ParameterConstant.PARAM_SKILL);
-        int accountId = (int)session.getAttribute("candidateId");
+        int accountId = (int)session.getAttribute("candidateAccountId");
 
         if(checkNames(surname) && checkNames(name) && checkLastname(lastname) && checkAge(age) && checkEmail(email) &&
                 checkCitizenship(citizenship) && checkPhone(phone) && checkExperience(experience)) {

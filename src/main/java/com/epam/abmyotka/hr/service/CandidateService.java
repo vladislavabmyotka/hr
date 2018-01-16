@@ -27,6 +27,15 @@ public class CandidateService {
         return candidate;
     }
 
+    public Candidate findByAccountId(int accountId) {
+        DBPool pool = DBPool.getInstance();
+        Connection connection = pool.getConnection();
+        CandidateDAO candidateDAO = new CandidateDAO(connection);
+        Candidate candidate = candidateDAO.findByAccountId(accountId);
+        pool.putConnection(connection);
+        return candidate;
+    }
+
     public boolean delete(int candidateId) {
         DBPool pool = DBPool.getInstance();
         Connection connection = pool.getConnection();

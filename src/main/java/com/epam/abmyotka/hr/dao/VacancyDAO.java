@@ -6,10 +6,7 @@ import org.apache.logging.log4j.Level;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-import java.sql.Connection;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
+import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -24,7 +21,7 @@ public class VacancyDAO extends AbstractDAO<Vacancy> {
     private static final String EXPERIENCE = "experience";
     private static final String ENGLISH = "english";
     private static final String TEXT = "text";
-    private static final String IS_OPEN = "isOpen";
+    private static final String CONDITION_VACANCY = "conditionVacancy";
     private static final String V_EMPLOYER_ID = "v_idEmployer";
 
     public VacancyDAO(Connection connection) {
@@ -39,18 +36,7 @@ public class VacancyDAO extends AbstractDAO<Vacancy> {
             statement = this.getStatement();
             ResultSet resultSet = statement.executeQuery(SQLConstant.SQL_SELECT_ALL_VACANCY);
             while(resultSet.next()) {
-                Vacancy vacancy = new Vacancy();
-                vacancy.setVacancyId(resultSet.getInt(VACANCY_ID));
-                vacancy.setPost(resultSet.getString(POST));
-                vacancy.setCompany(resultSet.getString(COMPANY));
-                vacancy.setSalary(resultSet.getBigDecimal(SALARY));
-                vacancy.setLocation(resultSet.getString(LOCATION));
-                vacancy.setExperience(resultSet.getInt(EXPERIENCE));
-                vacancy.setEnglish(resultSet.getString(ENGLISH));
-                vacancy.setText(resultSet.getString(TEXT));
-                vacancy.setOpen(resultSet.getBoolean(IS_OPEN));
-                vacancy.setEmployerId(resultSet.getInt(V_EMPLOYER_ID));
-
+                Vacancy vacancy = createVacancyByResultSet(resultSet);
                 vacancies.add(vacancy);
             }
         } catch (SQLException e) {
@@ -63,18 +49,83 @@ public class VacancyDAO extends AbstractDAO<Vacancy> {
     }
 
     @Override
-    public Vacancy findById(int id) {
-        return null;
+    public Vacancy findById(int vacancyId) {
+        Vacancy vacancy = null;
+        PreparedStatement statement = null;
+        try {
+            statement = this.getPreparedStatement(SQLConstant.SQL_SELECT_VACANCY_BY_VACANCY_ID);
+            statement.setInt(1, vacancyId);
+            ResultSet resultSet = statement.executeQuery();
+            if (resultSet.next()) {
+                vacancy = createVacancyByResultSet(resultSet);
+            }
+        } catch (SQLException e) {
+            LOGGER.log(Level.ERROR, "Error while trying find candidate by idCandidate in database! Detail: " +
+                    e.getMessage());
+        } finally {
+            this.closeStatement(statement);
+        }
+        return vacancy;
+    }
+
+    private Vacancy createVacancyByResultSet(ResultSet resultSet) throws SQLException {
+        Vacancy vacancy = new Vacancy();
+        vacancy.setVacancyId(resultSet.getInt(VACANCY_ID));
+        vacancy.setPost(resultSet.getString(POST));
+        vacancy.setCompany(resultSet.getString(COMPANY));
+        vacancy.setSalary(resultSet.getBigDecimal(SALARY));
+        vacancy.setLocation(resultSet.getString(LOCATION));
+        vacancy.setExperience(resultSet.getInt(EXPERIENCE));
+        vacancy.setEnglish(resultSet.getString(ENGLISH));
+        vacancy.setText(resultSet.getString(TEXT));
+        vacancy.setConditionVacancy(resultSet.getString(CONDITION_VACANCY));
+        vacancy.setEmployerId(resultSet.getInt(V_EMPLOYER_ID));
+        return vacancy;
     }
 
     @Override
-    public int delete(int id) {
-        return 0;
+    public int delete(int vacancyId) {
+        int countRowsAffected = 0;
+        PreparedStatement statement = null;
+        try {
+            statement = this.getPreparedStatement(SQLConstant.SQL_DELETE_VACANCY_BY_VACANCY_ID);
+            statement.setInt(1, vacancyId);
+            countRowsAffected = statement.executeUpdate();
+        } catch (SQLException e) {
+            LOGGER.log(Level.ERROR, "Error while trying delete vacancy from database! Detail: " + e.getMessage());
+        } finally {
+            this.closeStatement(statement);
+        }
+        return countRowsAffected;
     }
 
     @Override
     public int delete(Vacancy entity) {
         return 0;
+    }
+
+    public int update(Vacancy vacancy) {
+        int countRowsAffected = 0;
+        PreparedStatement statement = null;
+        try {
+            statement = this.getPreparedStatement(SQLConstant.SQL_UPDATE_VACANCY);
+            statement.setString(1, vacancy.getPost());
+            statement.setString(2, vacancy.getCompany());
+            statement.setBigDecimal(3, vacancy.getSalary());
+            statement.setString(4, vacancy.getLocation());
+            statement.setInt(5, vacancy.getExperience());
+            statement.setString(6, vacancy.getEnglish());
+            statement.setString(7, vacancy.getText());
+            statement.setString(8, vacancy.getConditionVacancy());
+            statement.setInt(9, vacancy.getVacancyId());
+            countRowsAffected = statement.executeUpdate();
+        } catch (SQLException e) {
+            LOGGER.log(Level.ERROR, "Error while trying update vacancy! Detail: " + e.getMessage());
+        } finally {
+            this.closeStatement(statement);
+        }
+
+        return countRowsAffected;
     }
 
     @Override

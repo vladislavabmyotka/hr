@@ -46,3 +46,8 @@ function validateOldPassword(form) {
         return false;
     }
 }
+
+function undisable(element, button) {
+    document.getElementById(element.toString()).disabled=false;
+    button.disabled=true;
+}

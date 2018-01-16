@@ -8,4 +8,5 @@ public class MessageConstant {
     public static final String INCORRECT_DATA = "The entered data is incorrect!";
     public static final String CANDIDATE_ALREADY_EXIST =
             "Your resume already exists, you need to create a separate account to add a new one!";
+    public static final String NON_EXIST_CV = "You haven't created a CV yet!";
 }

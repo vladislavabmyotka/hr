@@ -1,4 +1,4 @@
-package com.epam.abmyotka.hr.command.impl;
+package com.epam.abmyotka.hr.command.impl.candidateImpl;
 
 import com.epam.abmyotka.hr.command.Command;
 import com.epam.abmyotka.hr.constant.MessageConstant;
@@ -29,7 +29,7 @@ public class CandidateAddCommand implements Command {
         int accountId = accountService.findAccountIdByLoginPasswordAttachment(candidateAccount);
         if(accountId != 0) {
             if(!candidateService.isExistCandidateByAccountId(accountId)) {
-                session.setAttribute("candidateId", accountId);
+                session.setAttribute("candidateAccountId", accountId);
             } else {
                 router.setPagePath(PathConstant.PATH_PAGE_CANDIDATE);
                 request.setAttribute("errorMessage", MessageConstant.CANDIDATE_ALREADY_EXIST);

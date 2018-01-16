@@ -1,4 +1,4 @@
-package com.epam.abmyotka.hr.command.impl;
+package com.epam.abmyotka.hr.command.impl.accountImpl;
 
 import com.epam.abmyotka.hr.command.Command;
 import com.epam.abmyotka.hr.constant.AccountAttachmentConstant;
@@ -13,10 +13,10 @@ import com.epam.abmyotka.hr.service.EmployerService;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
-public class DeleteAccountCommand implements Command {
+public class AccountDeleteCommand implements Command {
     private AccountService accountService;
 
-    public DeleteAccountCommand(AccountService accountService) {
+    public AccountDeleteCommand(AccountService accountService) {
         this.accountService = accountService;
     }
 

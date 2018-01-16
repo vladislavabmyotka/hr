@@ -1,4 +1,4 @@
-package com.epam.abmyotka.hr.command.impl;
+package com.epam.abmyotka.hr.command.impl.adminImpl;
 
 import com.epam.abmyotka.hr.command.Command;
 import com.epam.abmyotka.hr.constant.MessageConstant;
@@ -14,7 +14,7 @@ import org.apache.logging.log4j.Logger;
 import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 
-import static com.epam.abmyotka.hr.validator.CandidateEmployerValidator.*;
+import static com.epam.abmyotka.hr.validator.CandidateEmployerVacancyValidator.*;
 
 public class AdminEmployerEditSaveCommand implements Command {
     private final static Logger LOGGER = LogManager.getLogger(AdminEmployerEditSaveCommand.class);

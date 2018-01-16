@@ -61,6 +61,15 @@
     </servlet-mapping>
 
     <servlet>
+        <servlet-name>Candidate View Edit</servlet-name>
+        <jsp-file>/WEB-INF/jsp/candidateViewEdit.jsp</jsp-file>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>Candidate View Edit</servlet-name>
+        <url-pattern>/candidateViewEdit</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
         <servlet-name>Employer Home</servlet-name>
         <jsp-file>/WEB-INF/jsp/employerHome.jsp</jsp-file>
     </servlet>
@@ -106,12 +115,30 @@
     </servlet-mapping>
 
     <servlet>
-        <servlet-name>Admin Employer Edit</servlet-name>
-        <jsp-file>/WEB-INF/jsp/adminEmployerEdit.jsp</jsp-file>
-    </servlet>
+    <servlet-name>Admin Employer Edit</servlet-name>
+    <jsp-file>/WEB-INF/jsp/adminEmployerEdit.jsp</jsp-file>
+</servlet>
     <servlet-mapping>
         <servlet-name>Admin Employer Edit</servlet-name>
         <url-pattern>/adminEmployerEdit</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>Admin Vacancy</servlet-name>
+        <jsp-file>/WEB-INF/jsp/adminVacancy.jsp</jsp-file>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>Admin Vacancy</servlet-name>
+        <url-pattern>/adminVacancy</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>Admin Vacancy Edit</servlet-name>
+        <jsp-file>/WEB-INF/jsp/adminVacancyEdit.jsp</jsp-file>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>Admin Vacancy Edit</servlet-name>
+        <url-pattern>/adminVacancyEdit</url-pattern>
     </servlet-mapping>
 
     <servlet>
