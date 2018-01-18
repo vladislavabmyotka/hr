@@ -7,14 +7,12 @@ import com.epam.abmyotka.hr.constant.PathConstant;
 import com.epam.abmyotka.hr.controller.Router;
 import com.epam.abmyotka.hr.creator.AdminCreator;
 import com.epam.abmyotka.hr.entity.Account;
+import com.epam.abmyotka.hr.manager.MessageManager;
 import com.epam.abmyotka.hr.service.AccountService;
 import com.epam.abmyotka.hr.validator.AccountValidator;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
-
-import java.util.Locale;
-import java.util.ResourceBundle;
 
 import static com.epam.abmyotka.hr.constant.AccountAttachmentConstant.ADMIN_ATTACHMENT;
 import static com.epam.abmyotka.hr.constant.AccountAttachmentConstant.CANDIDATE_ATTACHMENT;
@@ -57,12 +55,18 @@ public class AuthorizationCommand implements Command {
                         router.setPagePath(PathConstant.PATH_PAGE_EMPLOYER);
                     }
                 } else {
-                    request.setAttribute("errorLoginPassMessage", MessageConstant.INCORRECT_LOGIN_PASSWORD_MESSAGE);
+                    String language = request.getParameter(ParameterConstant.PARAM_LANGUAGE);
+                    String message = MessageManager.getMessage(language,
+                            MessageConstant.INCORRECT_LOGIN_PASSWORD_MESSAGE);
+                    request.setAttribute("errorLoginPassMessage", language);
                     router.setPagePath(PathConstant.PATH_PAGE_MAIN);
                 }
             }
         } else {
-            request.setAttribute("errorLoginPassMessage", MessageConstant.INCORRECT_LOGIN_PASSWORD_MESSAGE);
+            String language = request.getParameter(ParameterConstant.PARAM_LANGUAGE);
+            String message = MessageManager.getMessage(language,
+                    MessageConstant.INCORRECT_LOGIN_PASSWORD_MESSAGE);
+            request.setAttribute("errorLoginPassMessage", message);
             router.setPagePath(PathConstant.PATH_PAGE_MAIN);
         }
 

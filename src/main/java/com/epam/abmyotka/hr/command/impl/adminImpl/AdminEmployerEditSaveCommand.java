@@ -12,7 +12,6 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import javax.servlet.http.HttpServletRequest;
-import java.util.List;
 
 import static com.epam.abmyotka.hr.validator.CandidateEmployerVacancyValidator.*;
 
@@ -43,8 +42,8 @@ public class AdminEmployerEditSaveCommand implements Command {
             Employer employer = new Employer(Integer.parseInt(stringEmployerId), surname, name, lastname, address,
                     phone, email, company);
             if (service.update(employer)) {
-                List<Employer> employers = service.takeAll();
-                request.setAttribute("employerList", employers);
+                Command command = new AdminEmployerViewCommand(service);
+                command.execute(request);
             } else {
                 request.setAttribute("errorMessage", MessageConstant.ERROR_ON_WEBSITE);
             }

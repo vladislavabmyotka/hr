@@ -55,11 +55,11 @@ public class AccountService {
         return countRowsAffected != 0;
     }
 
-    public boolean update(Account account, int accountId) {
+    public boolean update(Account account) {
         DBPool pool = DBPool.getInstance();
         Connection connection = pool.getConnection();
         AccountDAO accountDAO = new AccountDAO(connection);
-        int countRowsAffected = accountDAO.update(account, accountId);
+        int countRowsAffected = accountDAO.update(account);
         pool.putConnection(connection);
         return countRowsAffected != 0;
     }

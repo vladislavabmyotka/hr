@@ -36,7 +36,8 @@ public class AccountEditCommand implements Command {
             Account user = new Account(login, password, attachment);
             int accountId = service.findAccountIdByPassword(oldPassword);
             if (accountId != 0) {
-                if (service.update(user, accountId)) {
+                user.setAccountId(accountId);
+                if (service.update(user)) {
                     session.setAttribute("role", user);
                     attachment = ((Account) session.getAttribute("role")).getAttachment();
                     if (attachment.equals(AccountAttachmentConstant.CANDIDATE_ATTACHMENT)) {

@@ -36,6 +36,12 @@ public class SQLConstant {
     public static final String SQL_SELECT_ALL_VACANCY = "SELECT * FROM vacancy";
     public static final String SQL_SELECT_VACANCY_BY_VACANCY_ID = "SELECT * FROM vacancy WHERE idvacancy = ?";
     public static final String SQL_DELETE_VACANCY_BY_VACANCY_ID = "DELETE FROM vacancy WHERE idvacancy = ?";
-    public static final String SQL_UPDATE_VACANCY = "UPDATE vacancy SET post = ?, company= ?, salary = ?, " +
+    public static final String SQL_UPDATE_VACANCY = "UPDATE vacancy SET post = ?, company = ?, salary = ?, " +
             "location = ?, experience = ?, english = ?, text = ?, conditionVacancy = ? WHERE idvacancy = ?";
+
+    public static final String SQL_SELECT_ALL_INTERVIEW = "SELECT * FROM interview";
+    public static final String SQL_SELECT_INTERVIEW_BY_INTERVIEW_ID = "SELECT * FROM interview WHERE idInterview = ?";
+    public static final String SQL_DELETE_INTERVIEW_BY_INTERVIEW_ID = "DELETE FROM interview WHERE idInterview = ?";
+    public static final String SQL_UPDATE_INTERVIEW = "UPDATE interview SET preResult = ?, finalResult = ? " +
+            "WHERE idInterview = ?";
 }

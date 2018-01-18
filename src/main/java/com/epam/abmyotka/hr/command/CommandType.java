@@ -8,12 +8,10 @@ import com.epam.abmyotka.hr.command.impl.candidateImpl.CandidateAddCommand;
 import com.epam.abmyotka.hr.command.impl.candidateImpl.CandidateAddSaveCommand;
 import com.epam.abmyotka.hr.command.impl.candidateImpl.CandidateViewEditCommand;
 import com.epam.abmyotka.hr.command.impl.candidateImpl.CandidateViewEditSaveCommand;
-import com.epam.abmyotka.hr.service.AccountService;
-import com.epam.abmyotka.hr.service.CandidateService;
-import com.epam.abmyotka.hr.service.EmployerService;
-import com.epam.abmyotka.hr.service.VacancyService;
+import com.epam.abmyotka.hr.service.*;
 
 public enum CommandType {
+    INDEX(new IndexCommand()),
     AUTHORIZATION(new AuthorizationCommand(new AccountService())),
     REGISTER(new RegisterCommand(new AccountService())),
     EDIT_ACCOUNT_DATA(new AccountEditCommand(new AccountService())),
@@ -30,6 +28,13 @@ public enum CommandType {
     ADMIN_VACANCY_DELETE(new AdminVacancyDeleteCommand(new VacancyService(), new EmployerService())),
     ADMIN_VACANCY_EDIT(new AdminVacancyEditCommand(new VacancyService())),
     ADMIN_VACANCY_EDIT_SAVE(new AdminVacancyEditSaveCommand(new VacancyService(), new EmployerService())),
+    ADMIN_INTERVIEW_VIEW(new AdminInterviewViewCommand(new InterviewService(), new CandidateService(),
+            new VacancyService(), new EmployerService())),
+    ADMIN_INTERVIEW_DELETE(new AdminInterviewDeleteCommand(new InterviewService(), new CandidateService(),
+            new VacancyService(), new EmployerService())),
+    ADMIN_INTERVIEW_EDIT(new AdminInterviewEditCommand(new InterviewService())),
+    ADMIN_INTERVIEW_EDIT_SAVE(new AdminInterviewEditSaveCommand(new InterviewService(), new CandidateService(),
+            new VacancyService(), new EmployerService())),
     CANDIDATE_ADD(new CandidateAddCommand(new AccountService(), new CandidateService())),
     CANDIDATE_ADD_SAVE(new CandidateAddSaveCommand(new CandidateService())),
     CANDIDATE_VIEW_EDIT(new CandidateViewEditCommand(new AccountService(), new CandidateService())),

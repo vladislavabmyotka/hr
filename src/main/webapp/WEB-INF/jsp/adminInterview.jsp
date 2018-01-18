@@ -10,7 +10,7 @@
 <html lang="${language}">
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-    <title><fmt:message key="vacancy.management" /></title>
+    <title><fmt:message key="interview.management" /></title>
     <style>
         <%@include file='../css/bootstrap.min.css' %>
         <%@include file='../css/main.css' %>
@@ -28,7 +28,7 @@
 
             <ul class="navbar-nav mr-auto">
                 <li class="nav-item active">
-                    <a class="nav-link" href="#"><fmt:message key="vacancies" />
+                    <a class="nav-link" href="#"><fmt:message key="interview" />
                         <span class="sr-only">(current)</span></a>
                 </li>
                 <li class="nav-item">
@@ -37,7 +37,7 @@
                 <form action="FrontController" method="post">
                     <input type="hidden" name="command" value="admin_candidate_view">
                     <li class="nav-item">
-                        <button type="submit" class="btn btn-link nav-link cursor"><fmt:message key="admin.candidate" />
+                        <button type="submit" class="btn btn-link nav-link cursor"><fmt:message key="admin.candidate"/>
                         </button>
                     </li>
                 </form>
@@ -49,9 +49,9 @@
                     </li>
                 </form>
                 <form action="FrontController" method="post">
-                    <input type="hidden" name="command" value="admin_interview_view">
+                    <input type="hidden" name="command" value="admin_vacancy_view">
                     <li class="nav-item">
-                        <button type="submit" class="btn btn-link nav-link cursor"><fmt:message key="interview" />
+                        <button type="submit" class="btn btn-link nav-link cursor"><fmt:message key="vacancies" />
                         </button>
                     </li>
                 </form>
@@ -59,7 +59,7 @@
 
             <ul class="nav navbar-nav navbar-right">
                 <form class="margin">
-                    <input type="hidden" name="command" value="admin_vacancy_view">
+                    <input type="hidden" name="command" value="admin_interview_view">
                     <select class="form-control" title="language" id="language" name="language" onchange="submit()">
                         <option value="ru" ${language == 'ru' ? 'selected' : ''}>Русский</option>
                         <option value="en" ${language == 'en' ? 'selected' : ''}>English</option>
@@ -81,40 +81,32 @@
             <thead class="thead-default">
             <tr>
                 <th>#</th>
-                <th><fmt:message key="post" /></th>
-                <th><fmt:message key="company" /></th>
-                <th><fmt:message key="salary" /></th>
-                <th><fmt:message key="location" /></th>
-                <th><fmt:message key="experience" /></th>
-                <th><fmt:message key="english" /></th>
-                <th><fmt:message key="text" /></th>
-                <th><fmt:message key="condition" /></th>
+                <th><fmt:message key="info.candidate" /></th>
+                <th><fmt:message key="info.vacancy" /></th>
                 <th><fmt:message key="info.employer" /></th>
+                <th><fmt:message key="result.pre" /></th>
+                <th><fmt:message key="result.final" /></th>
                 <th><fmt:message key="action" /></th>
             </tr>
             </thead>
             <tbody>
-            <c:forEach var="vacancy" items="${vacancyList}" varStatus="id">
+            <c:forEach var="interview" items="${interviewList}" varStatus="id">
                 <tr>
                     <th scope="row"><c:out value="${id.count}"/></th>
-                    <td><c:out value="${vacancy.post}"/></td>
-                    <td><c:out value="${vacancy.company}"/></td>
-                    <td><c:out value="${vacancy.salary}"/></td>
-                    <td><c:out value="${vacancy.location}"/></td>
-                    <td><c:out value="${vacancy.experience}"/></td>
-                    <td><c:out value="${vacancy.english}"/></td>
-                    <td><c:out value="${vacancy.text}"/></td>
-                    <td><c:out value="${vacancy.conditionVacancy}"/></td>
-                    <td><c:out value="${vacancy.employerInfo}"/></td>
+                    <td><c:out value="${interview.candidateInfo}"/></td>
+                    <td><c:out value="${interview.vacancyInfo}"/></td>
+                    <td><c:out value="${interview.employerInfo}"/></td>
+                    <td><c:out value="${interview.preResult}"/></td>
+                    <td><c:out value="${interview.finalResult}"/></td>
                     <td><form action="FrontController" method="post">
-                        <input type="hidden" name="command" value="admin_vacancy_delete">
-                        <button name="adminVacancyDelete" class="btn btn-link" type="submit"
-                                value="${vacancy.vacancyId}"><fmt:message key="delete.delete" />
+                        <input type="hidden" name="command" value="admin_interview_delete">
+                        <button name="adminInterviewDelete" class="btn btn-link" type="submit"
+                                value="${interview.interviewId}"><fmt:message key="delete.delete" />
                         </button></form>
                         <form action="FrontController" method="post">
-                            <input type="hidden" name="command" value="admin_vacancy_edit">
-                            <button name="adminVacancyEdit" class="btn btn-link" type="submit"
-                                    value="${vacancy.vacancyId}"><fmt:message key="edit" />
+                            <input type="hidden" name="command" value="admin_interview_edit">
+                            <button name="adminInterviewEdit" class="btn btn-link" type="submit"
+                                    value="${interview.interviewId}"><fmt:message key="edit" />
                             </button></form>
                     </td>
                 </tr>

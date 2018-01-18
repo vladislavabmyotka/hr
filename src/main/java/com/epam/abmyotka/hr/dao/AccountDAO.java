@@ -132,14 +132,15 @@ public class AccountDAO extends AbstractDAO<Account> {
         return countRowsAffected;
     }
 
-    public int update(Account user, int accountId) {
+    @Override
+    public int update(Account user) {
         int countRowsAffected = 0;
         PreparedStatement statement = null;
         try {
             statement = this.getPreparedStatement(SQLConstant.SQL_UPDATE_ACCOUNT);
             statement.setString(1, user.getLogin());
             statement.setString(2, user.getPassword());
-            statement.setInt(3, accountId);
+            statement.setInt(3, user.getAccountId());
             countRowsAffected = statement.executeUpdate();
         } catch (SQLException e) {
             LOGGER.log(Level.ERROR, "Error while trying update account! Detail: " + e.getMessage());

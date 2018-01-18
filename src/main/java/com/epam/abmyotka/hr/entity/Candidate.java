@@ -178,6 +178,10 @@ public class Candidate extends Entity {
         this.english = english;
     }
 
+    public String getMainInformation() {
+        return surname + " " + name + " " + (lastname != null ? lastname : "")  + "\n" + email;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) {

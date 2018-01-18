@@ -102,6 +102,7 @@ public class EmployerDAO extends AbstractDAO<Employer> {
         return employer;
     }
 
+    @Override
     public int update(Employer employer) {
         int countRowsAffected = 0;
         PreparedStatement statement = null;

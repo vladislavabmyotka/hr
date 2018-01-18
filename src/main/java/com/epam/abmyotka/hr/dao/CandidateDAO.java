@@ -147,6 +147,7 @@ public class CandidateDAO extends AbstractDAO<Candidate> {
         return 0;
     }
 
+    @Override
     public int update(Candidate candidate) {
         int countRowsAffected = 0;
         PreparedStatement statement = null;

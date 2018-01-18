@@ -5,14 +5,12 @@ import com.epam.abmyotka.hr.constant.MessageConstant;
 import com.epam.abmyotka.hr.constant.ParameterConstant;
 import com.epam.abmyotka.hr.constant.PathConstant;
 import com.epam.abmyotka.hr.controller.Router;
-import com.epam.abmyotka.hr.entity.Candidate;
 import com.epam.abmyotka.hr.service.CandidateService;
 import org.apache.logging.log4j.Level;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import javax.servlet.http.HttpServletRequest;
-import java.util.List;
 
 public class AdminCandidateDeleteCommand implements Command {
     private final static Logger LOGGER = LogManager.getLogger(AdminCandidateDeleteCommand.class);
@@ -41,8 +39,8 @@ public class AdminCandidateDeleteCommand implements Command {
             request.setAttribute("errorMessage", MessageConstant.ERROR_ON_WEBSITE);
         }
 
-        List<Candidate> candidates = service.takeAll();
-        request.setAttribute("candidateList", candidates);
+        Command command = new AdminCandidateViewCommand(service);
+        command.execute(request);
 
         return router;
     }

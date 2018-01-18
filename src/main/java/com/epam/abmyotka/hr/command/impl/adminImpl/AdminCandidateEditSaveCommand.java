@@ -13,8 +13,6 @@ import org.apache.logging.log4j.Logger;
 
 import javax.servlet.http.HttpServletRequest;
 
-import java.util.List;
-
 import static com.epam.abmyotka.hr.validator.CandidateEmployerVacancyValidator.*;
 
 public class AdminCandidateEditSaveCommand implements Command {
@@ -52,8 +50,8 @@ public class AdminCandidateEditSaveCommand implements Command {
                     Integer.parseInt(age), email, address, citizenship, phone, post, education,
                     Integer.parseInt(experience), english, skill);
             if (service.update(candidate)) {
-                List<Candidate> candidates = service.takeAll();
-                request.setAttribute("candidateList", candidates);
+                Command command = new AdminCandidateViewCommand(service);
+                command.execute(request);
             } else {
                 request.setAttribute("errorMessage", MessageConstant.ERROR_ON_WEBSITE);
             }

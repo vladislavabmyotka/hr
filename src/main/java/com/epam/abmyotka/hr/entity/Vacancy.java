@@ -119,6 +119,10 @@ public class Vacancy extends Entity {
         this.employerInfo = employerInfo;
     }
 
+    public String getMainInformation() {
+        return post + ", " + company + ", " + salary;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) {

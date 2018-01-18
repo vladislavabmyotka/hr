@@ -5,14 +5,12 @@ import com.epam.abmyotka.hr.constant.MessageConstant;
 import com.epam.abmyotka.hr.constant.ParameterConstant;
 import com.epam.abmyotka.hr.constant.PathConstant;
 import com.epam.abmyotka.hr.controller.Router;
-import com.epam.abmyotka.hr.entity.Employer;
 import com.epam.abmyotka.hr.service.EmployerService;
 import org.apache.logging.log4j.Level;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import javax.servlet.http.HttpServletRequest;
-import java.util.List;
 
 public class AdminEmployerDeleteCommand implements Command {
     private final static Logger LOGGER = LogManager.getLogger(AdminEmployerDeleteCommand.class);
@@ -41,8 +39,8 @@ public class AdminEmployerDeleteCommand implements Command {
             request.setAttribute("errorMessage", MessageConstant.ERROR_ON_WEBSITE);
         }
 
-        List<Employer> employers = service.takeAll();
-        request.setAttribute("employerList", employers);
+        Command command = new AdminEmployerViewCommand(service);
+        command.execute(request);
 
         return router;
     }

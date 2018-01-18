@@ -60,7 +60,7 @@ public class VacancyDAO extends AbstractDAO<Vacancy> {
                 vacancy = createVacancyByResultSet(resultSet);
             }
         } catch (SQLException e) {
-            LOGGER.log(Level.ERROR, "Error while trying find candidate by idCandidate in database! Detail: " +
+            LOGGER.log(Level.ERROR, "Error while trying find candidate by idInterview in database! Detail: " +
                     e.getMessage());
         } finally {
             this.closeStatement(statement);
@@ -104,6 +104,7 @@ public class VacancyDAO extends AbstractDAO<Vacancy> {
         return 0;
     }
 
+    @Override
     public int update(Vacancy vacancy) {
         int countRowsAffected = 0;
         PreparedStatement statement = null;

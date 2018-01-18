@@ -36,29 +36,35 @@
                 </li>
             </ul>
             <ul class="nav navbar-nav navbar-right">
-                <form>
-                    <select class="form-control" title="language" id="language" name="language"
+                <form action="FormController" method="post">
+                    <input type="hidden" name="command" value="index">
+                    <select class="form-control" title="language" id="language" name="language" onchange="submit()">
+                        <option value="ru" ${language == 'ru' ? 'selected' : ''}>Русский</option>
+                        <option value="en" ${language == 'en' ? 'selected' : ''}>English</option>
+                    </select>
+                    <%--<select class="form-control" title="language" id="language" name="language"
                             onchange="location=this.options[this.selectedIndex].value">
                         <option value="http://localhost:8080/hr/index.jsp?language=ru" ${language == 'ru' ? 'selected' : ''}>Русский</option>
                         <option value="http://localhost:8080/hr/index.jsp?language=en" ${language == 'en' ? 'selected' : ''}>English</option>
-                    </select>
+                    </select>--%>
                 </form>
             </ul>
         </div>
     </nav>
 
     <div class="container">
-        <form class="form-signin" name="Login" action="FrontController" method="post" onsubmit="return validate(this);">
+        <form class="form-signin" name="Login" action="FrontController" method="post">
             <h1 class="form-signin-heading"><fmt:message key="index.container.h1" /></h1>
 
             <input type="hidden" name="command" value="authorization">
 
             <label for="inputLogin" class="sr-only"></label>
-            <input name="login" type="text" id="inputLogin" class="form-control"
+            <input name="login" type="text" id="inputLogin" class="form-control" pattern="[a-zA-Z][\s\w]{4,25}"
                    placeholder=<fmt:message key="index.container.login" /> required="" autofocus="">
 
             <label for="inputPassword" class="sr-only"></label>
             <input name="password" type="password" id="inputPassword" class="form-control"
+                   pattern="^(?=.*\d)(?=.*[a-zA-Z])[0-9a-zA-Z]{8,25}$"
                    placeholder=<fmt:message key="index.container.password" /> required="" autocomplete="no">
 
             <br/>

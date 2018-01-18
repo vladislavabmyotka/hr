@@ -142,6 +142,24 @@
     </servlet-mapping>
 
     <servlet>
+        <servlet-name>Admin Interview</servlet-name>
+        <jsp-file>/WEB-INF/jsp/adminInterview.jsp</jsp-file>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>Admin Interview</servlet-name>
+        <url-pattern>/adminInterview</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>Admin Interview Edit</servlet-name>
+        <jsp-file>/WEB-INF/jsp/adminInterviewEdit.jsp</jsp-file>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>Admin Interview Edit</servlet-name>
+        <url-pattern>/adminInterviewEdit</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
         <servlet-name>Edit Account</servlet-name>
         <jsp-file>/WEB-INF/jsp/editAccount.jsp</jsp-file>
     </servlet>

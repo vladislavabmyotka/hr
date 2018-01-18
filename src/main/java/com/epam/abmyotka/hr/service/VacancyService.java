@@ -18,11 +18,11 @@ public class VacancyService {
         return vacancies;
     }
 
-    public Vacancy findById(int candidateId) {
+    public Vacancy findById(int vacancyId) {
         DBPool pool = DBPool.getInstance();
         Connection connection = pool.getConnection();
         VacancyDAO vacancyDAO = new VacancyDAO(connection);
-        Vacancy candidate = vacancyDAO.findById(candidateId);
+        Vacancy candidate = vacancyDAO.findById(vacancyId);
         pool.putConnection(connection);
         return candidate;
     }

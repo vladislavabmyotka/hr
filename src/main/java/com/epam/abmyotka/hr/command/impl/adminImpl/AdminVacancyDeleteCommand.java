@@ -5,8 +5,6 @@ import com.epam.abmyotka.hr.constant.MessageConstant;
 import com.epam.abmyotka.hr.constant.ParameterConstant;
 import com.epam.abmyotka.hr.constant.PathConstant;
 import com.epam.abmyotka.hr.controller.Router;
-import com.epam.abmyotka.hr.entity.Employer;
-import com.epam.abmyotka.hr.entity.Vacancy;
 import com.epam.abmyotka.hr.service.EmployerService;
 import com.epam.abmyotka.hr.service.VacancyService;
 import org.apache.logging.log4j.Level;
@@ -14,7 +12,6 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import javax.servlet.http.HttpServletRequest;
-import java.util.List;
 
 public class AdminVacancyDeleteCommand implements Command {
     private final static Logger LOGGER = LogManager.getLogger(AdminVacancyDeleteCommand.class);
@@ -45,20 +42,8 @@ public class AdminVacancyDeleteCommand implements Command {
             request.setAttribute("errorMessage", MessageConstant.ERROR_ON_WEBSITE);
         }
 
-        List<Vacancy> vacancies = vacancyService.takeAll();
-
-        for(Vacancy vacancy : vacancies) {
-            int employerId = vacancy.getEmployerId();
-            Employer employer = employerService.findById(employerId);
-            String surname = employer.getSurname();
-            String name = employer.getName();
-            String lastname = employer.getLastname();
-            lastname = lastname != null ? lastname : "";
-            String email = employer.getEmail();
-            vacancy.setEmployerInfo(surname + " " + name + " " + lastname  + "\n" + email);
-        }
-
-        request.setAttribute("vacancyList", vacancies);
+        Command command = new AdminVacancyViewCommand(vacancyService, employerService);
+        command.execute(request);
 
         return router;
     }

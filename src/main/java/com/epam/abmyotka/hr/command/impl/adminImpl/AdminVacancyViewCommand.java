@@ -1,6 +1,7 @@
 package com.epam.abmyotka.hr.command.impl.adminImpl;
 
 import com.epam.abmyotka.hr.command.Command;
+import com.epam.abmyotka.hr.constant.MessageConstant;
 import com.epam.abmyotka.hr.constant.PathConstant;
 import com.epam.abmyotka.hr.controller.Router;
 import com.epam.abmyotka.hr.entity.Employer;
@@ -28,12 +29,13 @@ public class AdminVacancyViewCommand implements Command {
 
         for(Vacancy vacancy : vacancies) {
             int employerId = vacancy.getEmployerId();
-            Employer employer = employerService.findById(employerId);
-            String surname = employer.getSurname();
-            String name = employer.getName();
-            String lastname = employer.getLastname();
-            String email = employer.getEmail();
-            vacancy.setEmployerInfo(surname + " " + name + " " + (lastname != null ? lastname : "")  + "\n" + email);
+            if (employerId != 0) {
+                Employer employer = employerService.findById(employerId);
+                String mainEmployerInformation = employer.getMainInformation();
+                vacancy.setEmployerInfo(mainEmployerInformation);
+            } else {
+                vacancy.setEmployerInfo(MessageConstant.EMPLOYER_NOT_ASSIGNED);
+            }
         }
 
         request.setAttribute("vacancyList", vacancies);
