@@ -5,6 +5,7 @@ import com.epam.abmyotka.hr.constant.MessageConstant;
 import com.epam.abmyotka.hr.constant.ParameterConstant;
 import com.epam.abmyotka.hr.constant.PathConstant;
 import com.epam.abmyotka.hr.controller.Router;
+import com.epam.abmyotka.hr.manager.MessageManager;
 import com.epam.abmyotka.hr.service.EmployerService;
 import com.epam.abmyotka.hr.service.VacancyService;
 import org.apache.logging.log4j.Level;
@@ -39,7 +40,10 @@ public class AdminVacancyDeleteCommand implements Command {
         }
 
         if (!vacancyService.delete(vacancyId)) {
-            request.setAttribute("errorMessage", MessageConstant.ERROR_ON_WEBSITE);
+            String language = request.getParameter(ParameterConstant.PARAM_LANGUAGE);
+            String message = MessageManager.getMessage(language,
+                    MessageConstant.ERROR_ON_WEBSITE);
+            request.setAttribute("errorMessage", message);
         }
 
         Command command = new AdminVacancyViewCommand(vacancyService, employerService);

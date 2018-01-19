@@ -70,27 +70,7 @@ public class AdminInterviewViewCommand implements Command {
                 }
             } else {
                 interview.setVacancyInfo(VACANCY_HAS_BEEN_REMOVED);
-
-                //TODO: REPLACED!!!!
-                //
-                String language = request.getParameter("language");
-                /*if (language != null) {
-                    interview.setEmployerInfo(language);
-                } else {
-                    Object object = request.getSession(true).getAttribute("language");
-                    if (object instanceof Locale) {
-                        interview.setEmployerInfo(object.toString());
-                    } else if (object instanceof String) {
-                        interview.setEmployerInfo(object.toString());
-                    }
-                }*/
-
-                String message = MessageManager.getMessage(language,
-                        MessageConstant.INCORRECT_LOGIN_PASSWORD_MESSAGE);
-                interview.setEmployerInfo(language);
-                //
-
-                //interview.setEmployerInfo(EMPLOYER_NOT_ASSIGNED);
+                interview.setEmployerInfo(EMPLOYER_NOT_ASSIGNED);
             }
         }
 

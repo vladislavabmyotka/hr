@@ -6,6 +6,7 @@ import com.epam.abmyotka.hr.constant.ParameterConstant;
 import com.epam.abmyotka.hr.constant.PathConstant;
 import com.epam.abmyotka.hr.controller.Router;
 import com.epam.abmyotka.hr.entity.Employer;
+import com.epam.abmyotka.hr.manager.MessageManager;
 import com.epam.abmyotka.hr.service.EmployerService;
 import org.apache.logging.log4j.Level;
 import org.apache.logging.log4j.LogManager;
@@ -45,7 +46,9 @@ public class AdminEmployerEditSaveCommand implements Command {
                 Command command = new AdminEmployerViewCommand(service);
                 command.execute(request);
             } else {
-                request.setAttribute("errorMessage", MessageConstant.ERROR_ON_WEBSITE);
+                String message = MessageManager.getMessage(request.getParameter(ParameterConstant.PARAM_LANGUAGE),
+                        MessageConstant.ERROR_ON_WEBSITE);
+                request.setAttribute("errorMessage", message);
             }
         } else {
             request.setAttribute("errorMessage", MessageConstant.INCORRECT_DATA);
@@ -62,7 +65,10 @@ public class AdminEmployerEditSaveCommand implements Command {
                 request.setAttribute("employer", employer);
             } else {
                 router.setPagePath(PathConstant.PATH_PAGE_ADMIN_EMPLOYER);
-                request.setAttribute("errorMessage", MessageConstant.ERROR_ON_WEBSITE);
+                String language = request.getParameter(ParameterConstant.PARAM_LANGUAGE);
+                String message = MessageManager.getMessage(language,
+                        MessageConstant.ERROR_ON_WEBSITE);
+                request.setAttribute("errorMessage", message);
             }
         }
 

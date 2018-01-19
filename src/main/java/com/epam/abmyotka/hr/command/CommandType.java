@@ -12,6 +12,7 @@ import com.epam.abmyotka.hr.service.*;
 
 public enum CommandType {
     INDEX(new IndexCommand()),
+    REGISTER_RELOAD(new RegisterReloadCommand()),
     AUTHORIZATION(new AuthorizationCommand(new AccountService())),
     REGISTER(new RegisterCommand(new AccountService())),
     EDIT_ACCOUNT_DATA(new AccountEditCommand(new AccountService())),

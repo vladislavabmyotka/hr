@@ -15,15 +15,6 @@
         <url-pattern>/index.jsp</url-pattern>
     </filter-mapping>
 
-    <!--<servlet>
-        <servlet-name>FrontController</servlet-name>
-        <servlet-class>com.epam.abmyotka.hr.servlet.FrontController</servlet-class>
-    </servlet>
-     <servlet-mapping>
-        <servlet-name>FrontController</servlet-name>
-        <url-pattern>/*</url-pattern>
-    </servlet-mapping>-->
-
     <servlet>
         <servlet-name>Index</servlet-name>
         <jsp-file>/index.jsp</jsp-file>

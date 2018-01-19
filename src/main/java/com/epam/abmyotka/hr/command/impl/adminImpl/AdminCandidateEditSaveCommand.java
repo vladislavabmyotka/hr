@@ -6,6 +6,7 @@ import com.epam.abmyotka.hr.constant.ParameterConstant;
 import com.epam.abmyotka.hr.constant.PathConstant;
 import com.epam.abmyotka.hr.controller.Router;
 import com.epam.abmyotka.hr.entity.Candidate;
+import com.epam.abmyotka.hr.manager.MessageManager;
 import com.epam.abmyotka.hr.service.CandidateService;
 import org.apache.logging.log4j.Level;
 import org.apache.logging.log4j.LogManager;
@@ -53,7 +54,10 @@ public class AdminCandidateEditSaveCommand implements Command {
                 Command command = new AdminCandidateViewCommand(service);
                 command.execute(request);
             } else {
-                request.setAttribute("errorMessage", MessageConstant.ERROR_ON_WEBSITE);
+                String language = request.getParameter(ParameterConstant.PARAM_LANGUAGE);
+                String message = MessageManager.getMessage(language,
+                        MessageConstant.ERROR_ON_WEBSITE);
+                request.setAttribute("errorMessage", message);
             }
         } else {
             request.setAttribute("errorMessage", MessageConstant.INCORRECT_DATA);
@@ -70,7 +74,9 @@ public class AdminCandidateEditSaveCommand implements Command {
                 request.setAttribute("candidate", candidate);
             } else {
                 router.setPagePath(PathConstant.PATH_PAGE_ADMIN_CANDIDATE);
-                request.setAttribute("errorMessage", MessageConstant.ERROR_ON_WEBSITE);
+                String message = MessageManager.getMessage(request.getParameter(ParameterConstant.PARAM_LANGUAGE),
+                        MessageConstant.ERROR_ON_WEBSITE);
+                request.setAttribute("errorMessage", message);
             }
         }
 

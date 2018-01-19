@@ -36,7 +36,7 @@
                 </li>
             </ul>
             <ul class="nav navbar-nav navbar-right">
-                <form action="FormController" method="post">
+                <form>
                     <input type="hidden" name="command" value="index">
                     <select class="form-control" title="language" id="language" name="language" onchange="submit()">
                         <option value="ru" ${language == 'ru' ? 'selected' : ''}>Русский</option>
@@ -68,7 +68,7 @@
                    placeholder=<fmt:message key="index.container.password" /> required="" autocomplete="no">
 
             <br/>
-            <h6 class="form-signin-heading error"> ${errorLoginPassMessage} </h6>
+            <h6 class="form-signin-heading error"> ${errorMessage} </h6>
             <br/>
 
             <button class="btn btn-lg btn-primary btn-block" type="submit"><fmt:message key="index.container.log" />
@@ -80,7 +80,7 @@
     </div>
 
     <script>
-        <%@include file='WEB-INF/js/validate.js' %>
+        <%@include file='WEB-INF/js/main.js' %>
     </script>
 </body>
 </html>

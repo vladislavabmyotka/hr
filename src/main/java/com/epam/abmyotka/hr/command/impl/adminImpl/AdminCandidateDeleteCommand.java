@@ -5,6 +5,7 @@ import com.epam.abmyotka.hr.constant.MessageConstant;
 import com.epam.abmyotka.hr.constant.ParameterConstant;
 import com.epam.abmyotka.hr.constant.PathConstant;
 import com.epam.abmyotka.hr.controller.Router;
+import com.epam.abmyotka.hr.manager.MessageManager;
 import com.epam.abmyotka.hr.service.CandidateService;
 import org.apache.logging.log4j.Level;
 import org.apache.logging.log4j.LogManager;
@@ -36,7 +37,10 @@ public class AdminCandidateDeleteCommand implements Command {
         }
 
         if (!service.delete(candidateId)) {
-            request.setAttribute("errorMessage", MessageConstant.ERROR_ON_WEBSITE);
+            String language = request.getParameter(ParameterConstant.PARAM_LANGUAGE);
+            String message = MessageManager.getMessage(language,
+                    MessageConstant.ERROR_ON_WEBSITE);
+            request.setAttribute("errorMessage", message);
         }
 
         Command command = new AdminCandidateViewCommand(service);

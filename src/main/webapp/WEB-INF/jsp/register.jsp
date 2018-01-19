@@ -38,6 +38,7 @@
             </ul>
             <ul class="nav navbar-nav navbar-right">
                 <form>
+                    <input type="hidden" name="command" value="register_reload">
                     <select class="form-control" title="language" id="language" name="language" onchange="submit()">
                         <option value="ru" ${language == 'ru' ? 'selected' : ''}>Русский</option>
                         <option value="en" ${language == 'en' ? 'selected' : ''}>English</option>
@@ -48,21 +49,23 @@
     </nav>
 
     <div class="container">
-        <form class="form-signin" action="FrontController" onsubmit="return (validate(this) && checkPasswordsMatch(this));">
+        <form class="form-signin" action="FrontController" onsubmit="return checkPasswordsMatch(this);">
             <h1 class="form-signin-heading"><fmt:message key="register.container.h1" /></h1>
 
             <input type="hidden" name="command" value="register">
 
             <label for="inputLogin" class="sr-only"></label>
-            <input name="login" type="text" id="inputLogin" class="form-control"
+            <input name="login" type="text" id="inputLogin" class="form-control" pattern="[a-zA-Z][\s\w]{4,25}"
                    placeholder=<fmt:message key="index.container.login" /> required="" autofocus="">
 
             <label for="inputPassword" class="sr-only"></label>
             <input name="password" type="password" id="inputPassword" class="form-control"
+                   pattern="^(?=.*\d)(?=.*[a-zA-Z])[0-9a-zA-Z]{8,25}$"
                    placeholder=<fmt:message key="index.container.password" /> required="">
 
             <label for="repeatPassword" class="sr-only"></label>
             <input name="repeatPassword" type="password" id="repeatPassword" class="form-control"
+                   pattern="^(?=.*\d)(?=.*[a-zA-Z])[0-9a-zA-Z]{8,25}$"
                    placeholder="<fmt:message key="register.repeat.password" />" required="">
 
             <div class="radio">
@@ -91,7 +94,7 @@
     </div>
     <c:import url="/WEB-INF/jsp/footer.jsp"/>
     <script>
-        <%@include file='../js/validate.js' %>
+        <%@include file='../js/main.js' %>
     </script>
 </body>
 </html>

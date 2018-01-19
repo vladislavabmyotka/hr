@@ -7,11 +7,13 @@ import com.epam.abmyotka.hr.constant.ParameterConstant;
 import com.epam.abmyotka.hr.constant.PathConstant;
 import com.epam.abmyotka.hr.controller.Router;
 import com.epam.abmyotka.hr.entity.Account;
+import com.epam.abmyotka.hr.manager.MessageManager;
 import com.epam.abmyotka.hr.service.AccountService;
 import com.epam.abmyotka.hr.validator.AccountValidator;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
+import java.util.Locale;
 
 public class RegisterCommand implements Command {
     private AccountService service;
@@ -22,7 +24,7 @@ public class RegisterCommand implements Command {
 
     @Override
     public Router execute(HttpServletRequest request) {
-        Router router = new Router(PathConstant.PATH_PAGE_REGISTER);
+        Router router = new Router(PathConstant.PATH_PAGE_REGISTER, Router.RouteType.FORWARD);
         String login = request.getParameter(ParameterConstant.PARAM_LOGIN);
         String password = request.getParameter(ParameterConstant.PARAM_PASSWORD);
         String repeatPassword = request.getParameter(ParameterConstant.PARAM_REPEAT_PASSWORD);
@@ -44,13 +46,36 @@ public class RegisterCommand implements Command {
                         router.setPagePath(PathConstant.PATH_PAGE_EMPLOYER);
                     }
                 } else {
-                    request.setAttribute("errorMessage", MessageConstant.ERROR_ON_WEBSITE);
+                    String message = null;
+                    Object object = request.getSession(true).getAttribute("language");
+                    if (object instanceof Locale) {
+                        message = MessageManager.getMessage(object.toString(), MessageConstant.ERROR_ON_WEBSITE);
+                    } else if (object instanceof String) {
+                        message = MessageManager.getMessage(object.toString(), MessageConstant.ERROR_ON_WEBSITE);
+                    }
+                    request.setAttribute("errorMessage", message);
                 }
             } else {
-                request.setAttribute("errorMessage", MessageConstant.USED_LOGIN_MESSAGE);
+                String message = null;
+                Object object = request.getSession(true).getAttribute("language");
+                if (object instanceof Locale) {
+                    message = MessageManager.getMessage(object.toString(), MessageConstant.USED_LOGIN_MESSAGE);
+                } else if (object instanceof String) {
+                    message = MessageManager.getMessage(object.toString(), MessageConstant.USED_LOGIN_MESSAGE);
+                }
+                request.setAttribute("errorMessage", message);
             }
         } else {
-            request.setAttribute("errorMessage", MessageConstant.INCORRECT_LOGIN_PASSWORD_MESSAGE);
+            String message = null;
+            Object object = request.getSession(true).getAttribute("language");
+            if (object instanceof Locale) {
+                message = MessageManager.getMessage(object.toString(),
+                        MessageConstant.INCORRECT_LOGIN_PASSWORD_MESSAGE);
+            } else if (object instanceof String) {
+                message = MessageManager.getMessage(object.toString(),
+                        MessageConstant.INCORRECT_LOGIN_PASSWORD_MESSAGE);
+            }
+            request.setAttribute("errorMessage", message);
         }
 
         return router;

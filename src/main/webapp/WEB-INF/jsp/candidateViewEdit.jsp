@@ -272,7 +272,7 @@
     </div>
     <c:import url="/WEB-INF/jsp/footer.jsp"/>
     <script>
-        <%@include file='../js/validate.js' %>
+        <%@include file='../js/main.js' %>
     </script>
 </body>
 </html>

@@ -74,26 +74,28 @@
     </nav>
     <br><br>
     <div class="container">
-        <form class="form-signin" action="FrontController" onsubmit="return (validate(this) &&
-            checkPasswordsMatch(this) && validateOldPassword(this));">
+        <form class="form-signin" action="FrontController" onsubmit="return (checkPasswordsMatch(this));">
             <h1 class="form-signin-heading"><fmt:message key="edit.title" /></h1>
 
             <input type="hidden" name="command" value="edit_account_data">
 
             <label for="inputLogin" class="sr-only"></label>
-            <input name="login" type="text" id="inputLogin" class="form-control"
+            <input name="login" type="text" id="inputLogin" class="form-control" pattern="[a-zA-Z][\s\w]{4,25}"
                    value="${pageContext.session.getAttribute("role").login}" required="" autofocus="">
 
             <label for="inputOldPassword" class="sr-only"></label>
             <input name="oldPassword" type="password" id="inputOldPassword" class="form-control"
+                   pattern="^(?=.*\d)(?=.*[a-zA-Z])[0-9a-zA-Z]{8,25}$"
                    placeholder="<fmt:message key="edit.password.old" />" required="">
 
             <label for="password" class="sr-only"></label>
             <input name="password" type="password" id="password" class="form-control"
+                   pattern="^(?=.*\d)(?=.*[a-zA-Z])[0-9a-zA-Z]{8,25}$"
                    placeholder="<fmt:message key="edit.password.new" />" required="">
 
             <label for="repeatPassword" class="sr-only"></label>
             <input name="repeatPassword" type="password" id="repeatPassword" class="form-control"
+                   pattern="^(?=.*\d)(?=.*[a-zA-Z])[0-9a-zA-Z]{8,25}$"
                    placeholder="<fmt:message key="edit.password.new.repeat" />" required="">
 
             <br/>
@@ -108,7 +110,7 @@
     </div>
     <c:import url="/WEB-INF/jsp/footer.jsp"/>
     <script>
-        <%@include file='../js/validate.js' %>
+        <%@include file='../js/main.js' %>
         <%@include file='../js/bootstrapDropdown.js' %>
     </script>
 </body>

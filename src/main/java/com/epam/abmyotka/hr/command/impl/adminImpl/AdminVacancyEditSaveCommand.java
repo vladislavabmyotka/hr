@@ -6,6 +6,7 @@ import com.epam.abmyotka.hr.constant.ParameterConstant;
 import com.epam.abmyotka.hr.constant.PathConstant;
 import com.epam.abmyotka.hr.controller.Router;
 import com.epam.abmyotka.hr.entity.Vacancy;
+import com.epam.abmyotka.hr.manager.MessageManager;
 import com.epam.abmyotka.hr.service.EmployerService;
 import com.epam.abmyotka.hr.service.VacancyService;
 import org.apache.logging.log4j.Level;
@@ -51,10 +52,16 @@ public class AdminVacancyEditSaveCommand implements Command {
                 Command command = new AdminVacancyViewCommand(vacancyService, employerService);
                 command.execute(request);
             } else {
-                request.setAttribute("errorMessage", MessageConstant.ERROR_ON_WEBSITE);
+                String language = request.getParameter(ParameterConstant.PARAM_LANGUAGE);
+                String message = MessageManager.getMessage(language,
+                        MessageConstant.ERROR_ON_WEBSITE);
+                request.setAttribute("errorMessage", message);
             }
         } else {
-            request.setAttribute("errorMessage", MessageConstant.INCORRECT_DATA);
+            String language = request.getParameter(ParameterConstant.PARAM_LANGUAGE);
+            String message = MessageManager.getMessage(language,
+                    MessageConstant.INCORRECT_DATA);
+            request.setAttribute("errorMessage", message);
             router.setPagePath(PathConstant.PATH_PAGE_ADMIN_VACANCY_EDIT);
             int vacancyId = 0;
             try {
@@ -68,7 +75,9 @@ public class AdminVacancyEditSaveCommand implements Command {
                 request.setAttribute("vacancy", vacancy);
             } else {
                 router.setPagePath(PathConstant.PATH_PAGE_ADMIN_VACANCY);
-                request.setAttribute("errorMessage", MessageConstant.ERROR_ON_WEBSITE);
+                language = request.getParameter(ParameterConstant.PARAM_LANGUAGE);
+                message = MessageManager.getMessage(language, MessageConstant.ERROR_ON_WEBSITE);
+                request.setAttribute("errorMessage", message);
             }
         }
 
