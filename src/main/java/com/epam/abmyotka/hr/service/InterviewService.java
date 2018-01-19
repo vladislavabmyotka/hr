@@ -44,4 +44,22 @@ public class InterviewService {
         pool.putConnection(connection);
         return countRowsAffected != 0;
     }
+
+    public boolean add(Interview interview) {
+        DBPool pool = DBPool.getInstance();
+        Connection connection = pool.getConnection();
+        InterviewDAO interviewDAO = new InterviewDAO(connection);
+        int countRowsAffected = interviewDAO.add(interview);
+        pool.putConnection(connection);
+        return countRowsAffected != 0;
+    }
+
+    public boolean checkForExist(Interview interview) {
+        DBPool pool = DBPool.getInstance();
+        Connection connection = pool.getConnection();
+        InterviewDAO interviewDAO = new InterviewDAO(connection);
+        boolean isExist = interviewDAO.checkForExist(interview);
+        pool.putConnection(connection);
+        return isExist;
+    }
 }

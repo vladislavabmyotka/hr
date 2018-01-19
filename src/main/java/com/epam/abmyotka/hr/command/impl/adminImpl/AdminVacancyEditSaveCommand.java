@@ -52,15 +52,13 @@ public class AdminVacancyEditSaveCommand implements Command {
                 Command command = new AdminVacancyViewCommand(vacancyService, employerService);
                 command.execute(request);
             } else {
-                String language = request.getParameter(ParameterConstant.PARAM_LANGUAGE);
-                String message = MessageManager.getMessage(language,
-                        MessageConstant.ERROR_ON_WEBSITE);
+                Object language = request.getSession(true).getAttribute("language");
+                String message = MessageManager.getMessage(language.toString(), MessageConstant.ERROR_ON_WEBSITE);
                 request.setAttribute("errorMessage", message);
             }
         } else {
-            String language = request.getParameter(ParameterConstant.PARAM_LANGUAGE);
-            String message = MessageManager.getMessage(language,
-                    MessageConstant.INCORRECT_DATA);
+            Object language = request.getSession(true).getAttribute("language");
+            String message = MessageManager.getMessage(language.toString(), MessageConstant.INCORRECT_DATA);
             request.setAttribute("errorMessage", message);
             router.setPagePath(PathConstant.PATH_PAGE_ADMIN_VACANCY_EDIT);
             int vacancyId = 0;
@@ -75,8 +73,8 @@ public class AdminVacancyEditSaveCommand implements Command {
                 request.setAttribute("vacancy", vacancy);
             } else {
                 router.setPagePath(PathConstant.PATH_PAGE_ADMIN_VACANCY);
-                language = request.getParameter(ParameterConstant.PARAM_LANGUAGE);
-                message = MessageManager.getMessage(language, MessageConstant.ERROR_ON_WEBSITE);
+                language = request.getSession(true).getAttribute("language");
+                message = MessageManager.getMessage(language.toString(), MessageConstant.ERROR_ON_WEBSITE);
                 request.setAttribute("errorMessage", message);
             }
         }

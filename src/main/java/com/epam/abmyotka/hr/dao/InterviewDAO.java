@@ -55,7 +55,7 @@ public class InterviewDAO extends AbstractDAO<Interview>{
                 interview = createInterviewByResultSet(resultSet);
             }
         } catch (SQLException e) {
-            LOGGER.log(Level.ERROR, "Error while trying find candidate by idInterview in database! Detail: " +
+            LOGGER.log(Level.ERROR, "Error while trying find interview by idInterview in database! Detail: " +
                     e.getMessage());
         } finally {
             this.closeStatement(statement);
@@ -114,7 +114,39 @@ public class InterviewDAO extends AbstractDAO<Interview>{
     }
 
     @Override
-    public int add(Interview entity) {
-        return 0;
+    public int add(Interview interview) {
+        int countRowsAffected = 0;
+        PreparedStatement statement = null;
+        try {
+            statement = this.getPreparedStatement(SQLConstant.SQL_INSERT_INTERVIEW);
+            statement.setInt(1, interview.getCandidateId());
+            statement.setInt(2, interview.getVacancyId());
+            countRowsAffected = statement.executeUpdate();
+        } catch (SQLException e) {
+            LOGGER.log(Level.ERROR, "Error while trying add interview in database! Detail: " + e.getMessage());
+        } finally {
+            this.closeStatement(statement);
+        }
+        return countRowsAffected;
+    }
+
+    public boolean checkForExist(Interview interview) {
+        boolean isExist = false;
+        PreparedStatement statement = null;
+        try {
+            statement = this.getPreparedStatement(SQLConstant.SQL_SELECT_INTERVIEW_BY_CANDIDATE_ID_VACANCY_ID);
+            statement.setInt(1, interview.getCandidateId());
+            statement.setInt(2, interview.getVacancyId());
+            ResultSet resultSet = statement.executeQuery();
+            if (resultSet.next()) {
+                isExist = true;
+            }
+        } catch (SQLException e) {
+            LOGGER.log(Level.ERROR, "Error while trying find interview by i_idCandidate and i_idvacancy " +
+                    "in database! Detail: " + e.getMessage());
+        } finally {
+            this.closeStatement(statement);
+        }
+        return isExist;
     }
 }

@@ -37,8 +37,8 @@ public class AdminEmployerDeleteCommand implements Command {
         }
 
         if (!service.delete(employerId)) {
-            String message = MessageManager.getMessage(request.getParameter(ParameterConstant.PARAM_LANGUAGE),
-                    MessageConstant.ERROR_ON_WEBSITE);
+            Object language = request.getSession(true).getAttribute("language");
+            String message = MessageManager.getMessage(language.toString(), MessageConstant.ERROR_ON_WEBSITE);
             request.setAttribute("errorMessage", message);
         }
 

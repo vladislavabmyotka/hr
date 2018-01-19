@@ -6,6 +6,7 @@ import com.epam.abmyotka.hr.constant.ParameterConstant;
 import com.epam.abmyotka.hr.constant.PathConstant;
 import com.epam.abmyotka.hr.controller.Router;
 import com.epam.abmyotka.hr.entity.Candidate;
+import com.epam.abmyotka.hr.manager.MessageManager;
 import com.epam.abmyotka.hr.service.CandidateService;
 import org.apache.logging.log4j.Level;
 import org.apache.logging.log4j.LogManager;
@@ -51,13 +52,16 @@ public class CandidateViewEditSaveCommand implements Command {
         }
         Candidate candidate = service.findById(candidateId);
         if (candidate != null) {
+            Object language = request.getSession(true).getAttribute("language");
+            String message = MessageManager.getMessage(language.toString(), MessageConstant.INCORRECT_DATA);
+
             if (surname != null) {
                 if(checkNames(surname)) {
                     candidate.setSurname(surname);
                 } else {
                     request.setAttribute("candidate", candidate);
                     router.setPagePath(PathConstant.PATH_PAGE_CANDIDATE_VIEW_EDIT);
-                    request.setAttribute("errorMessage", MessageConstant.INCORRECT_DATA);
+                    request.setAttribute("errorMessage", message);
                     return router;
                 }
             }
@@ -68,7 +72,7 @@ public class CandidateViewEditSaveCommand implements Command {
                 } else {
                     request.setAttribute("candidate", candidate);
                     router.setPagePath(PathConstant.PATH_PAGE_CANDIDATE_VIEW_EDIT);
-                    request.setAttribute("errorMessage", MessageConstant.INCORRECT_DATA);
+                    request.setAttribute("errorMessage", message);
                     return router;
                 }
             }
@@ -84,7 +88,7 @@ public class CandidateViewEditSaveCommand implements Command {
                 } else {
                     request.setAttribute("candidate", candidate);
                     router.setPagePath(PathConstant.PATH_PAGE_CANDIDATE_VIEW_EDIT);
-                    request.setAttribute("errorMessage", MessageConstant.INCORRECT_DATA);
+                    request.setAttribute("errorMessage", message);
                     return router;
                 }
             }
@@ -95,7 +99,7 @@ public class CandidateViewEditSaveCommand implements Command {
                 } else {
                     request.setAttribute("candidate", candidate);
                     router.setPagePath(PathConstant.PATH_PAGE_CANDIDATE_VIEW_EDIT);
-                    request.setAttribute("errorMessage", MessageConstant.INCORRECT_DATA);
+                    request.setAttribute("errorMessage", message);
                     return router;
                 }
             }
@@ -110,7 +114,7 @@ public class CandidateViewEditSaveCommand implements Command {
                 } else {
                     request.setAttribute("candidate", candidate);
                     router.setPagePath(PathConstant.PATH_PAGE_CANDIDATE_VIEW_EDIT);
-                    request.setAttribute("errorMessage", MessageConstant.INCORRECT_DATA);
+                    request.setAttribute("errorMessage", message);
                     return router;
                 }
             }
@@ -121,7 +125,7 @@ public class CandidateViewEditSaveCommand implements Command {
                 } else {
                     request.setAttribute("candidate", candidate);
                     router.setPagePath(PathConstant.PATH_PAGE_CANDIDATE_VIEW_EDIT);
-                    request.setAttribute("errorMessage", MessageConstant.INCORRECT_DATA);
+                    request.setAttribute("errorMessage", message);
                     return router;
                 }
             }
@@ -141,7 +145,7 @@ public class CandidateViewEditSaveCommand implements Command {
                 } else {
                     request.setAttribute("candidate", candidate);
                     router.setPagePath(PathConstant.PATH_PAGE_CANDIDATE_VIEW_EDIT);
-                    request.setAttribute("errorMessage", MessageConstant.INCORRECT_DATA);
+                    request.setAttribute("errorMessage", message);
                     return router;
                 }
             }
@@ -155,10 +159,14 @@ public class CandidateViewEditSaveCommand implements Command {
             }
 
             if (!service.update(candidate)) {
-                request.setAttribute("errorMessage", MessageConstant.ERROR_ON_WEBSITE);
+                language = request.getSession(true).getAttribute("language");
+                message = MessageManager.getMessage(language.toString(), MessageConstant.ERROR_ON_WEBSITE);
+                request.setAttribute("errorMessage", message);
             }
         } else {
-            request.setAttribute("errorMessage", MessageConstant.ERROR_ON_WEBSITE);
+            Object language = request.getSession(true).getAttribute("language");
+            String message = MessageManager.getMessage(language.toString(), MessageConstant.ERROR_ON_WEBSITE);
+            request.setAttribute("errorMessage", message);
         }
 
         return router;

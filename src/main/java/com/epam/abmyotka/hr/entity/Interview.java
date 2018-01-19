@@ -13,6 +13,11 @@ public class Interview extends Entity {
     public Interview() {
     }
 
+    public Interview(int candidateId, int vacancyId) {
+        this.candidateId = candidateId;
+        this.vacancyId = vacancyId;
+    }
+
     public Interview(int interviewId, String preResult, String finalResult) {
         this.interviewId = interviewId;
         this.preResult = preResult;

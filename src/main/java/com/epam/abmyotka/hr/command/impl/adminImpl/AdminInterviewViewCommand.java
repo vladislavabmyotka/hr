@@ -1,24 +1,19 @@
 package com.epam.abmyotka.hr.command.impl.adminImpl;
 
 import com.epam.abmyotka.hr.command.Command;
-import com.epam.abmyotka.hr.constant.MessageConstant;
-import com.epam.abmyotka.hr.constant.ParameterConstant;
 import com.epam.abmyotka.hr.constant.PathConstant;
 import com.epam.abmyotka.hr.controller.Router;
 import com.epam.abmyotka.hr.entity.Candidate;
 import com.epam.abmyotka.hr.entity.Employer;
 import com.epam.abmyotka.hr.entity.Interview;
 import com.epam.abmyotka.hr.entity.Vacancy;
-import com.epam.abmyotka.hr.manager.MessageManager;
 import com.epam.abmyotka.hr.service.CandidateService;
 import com.epam.abmyotka.hr.service.EmployerService;
 import com.epam.abmyotka.hr.service.InterviewService;
 import com.epam.abmyotka.hr.service.VacancyService;
 
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpSession;
 import java.util.List;
-import java.util.Locale;
 
 import static com.epam.abmyotka.hr.constant.MessageConstant.CANDIDATE_HAS_BEEN_REMOVED;
 import static com.epam.abmyotka.hr.constant.MessageConstant.EMPLOYER_NOT_ASSIGNED;

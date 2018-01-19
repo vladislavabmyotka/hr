@@ -41,9 +41,8 @@ public class AdminVacancyEditCommand implements Command {
             request.setAttribute("vacancy", vacancy);
         } else {
             router.setPagePath(PathConstant.PATH_PAGE_ADMIN_VACANCY);
-            String language = request.getParameter(ParameterConstant.PARAM_LANGUAGE);
-            String message = MessageManager.getMessage(language,
-                    MessageConstant.ERROR_ON_WEBSITE);
+            Object language = request.getSession(true).getAttribute("language");
+            String message = MessageManager.getMessage(language.toString(), MessageConstant.ERROR_ON_WEBSITE);
             request.setAttribute("errorMessage", message);
         }
 

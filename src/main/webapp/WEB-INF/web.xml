@@ -61,6 +61,15 @@
     </servlet-mapping>
 
     <servlet>
+        <servlet-name>Candidate Vacancy</servlet-name>
+        <jsp-file>/WEB-INF/jsp/candidateVacancy.jsp</jsp-file>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>Candidate Vacancy</servlet-name>
+        <url-pattern>/candidateVacancy</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
         <servlet-name>Employer Home</servlet-name>
         <jsp-file>/WEB-INF/jsp/employerHome.jsp</jsp-file>
     </servlet>

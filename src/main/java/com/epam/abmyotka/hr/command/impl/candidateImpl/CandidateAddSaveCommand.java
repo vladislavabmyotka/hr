@@ -6,6 +6,7 @@ import com.epam.abmyotka.hr.constant.ParameterConstant;
 import com.epam.abmyotka.hr.constant.PathConstant;
 import com.epam.abmyotka.hr.controller.Router;
 import com.epam.abmyotka.hr.entity.Candidate;
+import com.epam.abmyotka.hr.manager.MessageManager;
 import com.epam.abmyotka.hr.service.CandidateService;
 
 import javax.servlet.http.HttpServletRequest;
@@ -47,10 +48,14 @@ public class CandidateAddSaveCommand implements Command {
             Candidate candidate = new Candidate(surname, name, lastname, Integer.parseInt(age), email, address,
                     citizenship, phone, post, education, Integer.parseInt(experience), english, skill, accountId);
             if (!service.add(candidate)) {
-                request.setAttribute("errorMessage", MessageConstant.ERROR_ON_WEBSITE);
+                Object language = request.getSession(true).getAttribute("language");
+                String message = MessageManager.getMessage(language.toString(), MessageConstant.ERROR_ON_WEBSITE);
+                request.setAttribute("errorMessage", message);
             }
         } else {
-            request.setAttribute("errorMessage", MessageConstant.INCORRECT_DATA);
+            Object language = request.getSession(true).getAttribute("language");
+            String message = MessageManager.getMessage(language.toString(), MessageConstant.INCORRECT_DATA);
+            request.setAttribute("errorMessage", message);
             router.setPagePath(PathConstant.PATH_PAGE_CANDIDATE_ADD);
         }
 

@@ -54,13 +54,14 @@ public class AdminCandidateEditSaveCommand implements Command {
                 Command command = new AdminCandidateViewCommand(service);
                 command.execute(request);
             } else {
-                String language = request.getParameter(ParameterConstant.PARAM_LANGUAGE);
-                String message = MessageManager.getMessage(language,
-                        MessageConstant.ERROR_ON_WEBSITE);
+                Object language = request.getSession(true).getAttribute("language");
+                String message = MessageManager.getMessage(language.toString(), MessageConstant.ERROR_ON_WEBSITE);
                 request.setAttribute("errorMessage", message);
             }
         } else {
-            request.setAttribute("errorMessage", MessageConstant.INCORRECT_DATA);
+            Object language = request.getSession(true).getAttribute("language");
+            String message = MessageManager.getMessage(language.toString(), MessageConstant.INCORRECT_DATA);
+            request.setAttribute("errorMessage", message);
             router.setPagePath(PathConstant.PATH_PAGE_ADMIN_CANDIDATE_EDIT);
             int candidateId = 0;
             try {
@@ -74,8 +75,8 @@ public class AdminCandidateEditSaveCommand implements Command {
                 request.setAttribute("candidate", candidate);
             } else {
                 router.setPagePath(PathConstant.PATH_PAGE_ADMIN_CANDIDATE);
-                String message = MessageManager.getMessage(request.getParameter(ParameterConstant.PARAM_LANGUAGE),
-                        MessageConstant.ERROR_ON_WEBSITE);
+                language = request.getSession(true).getAttribute("language");
+                message = MessageManager.getMessage(language.toString(), MessageConstant.ERROR_ON_WEBSITE);
                 request.setAttribute("errorMessage", message);
             }
         }

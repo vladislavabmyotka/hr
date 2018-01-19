@@ -8,6 +8,7 @@ public class PathConstant {
     public static final String PATH_PAGE_CANDIDATE = "/candidateHome";
     public static final String PATH_PAGE_CANDIDATE_ADD = "/candidateAdd";
     public static final String PATH_PAGE_CANDIDATE_VIEW_EDIT = "/candidateViewEdit";
+    public static final String PATH_PAGE_CANDIDATE_VACANCY = "/candidateVacancy";
     public static final String PATH_PAGE_EMPLOYER = "/employerHome";
     public static final String PATH_PAGE_ADMIN = "/adminHome";
     public static final String PATH_PAGE_ADMIN_CANDIDATE = "/adminCandidate";

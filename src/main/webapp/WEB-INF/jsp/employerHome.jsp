@@ -31,6 +31,22 @@
                     <a class="nav-link" href="#"><fmt:message key="home" />
                         <span class="sr-only">(current)</span></a>
                 </li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="dropdown01" data-toggle="dropdown"
+                       aria-haspopup="true" aria-expanded="false"><fmt:message key="add" /></a>
+                    <div class="dropdown-menu" aria-labelledby="dropdown01">
+                        <form action="FrontController" method="post">
+                            <input type="hidden" name="command" value="employer_add_information">
+                            <button type="submit" class="btn btn-default empl-add cursor dropdown-item">
+                                <fmt:message key="employer.add.info" /></button>
+                        </form>
+                        <form action="FrontController" method="post">
+                            <input type="hidden" name="command" value="employer_add_vacancy">
+                            <button type="submit" class="btn btn-default empl-add cursor dropdown-item">
+                                <fmt:message key="employer.add.vacancy" /></button>
+                        </form>
+                    </div>
+                </li>
             </ul>
 
             <ul class="nav navbar-nav navbar-right">
@@ -97,8 +113,13 @@
 
     </main>
     <c:import url="/WEB-INF/jsp/footer.jsp"/>
+    <script src="http://code.jquery.com/jquery.min.js"></script>
     <script>
-        <%@include file='../js/bootstrapDropdown.js' %>
+        <%@include file='../js/bootstrap.min.js' %>
     </script>
+    <%--<script type="text/javascript" src=" <c:url value='/WEB-INF/js/jquery.js'/>"></script>--%>
+    <%--<script>
+        <%@include file='../js/bootstrapDropdown.js' %>
+    </script>--%>
 </body>
 </html>

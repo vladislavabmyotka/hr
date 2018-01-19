@@ -7,6 +7,7 @@ import com.epam.abmyotka.hr.constant.ParameterConstant;
 import com.epam.abmyotka.hr.constant.PathConstant;
 import com.epam.abmyotka.hr.controller.Router;
 import com.epam.abmyotka.hr.entity.Account;
+import com.epam.abmyotka.hr.manager.MessageManager;
 import com.epam.abmyotka.hr.service.AccountService;
 import com.epam.abmyotka.hr.validator.AccountValidator;
 
@@ -48,13 +49,21 @@ public class AccountEditCommand implements Command {
                         router.setRoute(Router.RouteType.REDIRECT);
                     }
                 } else {
-                    request.setAttribute("errorLoginPassMessage", MessageConstant.ERROR_ON_WEBSITE);
+                    Object language = request.getSession(true).getAttribute("language");
+                    String message = MessageManager.getMessage(language.toString(), MessageConstant.ERROR_ON_WEBSITE);
+                    request.setAttribute("errorLoginPassMessage", message);
                 }
             } else {
-                request.setAttribute("errorLoginPassMessage", MessageConstant.INCORRECT_PASSWORD_MESSAGE);
+                Object language = request.getSession(true).getAttribute("language");
+                String message = MessageManager.getMessage(language.toString(),
+                        MessageConstant.INCORRECT_PASSWORD_MESSAGE);
+                request.setAttribute("errorLoginPassMessage", message);
             }
         } else {
-            request.setAttribute("errorLoginPassMessage", MessageConstant.INCORRECT_LOGIN_PASSWORD_MESSAGE);
+            Object language = request.getSession(true).getAttribute("language");
+            String message = MessageManager.getMessage(language.toString(),
+                    MessageConstant.INCORRECT_LOGIN_PASSWORD_MESSAGE);
+            request.setAttribute("errorLoginPassMessage", message);
         }
         return router;
     }

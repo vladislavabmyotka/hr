@@ -1,14 +1,12 @@
 package com.epam.abmyotka.hr.command.impl.accountImpl;
 
 import com.epam.abmyotka.hr.command.Command;
-import com.epam.abmyotka.hr.constant.AccountAttachmentConstant;
 import com.epam.abmyotka.hr.constant.MessageConstant;
 import com.epam.abmyotka.hr.constant.PathConstant;
 import com.epam.abmyotka.hr.controller.Router;
 import com.epam.abmyotka.hr.entity.Account;
+import com.epam.abmyotka.hr.manager.MessageManager;
 import com.epam.abmyotka.hr.service.AccountService;
-import com.epam.abmyotka.hr.service.CandidateService;
-import com.epam.abmyotka.hr.service.EmployerService;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -31,7 +29,9 @@ public class AccountDeleteCommand implements Command {
             router.setRoute(Router.RouteType.REDIRECT);
             session.invalidate();
         } else {
-            request.setAttribute("errorMessage", MessageConstant.ERROR_ON_WEBSITE);
+            Object language = request.getSession(true).getAttribute("language");
+            String message = MessageManager.getMessage(language.toString(), MessageConstant.ERROR_ON_WEBSITE);
+            request.setAttribute("errorMessage", message);
         }
 
         return router;

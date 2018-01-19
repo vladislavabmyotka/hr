@@ -45,6 +45,13 @@
                             <fmt:message key="candidate.view.edit" /></button>
                     </li>
                 </form>
+                <form action="FrontController" method="post">
+                    <input type="hidden" name="command" value="candidate_vacancy_view">
+                    <li class="nav-item">
+                        <button type="submit" class="btn btn-link nav-link cursor">
+                            <fmt:message key="vacancies" /></button>
+                    </li>
+                </form>
             </ul>
 
             <ul class="nav navbar-nav navbar-right">

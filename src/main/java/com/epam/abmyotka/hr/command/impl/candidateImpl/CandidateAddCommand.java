@@ -5,6 +5,7 @@ import com.epam.abmyotka.hr.constant.MessageConstant;
 import com.epam.abmyotka.hr.constant.PathConstant;
 import com.epam.abmyotka.hr.controller.Router;
 import com.epam.abmyotka.hr.entity.Account;
+import com.epam.abmyotka.hr.manager.MessageManager;
 import com.epam.abmyotka.hr.service.AccountService;
 import com.epam.abmyotka.hr.service.CandidateService;
 
@@ -32,11 +33,16 @@ public class CandidateAddCommand implements Command {
                 session.setAttribute("candidateAccountId", accountId);
             } else {
                 router.setPagePath(PathConstant.PATH_PAGE_CANDIDATE);
-                request.setAttribute("errorMessage", MessageConstant.CANDIDATE_ALREADY_EXIST);
+                Object language = request.getSession(true).getAttribute("language");
+                String message = MessageManager.getMessage(language.toString(),
+                        MessageConstant.CANDIDATE_ALREADY_EXIST);
+                request.setAttribute("errorMessage", message);
             }
         } else {
             router.setPagePath(PathConstant.PATH_PAGE_CANDIDATE);
-            request.setAttribute("errorMessage", MessageConstant.ERROR_ON_WEBSITE);
+            Object language = request.getSession(true).getAttribute("language");
+            String message = MessageManager.getMessage(language.toString(), MessageConstant.ERROR_ON_WEBSITE);
+            request.setAttribute("errorMessage", message);
         }
 
         return router;

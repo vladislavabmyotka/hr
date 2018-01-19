@@ -13,7 +13,6 @@ import com.epam.abmyotka.hr.validator.AccountValidator;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
-import java.util.Locale;
 
 public class RegisterCommand implements Command {
     private AccountService service;
@@ -46,35 +45,19 @@ public class RegisterCommand implements Command {
                         router.setPagePath(PathConstant.PATH_PAGE_EMPLOYER);
                     }
                 } else {
-                    String message = null;
-                    Object object = request.getSession(true).getAttribute("language");
-                    if (object instanceof Locale) {
-                        message = MessageManager.getMessage(object.toString(), MessageConstant.ERROR_ON_WEBSITE);
-                    } else if (object instanceof String) {
-                        message = MessageManager.getMessage(object.toString(), MessageConstant.ERROR_ON_WEBSITE);
-                    }
+                    Object language = request.getSession(true).getAttribute("language");
+                    String message = MessageManager.getMessage(language.toString(), MessageConstant.ERROR_ON_WEBSITE);
                     request.setAttribute("errorMessage", message);
                 }
             } else {
-                String message = null;
-                Object object = request.getSession(true).getAttribute("language");
-                if (object instanceof Locale) {
-                    message = MessageManager.getMessage(object.toString(), MessageConstant.USED_LOGIN_MESSAGE);
-                } else if (object instanceof String) {
-                    message = MessageManager.getMessage(object.toString(), MessageConstant.USED_LOGIN_MESSAGE);
-                }
+                Object language = request.getSession(true).getAttribute("language");
+                String message = MessageManager.getMessage(language.toString(), MessageConstant.USED_LOGIN_MESSAGE);
                 request.setAttribute("errorMessage", message);
             }
         } else {
-            String message = null;
-            Object object = request.getSession(true).getAttribute("language");
-            if (object instanceof Locale) {
-                message = MessageManager.getMessage(object.toString(),
-                        MessageConstant.INCORRECT_LOGIN_PASSWORD_MESSAGE);
-            } else if (object instanceof String) {
-                message = MessageManager.getMessage(object.toString(),
-                        MessageConstant.INCORRECT_LOGIN_PASSWORD_MESSAGE);
-            }
+            Object language = request.getSession(true).getAttribute("language");
+            String message = MessageManager.getMessage(language.toString(),
+                    MessageConstant.INCORRECT_LOGIN_PASSWORD_MESSAGE);
             request.setAttribute("errorMessage", message);
         }
 

@@ -4,10 +4,7 @@ import com.epam.abmyotka.hr.command.impl.*;
 import com.epam.abmyotka.hr.command.impl.accountImpl.AccountDeleteCommand;
 import com.epam.abmyotka.hr.command.impl.accountImpl.AccountEditCommand;
 import com.epam.abmyotka.hr.command.impl.adminImpl.*;
-import com.epam.abmyotka.hr.command.impl.candidateImpl.CandidateAddCommand;
-import com.epam.abmyotka.hr.command.impl.candidateImpl.CandidateAddSaveCommand;
-import com.epam.abmyotka.hr.command.impl.candidateImpl.CandidateViewEditCommand;
-import com.epam.abmyotka.hr.command.impl.candidateImpl.CandidateViewEditSaveCommand;
+import com.epam.abmyotka.hr.command.impl.candidateImpl.*;
 import com.epam.abmyotka.hr.service.*;
 
 public enum CommandType {
@@ -39,7 +36,10 @@ public enum CommandType {
     CANDIDATE_ADD(new CandidateAddCommand(new AccountService(), new CandidateService())),
     CANDIDATE_ADD_SAVE(new CandidateAddSaveCommand(new CandidateService())),
     CANDIDATE_VIEW_EDIT(new CandidateViewEditCommand(new AccountService(), new CandidateService())),
-    CANDIDATE_VIEW_EDIT_SAVE(new CandidateViewEditSaveCommand(new CandidateService()));
+    CANDIDATE_VIEW_EDIT_SAVE(new CandidateViewEditSaveCommand(new CandidateService())),
+    CANDIDATE_VACANCY_VIEW(new CandidateVacancyViewCommand(new VacancyService(), new EmployerService())),
+    CANDIDATE_VACANCY_APPLY(new CandidateVacancyApplyCommand(new AccountService(), new CandidateService(),
+            new VacancyService(), new EmployerService(), new InterviewService()));
 
     private Command command;
 

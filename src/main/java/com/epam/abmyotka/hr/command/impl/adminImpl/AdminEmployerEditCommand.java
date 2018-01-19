@@ -41,8 +41,8 @@ public class AdminEmployerEditCommand implements Command {
             request.setAttribute("employer", employer);
         } else {
             router.setPagePath(PathConstant.PATH_PAGE_ADMIN_EMPLOYER);
-            String message = MessageManager.getMessage(request.getParameter(ParameterConstant.PARAM_LANGUAGE),
-                    MessageConstant.ERROR_ON_WEBSITE);
+            Object language = request.getSession(true).getAttribute("language");
+            String message = MessageManager.getMessage(language.toString(), MessageConstant.ERROR_ON_WEBSITE);
             request.setAttribute("errorMessage", message);
         }
 

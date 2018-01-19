@@ -14,8 +14,6 @@ import com.epam.abmyotka.hr.validator.AccountValidator;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
-import java.util.Locale;
-
 import static com.epam.abmyotka.hr.constant.AccountAttachmentConstant.ADMIN_ATTACHMENT;
 import static com.epam.abmyotka.hr.constant.AccountAttachmentConstant.CANDIDATE_ATTACHMENT;
 import static com.epam.abmyotka.hr.constant.AccountAttachmentConstant.EMPLOYER_ATTACHMENT;
@@ -35,7 +33,7 @@ public class AuthorizationCommand implements Command {
 
         HttpSession session = request.getSession(true);
 
-        String message = null;
+        String message;
 
         if(AccountValidator.checkLogin(login) && AccountValidator.checkPassword(password)) {
             Account user = new Account(login, password);
@@ -59,27 +57,16 @@ public class AuthorizationCommand implements Command {
                         router.setPagePath(PathConstant.PATH_PAGE_EMPLOYER);
                     }
                 } else {
-                    Object object = request.getSession(true).getAttribute("language");
-                    if (object instanceof Locale) {
-                        message = MessageManager.getMessage(object.toString(),
-                                MessageConstant.INCORRECT_LOGIN_PASSWORD_MESSAGE);
-                    } else if (object instanceof String) {
-                        message = MessageManager.getMessage(object.toString(),
-                                MessageConstant.INCORRECT_LOGIN_PASSWORD_MESSAGE);
-                    }
+                    Object language = request.getSession(true).getAttribute("language");
+                    message = MessageManager.getMessage(language.toString(),
+                            MessageConstant.INCORRECT_LOGIN_PASSWORD_MESSAGE);
                     request.setAttribute("errorMessage", message);
                     router.setPagePath(PathConstant.PATH_PAGE_MAIN);
                 }
             }
         } else {
-            Object object = request.getSession(true).getAttribute("language");
-            if (object instanceof Locale) {
-                message = MessageManager.getMessage(object.toString(),
-                        MessageConstant.INCORRECT_LOGIN_PASSWORD_MESSAGE);
-            } else if (object instanceof String) {
-                message = MessageManager.getMessage(object.toString(),
-                        MessageConstant.INCORRECT_LOGIN_PASSWORD_MESSAGE);
-            }
+            Object language = request.getSession(true).getAttribute("language");
+            message = MessageManager.getMessage(language.toString(), MessageConstant.INCORRECT_LOGIN_PASSWORD_MESSAGE);
             request.setAttribute("errorMessage", message);
             router.setPagePath(PathConstant.PATH_PAGE_MAIN);
         }

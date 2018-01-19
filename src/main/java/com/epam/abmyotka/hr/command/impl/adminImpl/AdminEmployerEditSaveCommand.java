@@ -46,12 +46,14 @@ public class AdminEmployerEditSaveCommand implements Command {
                 Command command = new AdminEmployerViewCommand(service);
                 command.execute(request);
             } else {
-                String message = MessageManager.getMessage(request.getParameter(ParameterConstant.PARAM_LANGUAGE),
-                        MessageConstant.ERROR_ON_WEBSITE);
+                Object language = request.getSession(true).getAttribute("language");
+                String message = MessageManager.getMessage(language.toString(), MessageConstant.ERROR_ON_WEBSITE);
                 request.setAttribute("errorMessage", message);
             }
         } else {
-            request.setAttribute("errorMessage", MessageConstant.INCORRECT_DATA);
+            Object language = request.getSession(true).getAttribute("language");
+            String message = MessageManager.getMessage(language.toString(), MessageConstant.INCORRECT_DATA);
+            request.setAttribute("errorMessage", message);
             router.setPagePath(PathConstant.PATH_PAGE_ADMIN_EMPLOYER_EDIT);
             int employerId = 0;
             try {
@@ -65,9 +67,8 @@ public class AdminEmployerEditSaveCommand implements Command {
                 request.setAttribute("employer", employer);
             } else {
                 router.setPagePath(PathConstant.PATH_PAGE_ADMIN_EMPLOYER);
-                String language = request.getParameter(ParameterConstant.PARAM_LANGUAGE);
-                String message = MessageManager.getMessage(language,
-                        MessageConstant.ERROR_ON_WEBSITE);
+                language = request.getSession(true).getAttribute("language");
+                message = MessageManager.getMessage(language.toString(), MessageConstant.ERROR_ON_WEBSITE);
                 request.setAttribute("errorMessage", message);
             }
         }

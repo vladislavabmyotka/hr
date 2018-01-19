@@ -15,6 +15,7 @@ public class ParameterConstant {
     public static final String PARAM_ADMIN_VACANCY_EDIT = "adminVacancyEdit";
     public static final String PARAM_ADMIN_INTERVIEW_DELETE = "adminInterviewDelete";
     public static final String PARAM_ADMIN_INTERVIEW_EDIT = "adminInterviewEdit";
+    public static final String PARAM_CANDIDATE_VACANCY_APPLY = "candidateVacancyApply";
     public static final String PARAM_EMPLOYER_ID = "employerId";
     public static final String PARAM_CANDIDATE_ID = "candidateId";
     public static final String PARAM_VACANCY_ID = "vacancyId";
