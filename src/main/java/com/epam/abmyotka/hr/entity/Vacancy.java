@@ -18,6 +18,19 @@ public class Vacancy extends Entity {
     public Vacancy() {
     }
 
+    public Vacancy(String post, String company, BigDecimal salary, String location, int experience, String english,
+                   String text, String conditionVacancy, int employerId) {
+        this.post = post;
+        this.company = company;
+        this.salary = salary;
+        this.location = location;
+        this.experience = experience;
+        this.english = english;
+        this.text = text;
+        this.conditionVacancy = conditionVacancy;
+        this.employerId = employerId;
+    }
+
     public Vacancy(int vacancyId, String post, String company, BigDecimal salary, String location, int experience,
                    String english, String text, String conditionVacancy) {
         this.vacancyId = vacancyId;

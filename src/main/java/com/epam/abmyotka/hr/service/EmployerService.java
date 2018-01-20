@@ -27,6 +27,15 @@ public class EmployerService {
         return employer;
     }
 
+    public Employer findByAccountId(int accountId) {
+        DBPool pool = DBPool.getInstance();
+        Connection connection = pool.getConnection();
+        EmployerDAO employerDAO = new EmployerDAO(connection);
+        Employer employer = employerDAO.findByAccountId(accountId);
+        pool.putConnection(connection);
+        return employer;
+    }
+
     public boolean delete(int employerId) {
         DBPool pool = DBPool.getInstance();
         Connection connection = pool.getConnection();
@@ -43,5 +52,23 @@ public class EmployerService {
         int countRowsAffected = employerDAO.update(employer);
         pool.putConnection(connection);
         return countRowsAffected != 0;
+    }
+
+    public boolean add(Employer employer) {
+        DBPool pool = DBPool.getInstance();
+        Connection connection = pool.getConnection();
+        EmployerDAO employerDAO = new EmployerDAO(connection);
+        int countRowsAffected = employerDAO.add(employer);
+        pool.putConnection(connection);
+        return countRowsAffected != 0;
+    }
+
+    public boolean isExistEmployerByAccountId(int accountId) {
+        DBPool pool = DBPool.getInstance();
+        Connection connection = pool.getConnection();
+        EmployerDAO employerDAO = new EmployerDAO(connection);
+        Employer employer = employerDAO.findByAccountId(accountId);
+        pool.putConnection(connection);
+        return employer != null;
     }
 }

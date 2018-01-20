@@ -44,19 +44,30 @@
             </ul>
 
             <ul class="nav navbar-nav navbar-right">
-                <form class="margin" action="FrontController" method="post">
-                    <input type="hidden" name="command" value="candidate_view_edit">
-                    <select class="form-control" title="language" id="language" name="language" onchange="submit()">
-                        <option value="ru" ${language == 'ru' ? 'selected' : ''}>Русский</option>
-                        <option value="en" ${language == 'en' ? 'selected' : ''}>English</option>
-                    </select>
-                </form>
-
-                <form class="form-signin" action="FrontController" method="post">
-                    <input type="hidden" name="command" value="">
-                    <button class="btn btn-outline-success my-2 my-sm-0" type="submit"><fmt:message key="exit" />
-                    </button>
-                </form>
+                <li class="dropdown personal-account">
+                    <a href="#" data-toggle="dropdown" class="dropdown-toggle">
+                        <fmt:message key="general.personal.cabinet" /><b class="caret"></b></a>
+                    <ul id="menu1" class="dropdown-menu">
+                        <li><a href="editAccount"><fmt:message key="general.personal.cabinet.edit" /></a></li>
+                        <li><a href="deleteAccount"><fmt:message key="general.personal.cabinet.delete" /></a></li>
+                    </ul>
+                </li>
+                <li>
+                    <form class="margin" action="FrontController" method="post">
+                        <input type="hidden" name="command" value="candidate_view_edit">
+                        <select class="form-control" title="language" id="language" name="language" onchange="submit()">
+                            <option value="ru" ${language == 'ru' ? 'selected' : ''}>Русский</option>
+                            <option value="en" ${language == 'en' ? 'selected' : ''}>English</option>
+                        </select>
+                    </form>
+                </li>
+                <li>
+                    <form class="form-signin" action="FrontController" method="post">
+                        <input type="hidden" name="command" value="">
+                        <button class="btn btn-outline-success my-2 my-sm-0" type="submit"><fmt:message key="exit" />
+                        </button>
+                    </form>
+                </li>
             </ul>
         </div>
     </nav>

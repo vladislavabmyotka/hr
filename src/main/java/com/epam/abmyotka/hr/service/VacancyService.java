@@ -27,6 +27,15 @@ public class VacancyService {
         return candidate;
     }
 
+    public List<Vacancy> findAllByEmployerId(int employerId) {
+        DBPool pool = DBPool.getInstance();
+        Connection connection = pool.getConnection();
+        VacancyDAO vacancyDAO = new VacancyDAO(connection);
+        List<Vacancy> vacancies = vacancyDAO.findAllByEmployerId(employerId);
+        pool.putConnection(connection);
+        return vacancies;
+    }
+
     public boolean delete(int vacancyId) {
         DBPool pool = DBPool.getInstance();
         Connection connection = pool.getConnection();
@@ -41,6 +50,15 @@ public class VacancyService {
         Connection connection = pool.getConnection();
         VacancyDAO vacancyDAO = new VacancyDAO(connection);
         int countRowsAffected = vacancyDAO.update(vacancy);
+        pool.putConnection(connection);
+        return countRowsAffected != 0;
+    }
+
+    public boolean add(Vacancy vacancy) {
+        DBPool pool = DBPool.getInstance();
+        Connection connection = pool.getConnection();
+        VacancyDAO vacancyDAO = new VacancyDAO(connection);
+        int countRowsAffected = vacancyDAO.add(vacancy);
         pool.putConnection(connection);
         return countRowsAffected != 0;
     }

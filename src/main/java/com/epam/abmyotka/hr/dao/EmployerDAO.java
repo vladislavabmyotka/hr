@@ -163,7 +163,25 @@ public class EmployerDAO extends AbstractDAO<Employer> {
     }
 
     @Override
-    public int add(Employer entity) {
-        return 0;
+    public int add(Employer employer) {
+        int countRowsAffected = 0;
+        PreparedStatement statement = null;
+        try {
+            statement = this.getPreparedStatement(SQLConstant.SQL_INSERT_EMPLOYER);
+            statement.setString(1, employer.getSurname());
+            statement.setString(2, employer.getName());
+            statement.setString(3, employer.getLastname());
+            statement.setString(4,employer.getAddress());
+            statement.setString(5, employer.getPhone());
+            statement.setString(6, employer.getEmail());
+            statement.setString(7, employer.getCompany());
+            statement.setInt(8, employer.getAccountId());
+            countRowsAffected = statement.executeUpdate();
+        } catch (SQLException e) {
+            LOGGER.log(Level.ERROR, "Error while trying add employer in database! Detail: " + e.getMessage());
+        } finally {
+            this.closeStatement(statement);
+        }
+        return countRowsAffected;
     }
 }

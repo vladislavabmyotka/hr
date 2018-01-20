@@ -32,12 +32,17 @@ public class SQLConstant {
     public static final String SQL_DELETE_EMPLOYER_BY_EMPLOYER_ID = "DELETE FROM employer WHERE idEmployer = ?";
     public static final String SQL_UPDATE_EMPLOYER = "UPDATE employer SET surname = ?, name = ?, lastname = ?, " +
             "address = ?, phone = ?, email = ?, company = ? WHERE idEmployer = ?";
+    public static final String SQL_INSERT_EMPLOYER = "INSERT INTO employer (surname, name, lastname, address, phone, " +
+            "email, company, e_idAccount) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
 
     public static final String SQL_SELECT_ALL_VACANCY = "SELECT * FROM vacancy";
     public static final String SQL_SELECT_VACANCY_BY_VACANCY_ID = "SELECT * FROM vacancy WHERE idvacancy = ?";
+    public static final String SQL_SELECT_VACANCY_BY_EMPLOYER_ID = "SELECT * FROM vacancy WHERE v_idEmployer = ?";
     public static final String SQL_DELETE_VACANCY_BY_VACANCY_ID = "DELETE FROM vacancy WHERE idvacancy = ?";
     public static final String SQL_UPDATE_VACANCY = "UPDATE vacancy SET post = ?, company = ?, salary = ?, " +
             "location = ?, experience = ?, english = ?, text = ?, conditionVacancy = ? WHERE idvacancy = ?";
+    public static final String SQL_INSERT_VACANCY = "INSERT INTO vacancy (post, company, salary, location, " +
+            "experience, english, text, conditionVacancy, v_idEmployer) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
 
     public static final String SQL_SELECT_ALL_INTERVIEW = "SELECT * FROM interview";
     public static final String SQL_SELECT_INTERVIEW_BY_INTERVIEW_ID = "SELECT * FROM interview WHERE idInterview = ?";

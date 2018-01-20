@@ -18,6 +18,7 @@ import static com.epam.abmyotka.hr.validator.CandidateEmployerVacancyValidator.*
 
 public class CandidateViewEditSaveCommand implements Command {
     private final static Logger LOGGER = LogManager.getLogger(CandidateViewEditSaveCommand.class);
+
     private CandidateService service;
 
     public CandidateViewEditSaveCommand(CandidateService service) {

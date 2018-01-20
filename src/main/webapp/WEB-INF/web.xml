@@ -79,6 +79,42 @@
     </servlet-mapping>
 
     <servlet>
+        <servlet-name>Employer Add Information</servlet-name>
+        <jsp-file>/WEB-INF/jsp/employerAddInformation.jsp</jsp-file>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>Employer Add Information</servlet-name>
+        <url-pattern>/employerAddInformation</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>Employer Add Vacancy</servlet-name>
+        <jsp-file>/WEB-INF/jsp/employerAddVacancy.jsp</jsp-file>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>Employer Add Vacancy</servlet-name>
+        <url-pattern>/employerAddVacancy</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>Employer View Edit Information</servlet-name>
+        <jsp-file>/WEB-INF/jsp/employerViewEditInformation.jsp</jsp-file>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>Employer View Edit Information</servlet-name>
+        <url-pattern>/employerViewEditInformation</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>Employer View Vacancy</servlet-name>
+        <jsp-file>/WEB-INF/jsp/employerViewVacancy.jsp</jsp-file>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>Employer View Vacancy</servlet-name>
+        <url-pattern>/employerViewVacancy</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
         <servlet-name>Admin</servlet-name>
         <jsp-file>/WEB-INF/jsp/adminHome.jsp</jsp-file>
     </servlet>

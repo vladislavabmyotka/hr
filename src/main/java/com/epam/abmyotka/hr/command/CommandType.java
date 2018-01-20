@@ -5,6 +5,7 @@ import com.epam.abmyotka.hr.command.impl.accountImpl.AccountDeleteCommand;
 import com.epam.abmyotka.hr.command.impl.accountImpl.AccountEditCommand;
 import com.epam.abmyotka.hr.command.impl.adminImpl.*;
 import com.epam.abmyotka.hr.command.impl.candidateImpl.*;
+import com.epam.abmyotka.hr.command.impl.employerImpl.*;
 import com.epam.abmyotka.hr.service.*;
 
 public enum CommandType {
@@ -39,7 +40,18 @@ public enum CommandType {
     CANDIDATE_VIEW_EDIT_SAVE(new CandidateViewEditSaveCommand(new CandidateService())),
     CANDIDATE_VACANCY_VIEW(new CandidateVacancyViewCommand(new VacancyService(), new EmployerService())),
     CANDIDATE_VACANCY_APPLY(new CandidateVacancyApplyCommand(new AccountService(), new CandidateService(),
-            new VacancyService(), new EmployerService(), new InterviewService()));
+            new VacancyService(), new EmployerService(), new InterviewService())),
+    EMPLOYER_ADD_INFORMATION(new EmployerAddInformationCommand(new AccountService(), new EmployerService())),
+    EMPLOYER_ADD_INFORMATION_SAVE(new EmployerAddInformationSaveCommand(new EmployerService())),
+    EMPLOYER_ADD_VACANCY(new EmployerAddVacancyCommand(new AccountService(), new EmployerService(),
+            new VacancyService())),
+    EMPLOYER_ADD_VACANCY_SAVE(new EmployerAddVacancySaveCommand(new EmployerService(), new VacancyService())),
+    EMPLOYER_VIEW_EDIT_INFORMATION(new EmployerViewEditInformationCommand(new AccountService(), new EmployerService())),
+    EMPLOYER_VIEW_EDIT_INFORMATION_SAVE(new EmployerViewEditInformationSaveCommand(new EmployerService())),
+    EMPLOYER_VIEW_VACANCY(new EmployerViewVacancyCommand(new AccountService(), new EmployerService(),
+            new VacancyService())),
+    EMPLOYER_VACANCY_DELETE(new EmployerVacancyDeleteCommand(new AccountService(), new EmployerService(),
+            new VacancyService()));
 
     private Command command;
 

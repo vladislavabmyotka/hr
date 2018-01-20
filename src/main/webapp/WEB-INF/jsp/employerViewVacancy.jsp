@@ -10,7 +10,7 @@
 <html lang="${language}">
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-    <title><fmt:message key="vacancies" /></title>
+    <title><fmt:message key="employer.view.edit.vacancy" /></title>
     <style>
         <%@include file='../css/bootstrap.min.css' %>
         <%@include file='../css/main.css' %>
@@ -27,25 +27,43 @@
         <div class="collapse navbar-collapse" id="navbarsExampleDefault">
 
             <ul class="navbar-nav mr-auto">
-                <li class="nav-item active">
-                    <a class="nav-link" href="#"><fmt:message key="vacancies" />
-                        <span class="sr-only">(current)</span></a>
-                </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="candidateHome"><fmt:message key="home" /></a>
+                    <a class="nav-link" href="employerHome"><fmt:message key="home" /></a>
+                </li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="dropdown01" data-toggle="dropdown"
+                       aria-haspopup="true" aria-expanded="false"><fmt:message key="add" /></a>
+                    <div class="dropdown-menu" aria-labelledby="dropdown01">
+                        <form action="FrontController" method="post">
+                            <input type="hidden" name="command" value="employer_add_information">
+                            <button type="submit" class="btn btn-default empl-add cursor dropdown-item">
+                                <fmt:message key="employer.add.info" /></button>
+                        </form>
+                        <form action="FrontController" method="post">
+                            <input type="hidden" name="command" value="employer_add_vacancy">
+                            <button type="submit" class="btn btn-default empl-add cursor dropdown-item">
+                                <fmt:message key="employer.add.vacancy" /></button>
+                        </form>
+                    </div>
+                </li>
+                <li class="nav-item active dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="dropdown02" data-toggle="dropdown"
+                       aria-haspopup="true" aria-expanded="false"><fmt:message key="view.edit" /></a>
+                    <div class="dropdown-menu" aria-labelledby="dropdown02">
+                        <form action="FrontController" method="post">
+                            <input type="hidden" name="command" value="employer_view_edit_information">
+                            <button type="submit" class="btn btn-default empl-add cursor dropdown-item">
+                                <fmt:message key="employer.view.edit.info" /></button>
+                        </form>
+                        <a class="dropdown-item btn btn-default empl-add cursor" href="#">
+                            <fmt:message key="employer.view.edit.vacancy" /><span class="sr-only">(current)</span></a>
+                    </div>
                 </li>
                 <form action="FrontController" method="post">
-                    <input type="hidden" name="command" value="candidate_add">
+                    <input type="hidden" name="command" value="employer_interview">
                     <li class="nav-item">
-                        <button type="submit" class="btn btn-link nav-link cursor"><fmt:message key="candidate.add" />
+                        <button type="submit" class="btn btn-link nav-link cursor"><fmt:message key="interview" />
                         </button>
-                    </li>
-                </form>
-                <form action="FrontController" method="post">
-                    <input type="hidden" name="command" value="candidate_view_edit">
-                    <li class="nav-item">
-                        <button type="submit" class="btn btn-link nav-link cursor">
-                            <fmt:message key="candidate.view.edit" /></button>
                     </li>
                 </form>
             </ul>
@@ -61,7 +79,7 @@
                 </li>
                 <li>
                     <form class="margin" action="FrontController" method="post">
-                        <input type="hidden" name="command" value="candidate_vacancy_view">
+                        <input type="hidden" name="command" value="employer_view_vacancy">
                         <select class="form-control" title="language" id="language" name="language" onchange="submit()">
                             <option value="ru" ${language == 'ru' ? 'selected' : ''}>Русский</option>
                             <option value="en" ${language == 'en' ? 'selected' : ''}>English</option>
@@ -81,8 +99,7 @@
     <br/><br/>
     <div class="container">
         <h6 class="form-signin-heading error"> ${errorMessage} </h6> <br/>
-        <h6 class="form-signin-heading"> ${notificationMessage} </h6> <br/>
-        <table class="table table-bordered table-hover table-sm table-mrgn">
+        <table class="table table-bordered table-hover table-mrgn">
             <thead class="thead-default">
             <tr>
                 <th>#</th>
@@ -94,7 +111,6 @@
                 <th><fmt:message key="english" /></th>
                 <th><fmt:message key="text" /></th>
                 <th><fmt:message key="condition" /></th>
-                <th><fmt:message key="info.employer" /></th>
                 <th><fmt:message key="action" /></th>
             </tr>
             </thead>
@@ -110,12 +126,19 @@
                     <td><c:out value="${vacancy.english}"/></td>
                     <td><c:out value="${vacancy.text}"/></td>
                     <td><c:out value="${vacancy.conditionVacancy}"/></td>
-                    <td><c:out value="${vacancy.employerInfo}"/></td>
-                    <td><form action="FrontController" method="post">
-                        <input type="hidden" name="command" value="candidate_vacancy_apply">
-                        <button name="candidateVacancyApply" class="btn btn-link" type="submit"
-                                value="${vacancy.vacancyId}"><fmt:message key="vacancy.apply" />
-                        </button></form>
+                    <td>
+                        <form action="FrontController" method="post">
+                            <input type="hidden" name="command" value="employer_vacancy_delete">
+                            <button name="employerVacancyDelete" class="btn btn-link" type="submit"
+                                    value="${vacancy.vacancyId}"><fmt:message key="delete.delete" />
+                            </button>
+                        </form>
+                        <form action="FrontController" method="post">
+                            <input type="hidden" name="command" value="employer_vacancy_edit">
+                            <button name="employerVacancyEdit" class="btn btn-link" type="submit"
+                                    value="${vacancy.vacancyId}"><fmt:message key="edit" />
+                            </button>
+                        </form>
                     </td>
                 </tr>
             </c:forEach>
@@ -123,5 +146,9 @@
         </table>
     </div>
     <c:import url="/WEB-INF/jsp/footer.jsp"/>
+    <script src="http://code.jquery.com/jquery.min.js"></script>
+    <script>
+        <%@include file='../js/bootstrap.min.js' %>
+    </script>
 </body>
 </html>

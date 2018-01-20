@@ -87,7 +87,8 @@
         <!-- Main jumbotron for a primary marketing message or call to action -->
         <div class="jumbotron">
             <div class="container">
-                <h1 class="display-3">Hello, ${pageContext.session.getAttribute("role").login}!</h1>
+                <h1 class="display-3"><fmt:message key="hello" /> ${pageContext.session.getAttribute("role").login}!
+                </h1>
                 <p><fmt:message key="home.main.title" /></p>
             </div>
         </div>

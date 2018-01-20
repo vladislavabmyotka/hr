@@ -60,12 +60,32 @@ public class VacancyDAO extends AbstractDAO<Vacancy> {
                 vacancy = createVacancyByResultSet(resultSet);
             }
         } catch (SQLException e) {
-            LOGGER.log(Level.ERROR, "Error while trying find candidate by idInterview in database! Detail: " +
+            LOGGER.log(Level.ERROR, "Error while trying find vacancy by idvacancy in database! Detail: " +
                     e.getMessage());
         } finally {
             this.closeStatement(statement);
         }
         return vacancy;
+    }
+
+    public List<Vacancy> findAllByEmployerId(int employerId) {
+        List<Vacancy> vacancies = new ArrayList<>();
+        PreparedStatement statement = null;
+        try {
+            statement = this.getPreparedStatement(SQLConstant.SQL_SELECT_VACANCY_BY_EMPLOYER_ID);
+            statement.setInt(1, employerId);
+            ResultSet resultSet = statement.executeQuery();
+            while(resultSet.next()) {
+                Vacancy vacancy = createVacancyByResultSet(resultSet);
+                vacancies.add(vacancy);
+            }
+        } catch (SQLException e) {
+            LOGGER.log(Level.ERROR, "Error while trying find vacancy by v_idEmployer in database! Detail: " +
+                    e.getMessage());
+        } finally {
+            this.closeStatement(statement);
+        }
+        return vacancies;
     }
 
     private Vacancy createVacancyByResultSet(ResultSet resultSet) throws SQLException {
@@ -130,7 +150,26 @@ public class VacancyDAO extends AbstractDAO<Vacancy> {
     }
 
     @Override
-    public int add(Vacancy entity) {
-        return 0;
+    public int add(Vacancy vacancy) {
+        int countRowsAffected = 0;
+        PreparedStatement statement = null;
+        try {
+            statement = this.getPreparedStatement(SQLConstant.SQL_INSERT_VACANCY);
+            statement.setString(1, vacancy.getPost());
+            statement.setString(2, vacancy.getCompany());
+            statement.setBigDecimal(3, vacancy.getSalary());
+            statement.setString(4,vacancy.getLocation());
+            statement.setInt(5, vacancy.getExperience());
+            statement.setString(6, vacancy.getEnglish());
+            statement.setString(7, vacancy.getText());
+            statement.setString(8, vacancy.getConditionVacancy());
+            statement.setInt(9, vacancy.getEmployerId());
+            countRowsAffected = statement.executeUpdate();
+        } catch (SQLException e) {
+            LOGGER.log(Level.ERROR, "Error while trying add vacancy in database! Detail: " + e.getMessage());
+        } finally {
+            this.closeStatement(statement);
+        }
+        return countRowsAffected;
     }
 }

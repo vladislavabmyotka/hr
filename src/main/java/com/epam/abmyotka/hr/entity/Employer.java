@@ -14,6 +14,18 @@ public class Employer extends Entity {
     public Employer() {
     }
 
+    public Employer(String surname, String name, String lastname, String address, String phone, String email,
+                    String company, int accountId) {
+        this.surname = surname;
+        this.name = name;
+        this.lastname = lastname;
+        this.address = address;
+        this.phone = phone;
+        this.email = email;
+        this.company = company;
+        this.accountId = accountId;
+    }
+
     public Employer(int employerId, String surname, String name, String lastname, String address, String phone,
                     String email, String company) {
         this.employerId = employerId;

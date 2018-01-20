@@ -10,7 +10,7 @@
 <html lang="${language}">
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-    <title><fmt:message key="employer.home" /></title>
+    <title><fmt:message key="employer.add.info.title" /></title>
     <style>
         <%@include file='../css/bootstrap.min.css' %>
         <%@include file='../css/main.css' %>
@@ -27,19 +27,15 @@
         <div class="collapse navbar-collapse" id="navbarsExampleDefault">
 
             <ul class="navbar-nav mr-auto">
-                <li class="nav-item active">
-                    <a class="nav-link" href="#"><fmt:message key="home" />
-                        <span class="sr-only">(current)</span></a>
+                <li class="nav-item">
+                    <a class="nav-link" href="employerHome"><fmt:message key="home" /></a>
                 </li>
-                <li class="nav-item dropdown">
+                <li class="nav-item active dropdown">
                     <a class="nav-link dropdown-toggle" href="#" id="dropdown01" data-toggle="dropdown"
                        aria-haspopup="true" aria-expanded="false"><fmt:message key="add" /></a>
                     <div class="dropdown-menu" aria-labelledby="dropdown01">
-                        <form action="FrontController" method="post">
-                            <input type="hidden" name="command" value="employer_add_information">
-                            <button type="submit" class="btn btn-default empl-add cursor dropdown-item">
-                                <fmt:message key="employer.add.info" /></button>
-                        </form>
+                        <a class="dropdown-item btn btn-default empl-add cursor" href="#">
+                            <fmt:message key="employer.add.info" /><span class="sr-only">(current)</span></a>
                         <form action="FrontController" method="post">
                             <input type="hidden" name="command" value="employer_add_vacancy">
                             <button type="submit" class="btn btn-default empl-add cursor dropdown-item">
@@ -85,9 +81,9 @@
                     <form class="margin">
                         <select class="form-control" title="language" id="language" name="language"
                                 onchange="location=this.options[this.selectedIndex].value">
-                            <option value="http://localhost:8080/hr/employerHome?language=ru"
+                            <option value="http://localhost:8080/hr/employerAddInformation?language=ru"
                             ${language == 'ru' ? 'selected' : ''}>Русский</option>
-                            <option value="http://localhost:8080/hr/employerHome?language=en"
+                            <option value="http://localhost:8080/hr/employerAddInformation?language=en"
                             ${language == 'en' ? 'selected' : ''}>English</option>
                         </select>
                     </form>
@@ -102,41 +98,81 @@
             </ul>
         </div>
     </nav>
-
-    <main role="main">
-
-        <!-- Main jumbotron for a primary marketing message or call to action -->
-        <div class="jumbotron">
-            <div class="container">
-                <h1 class="display-3"><fmt:message key="hello" /> ${pageContext.session.getAttribute("role").login}!
-                </h1>
-                <p><fmt:message key="home.main.title" /></p>
-                <h6 class="form-signin-heading error">${errorMessage}</h6>
-            </div>
-        </div>
-
-        <div class="container">
-            <!-- Example row of columns -->
-            <div class="row">
-                <div class="col-md-4">
-                    <h2><fmt:message key="employer.home.title1" /></h2>
-                    <p><fmt:message key="employer.home.title1.main" /></p>
-                </div>
-                <div class="col-md-4">
-                    <h2><fmt:message key="employer.home.title2" /></h2>
-                    <p><fmt:message key="employer.home.title2.main" /></p>
-                </div>
-                <div class="col-md-4">
-                    <h2><fmt:message key="employer.home.title3" /></h2>
-                    <p><fmt:message key="employer.home.title3.main" /></p>
+    <br/><br/>
+    <div class="container">
+        <form class="form-horizontal" action="FrontController" method="post">
+            <input type="hidden" name="command" value="employer_add_information_save">
+            <div class="form-group">
+                <label class="control-label col-sm-2" for="surname"><fmt:message key="surname" />:
+                </label>
+                <div class="col-sm-10">
+                    <input name="surname" type="text" class="form-control" id="surname" required
+                           pattern="[A-ZА-Я][a-zа-яёA-ZА-ЯЁ-]{1,40}" placeholder="<fmt:message key="enter.surname" />">
                 </div>
             </div>
+            <div class="form-group">
+                <label class="control-label col-sm-2" for="name"><fmt:message key="name" />:
+                </label>
+                <div class="col-sm-10">
+                    <input name="name" type="text" class="form-control" id="name" required
+                           pattern="[A-ZА-Я][a-zа-яёA-ZА-ЯЁ-]{1,40}" placeholder="<fmt:message key="enter.name" />">
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="control-label col-sm-2" for="lastname"><fmt:message key="lastname" />:
+                </label>
+                <div class="col-sm-10">
+                    <input name="lastname" type="text" class="form-control" id="lastname"
+                           placeholder="<fmt:message key="enter.lastname" />">
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="control-label col-sm-2" for="address"><fmt:message key="address" />:
+                </label>
+                <div class="col-sm-10">
+                    <input name="address" type="text" class="form-control" id="address" required
+                           placeholder="<fmt:message key="enter.address" />">
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="control-label col-sm-2" for="phone"><fmt:message key="phone" />:
+                </label>
+                <div class="col-sm-10">
+                    <input name="phone" type="tel" class="form-control" id="phone" required
+                           pattern="^[+]?((8|\+7)[\- ]?)?(\(?\d{3}\)?[\- ]?)?[\d\- ]{7,12}$"
+                           placeholder="<fmt:message key="enter.phone" />">
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="control-label col-sm-2" for="email"><fmt:message key="email" />:
+                </label>
+                <div class="col-sm-10">
+                    <input name="email" type="email" class="form-control" id="email" required
+                           pattern="^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$"
+                           placeholder="<fmt:message key="enter.email" />">
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="control-label col-sm-2" for="company"><fmt:message key="company" />:
+                </label>
+                <div class="col-sm-10">
+                    <input name="company" type="text" class="form-control" id="company"
+                           placeholder="<fmt:message key="enter.company" />">
+                </div>
+            </div>
 
-            <hr>
+            <br/>
+            <h6 class="form-signin-heading error"> ${errorMessage} </h6>
+            <br/>
 
-        </div>
-
-    </main>
+            <button class="btn btn-lg btn-primary btn-block" type="submit">
+                <fmt:message key="save"/></button>
+            <button class="btn btn-lg btn-primary btn-block" type="reset">
+                <fmt:message key="reset" /></button>
+            <a href="employerHome"><button type="button" class="btn btn-lg btn-primary btn-block cancel-mrgn">
+                <fmt:message key="delete.cancel" /></button></a>
+        </form>
+    </div>
     <c:import url="/WEB-INF/jsp/footer.jsp"/>
     <script src="http://code.jquery.com/jquery.min.js"></script>
     <script>
