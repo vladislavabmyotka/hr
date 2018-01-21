@@ -14,6 +14,7 @@ public class MessageConstant {
             "message.candidate.already.responded.to.vacancy";
     public static final String CANDIDATE_SUCCESSFULLY_RESPONDED = "message.candidate.successfully.responded";
     public static final String EMPLOYER_NOT_ADD_VACANCIES = "message.employer.non.vacancies";
+    public static final String EMPLOYER_NON_INTERVIEW = "message.employer.non.interview";
     public static final String EMPLOYER_NOT_ASSIGNED = "Не назначен";
     public static final String VACANCY_HAS_BEEN_REMOVED = "Вакансия была удалена";
     public static final String CANDIDATE_HAS_BEEN_REMOVED = "Соискатель быд удален";

@@ -48,6 +48,17 @@ public class SQLConstant {
     public static final String SQL_SELECT_INTERVIEW_BY_INTERVIEW_ID = "SELECT * FROM interview WHERE idInterview = ?";
     public static final String SQL_SELECT_INTERVIEW_BY_CANDIDATE_ID_VACANCY_ID = "SELECT * FROM interview " +
             "WHERE i_idCandidate = ? and i_idvacancy = ?";
+    public static final String SQL_SELECT_INTERVIEW_BY_EMPLOYER_ID =
+            "SELECT idInterview, i_idCandidate, i_idvacancy, preResult, finalResult, " +
+            "GROUP_CONCAT(candidate.surname, ' ', candidate.name, ' ', " +
+            "case when candidate.lastname  is NOT null then candidate.lastname else '' end, '\n', candidate.email) " +
+            "AS 'candidateInfo', " +
+            "GROUP_CONCAT(vacancy.post, ', ', vacancy.company, ', ', vacancy.salary) AS 'vacancyInfo' " +
+            "FROM interview " +
+            "INNER JOIN candidate on interview.i_idCandidate = candidate.idCandidate " +
+            "INNER JOIN vacancy on interview.i_idvacancy = vacancy.idvacancy " +
+            "WHERE i_idvacancy IN (SELECT idvacancy FROM vacancy WHERE v_idEmployer = ?) " +
+            "GROUP BY idInterview;";
     public static final String SQL_DELETE_INTERVIEW_BY_INTERVIEW_ID = "DELETE FROM interview WHERE idInterview = ?";
     public static final String SQL_UPDATE_INTERVIEW = "UPDATE interview SET preResult = ?, finalResult = ? " +
             "WHERE idInterview = ?";

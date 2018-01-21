@@ -18,6 +18,8 @@ public class InterviewDAO extends AbstractDAO<Interview>{
     private static final String VACANCY_ID = "i_idvacancy";
     private static final String PRE_RESULT = "preResult";
     private static final String FINAL_RESULT = "finalResult";
+    private static final String CANDIDATE_INFO = "candidateInfo";
+    private static final String VACANCY_INFO = "vacancyInfo";
 
     public InterviewDAO(Connection connection) {
         super(connection);
@@ -36,6 +38,34 @@ public class InterviewDAO extends AbstractDAO<Interview>{
             }
         } catch (SQLException e) {
             LOGGER.log(Level.ERROR, "SQL exception (request or table failed)! Detail: " + e.getMessage());
+        } finally {
+            this.closeStatement(statement);
+        }
+
+        return interviews;
+    }
+
+    public List<Interview> findAllByEmployerId(int employerId) {
+        List<Interview> interviews = new ArrayList<>();
+        PreparedStatement statement = null;
+        try {
+            statement = this.getPreparedStatement(SQLConstant.SQL_SELECT_INTERVIEW_BY_EMPLOYER_ID);
+            statement.setInt(1, employerId);
+            ResultSet resultSet = statement.executeQuery();
+            while(resultSet.next()) {
+                Interview interview = new Interview();
+                interview.setInterviewId(resultSet.getInt(INTERVIEW_ID));
+                interview.setCandidateId(resultSet.getInt(CANDIDATE_ID));
+                interview.setVacancyId(resultSet.getInt(VACANCY_ID));
+                interview.setPreResult(resultSet.getString(PRE_RESULT));
+                interview.setFinalResult(resultSet.getString(FINAL_RESULT));
+                interview.setCandidateInfo(resultSet.getString(CANDIDATE_INFO));
+                interview.setVacancyInfo(resultSet.getString(VACANCY_INFO));
+                interviews.add(interview);
+            }
+        } catch (SQLException e) {
+            LOGGER.log(Level.ERROR, "Error while trying find interviews by employerId in database! Detail: " +
+                    e.getMessage());
         } finally {
             this.closeStatement(statement);
         }

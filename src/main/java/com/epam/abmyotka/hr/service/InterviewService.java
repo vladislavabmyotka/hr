@@ -27,6 +27,15 @@ public class InterviewService {
         return interview;
     }
 
+    public List<Interview> findAllByEmployerId(int employerId) {
+        DBPool pool = DBPool.getInstance();
+        Connection connection = pool.getConnection();
+        InterviewDAO interviewDAO = new InterviewDAO(connection);
+        List<Interview> interviews = interviewDAO.findAllByEmployerId(employerId);
+        pool.putConnection(connection);
+        return interviews;
+    }
+
     public boolean delete(int interviewId) {
         DBPool pool = DBPool.getInstance();
         Connection connection = pool.getConnection();

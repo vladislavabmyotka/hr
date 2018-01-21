@@ -80,6 +80,12 @@
     </nav>
     <br/><br/>
     <div class="container">
+        <form class="form-inline my-2 my-lg-0 search" action="FrontController" method="post">
+            <input type="hidden" name="command" value="candidate_vacancy_search">
+            <input class="form-control mr-sm-2" type="text" placeholder="<fmt:message key="search" />"
+                   aria-label="Search">
+            <button class="btn btn-outline-success my-2 my-sm-0" type="submit"><fmt:message key="search" /></button>
+        </form>
         <h6 class="form-signin-heading error"> ${errorMessage} </h6> <br/>
         <h6 class="form-signin-heading"> ${notificationMessage} </h6> <br/>
         <table class="table table-bordered table-hover table-sm table-mrgn">

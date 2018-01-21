@@ -147,12 +147,12 @@ INSERT INTO candidate (surname, name, lastname, age, email, address, citizenship
 			'PHP Developer', 'БГУ Механико-математический факультет', 4, 'A0 (Абсолютный новичек)', 'Коммуникабелен, легко обучаем', 1);
 INSERT INTO candidate (surname, name, lastname, age, email, address, citizenship, phone, post, education, experience, english, skill, c_idAccount) 
 	VALUES ('Disney', 'Ksenia', 'Viktorovna', 20, 'SmileWether@mail.ru', 'просп. Рокоссовского 100, 1', 'Республика Беларусь',
-			'+375 29 852-78-98', 'Бизнес-аналитик', 'БГУ Факультет прикладной математики и информатики', 0, 'A1+ (Базовый средний)',
-            'Курсовые работы по Java, C#, JavaScript. Знание Ajax, Perl.', 2);
+			'+375 29 852-78-98', 'Бизнес-аналитик', 'БГУ Факультет прикладной математики и информатики', 0, 'A1+ (Базовый средний)', 'Курсовые работы по Java, C#, JavaScript. Знание Ajax, Perl.', 
+            2);
 INSERT INTO candidate (surname, name, lastname, age, email, address, citizenship, phone, post, education, experience, english, skill, c_idAccount) 
 	VALUES ('Брусов', 'Кирилл', 'Кириллович', 43, 'bigboss42@gmail.com', 'Ул. Каменогорская 42, 33', 'Российская Федерация', '8 (029) 133-14-34',
-			'DB Developer', 'НИИ Московая академия сплавов', 22, 'A2+ (Ниже среднего)',
-            'Огромный опыт в научной сфере, многочисленные работы по сопротивлению материалов, 11 лет преподования в МГУ', 3);
+			'DB Developer', 'НИИ Московая академия сплавов', 22, 'A2+ (Ниже среднего)', 'Огромный опыт в научной сфере, многочисленные работы по сопротивлению материалов, 11 лет преподования в МГУ', 
+            3);
 INSERT INTO candidate (surname, name, lastname, age, email, address, citizenship, phone, post, education, experience, english, skill, c_idAccount) 
 	VALUES ('Аверин', 'Иван', 'Янович', 17, 'ivan.averin.yanovich@gmail.com', 'ул. Платонова 10, 11', 'Республика Беларусь', '8 (029) 147-57-75',
 			'Junior .NET Developer', 'БГУИР КСИС', 0, 'Не указано', 'Аналитический склад ума', 4);
@@ -176,20 +176,16 @@ INSERT INTO employer (surname, name, address, phone, email, company, e_idAccount
 -- заполнение данными таблицы vacancy
 -- добавление нескольких вакансий
 INSERT INTO vacancy (post, company, salary, location, experience, english, text, conditionVacancy, v_idEmployer) VALUES ('PHP Developer', 
-			'BelHard', 1500, 'г. Могилев', 4, 'C1+ (Выше продвинутого)',
-            'Понимание принципов ООП и знание паттернов проектирования; Опыт работы и уверенные знания Mysql, SQLite; Опыт работы с современными фреймворками; Хорошее знание Javascript и опыт работы с Jquery, Bootstrap; Базовое знание Unix/Linux; Базовое знание Unix/Linux;',
+			'BelHard', 1500, 'г. Могилев', 4, 'C1+ (Выше продвинутого)', 'Понимание принципов ООП и знание паттернов проектирования; Опыт работы и уверенные знания Mysql, SQLite; Опыт работы с современными фреймворками; Хорошее знание Javascript и опыт работы с Jquery, Bootstrap; Базовое знание Unix/Linux; Базовое знание Unix/Linux;',
             'Открыта', 1);
 INSERT INTO vacancy (post, company, salary, location, english, text, conditionVacancy, v_idEmployer) VALUES ('Junior .NET Developer', 'BelHard', 
-			500, 'г. Минск', 'B2+ (Ниже продвинутого)',
-            'Теоретическая база по .NET, C#; Знание основ HTML, CSS, JavaScript; Опыт работы c .NET, C# в рамках учебных проектов (лабораторные, курсовые, диплом) приветствуется; Опыт коммерческой разработки приветствуется;',
+			500, 'г. Минск', 'B2+ (Ниже продвинутого)', 'Теоретическая база по .NET, C#; Знание основ HTML, CSS, JavaScript; Опыт работы c .NET, C# в рамках учебных проектов (лабораторные, курсовые, диплом) приветствуется; Опыт коммерческой разработки приветствуется;',
             'Открыта', 1);
 INSERT INTO vacancy (post, company, salary, location, experience, english, text, conditionVacancy, v_idEmployer) VALUES ('Бизнес-аналитик', 
-			'ITransition', 450, 'г. Витебск', 1, 'B1+ (Выше среднего)', 
-            'Работа с веб-проектами, составление технического задания,  постановка задач инженерам программистам, представление результатов работ заказчику, сдача-приемка работ',
+			'ITransition', 450, 'г. Витебск', 1, 'B1+ (Выше среднего)', 'Работа с веб-проектами, составление технического задания,  постановка задач инженерам программистам, представление результатов работ заказчику, сдача-приемка работ',
             'Открыта', 2);
 INSERT INTO vacancy (post, company, salary, location, english, text, conditionVacancy, v_idEmployer) VALUES ('Бизнес-аналитик', 'Клевер Парк', 
-			380, 'г. Минск', 'A2+ (Ниже среднего)',
-            'Умение работать в команде, Знание достаточно большого количества ПО, Знание методологии разработки программных продуктов, Активность и желание развиваться',
+			380, 'г. Минск', 'A2+ (Ниже среднего)', 'Умение работать в команде, Знание достаточно большого количества ПО, Знание методологии разработки программных продуктов, Активность и желание развиваться',
             'Закрыта', 3);
 INSERT INTO vacancy (post, company, salary, location, experience, english, text, conditionVacancy, v_idEmployer) VALUES ('Database developer', 
 			'BelHard', 720, 'г. Гомель', 2, 'A1+ (Базовый средний)', 'Знание языка запросов SQL (например, Transact-SQL); Знание прикладного языка программирования (например, С#); Знание технологий, обеспечивающих взаимодействие, связь приложения с базой данных (ADO.NET, Entity Framework, LINQ)',
