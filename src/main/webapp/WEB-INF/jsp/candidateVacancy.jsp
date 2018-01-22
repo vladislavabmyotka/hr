@@ -82,7 +82,7 @@
     <div class="container">
         <form class="form-inline my-2 my-lg-0 search" action="FrontController" method="post">
             <input type="hidden" name="command" value="candidate_vacancy_search">
-            <input class="form-control mr-sm-2" type="text" placeholder="<fmt:message key="search" />"
+            <input name="search" class="form-control mr-sm-2" type="text" placeholder="<fmt:message key="search" />"
                    aria-label="Search">
             <button class="btn btn-outline-success my-2 my-sm-0" type="submit"><fmt:message key="search" /></button>
         </form>

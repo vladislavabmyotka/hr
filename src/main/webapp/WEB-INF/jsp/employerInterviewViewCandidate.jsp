@@ -228,6 +228,12 @@
             </div>
 
             <form action="FrontController" method="post">
+                <input type="hidden" name="command" value="employer_interview_view_candidate_send_email">
+                <input type="hidden" name="candidateId" value="${candidate.candidateId}">
+                <button type="submit" class="btn btn-lg btn-primary btn-block cancel-mrgn">
+                    <fmt:message key="employer.interview.view.candidate.send.email" /></button>
+            </form>
+            <form action="FrontController" method="post">
                 <input type="hidden" name="command" value="employer_interview">
                 <button type="submit" class="btn btn-lg btn-primary btn-block cancel-mrgn">
                     <fmt:message key="back" /></button>

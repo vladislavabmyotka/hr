@@ -1,0 +1,81 @@
+package com.epam.abmyotka.hr.command.impl.employerImpl;
+
+import com.epam.abmyotka.hr.command.Command;
+import com.epam.abmyotka.hr.constant.MessageConstant;
+import com.epam.abmyotka.hr.constant.ParameterConstant;
+import com.epam.abmyotka.hr.constant.PathConstant;
+import com.epam.abmyotka.hr.controller.Router;
+import com.epam.abmyotka.hr.entity.Account;
+import com.epam.abmyotka.hr.entity.Employer;
+import com.epam.abmyotka.hr.mail.MailThread;
+import com.epam.abmyotka.hr.manager.MessageManager;
+import com.epam.abmyotka.hr.service.AccountService;
+import com.epam.abmyotka.hr.service.CandidateService;
+import com.epam.abmyotka.hr.service.EmployerService;
+import com.epam.abmyotka.hr.service.InterviewService;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
+import java.util.Objects;
+import java.util.Properties;
+
+public class EmployerInterviewViewCandidateSendEmailSubmitCommand implements Command {
+    private AccountService accountService;
+    private CandidateService candidateService;
+    private EmployerService employerService;
+    private InterviewService interviewService;
+
+    public EmployerInterviewViewCandidateSendEmailSubmitCommand(AccountService accountService,
+                CandidateService candidateService, EmployerService employerService, InterviewService interviewService) {
+        this.accountService = accountService;
+        this.candidateService = candidateService;
+        this.employerService = employerService;
+        this.interviewService = interviewService;
+    }
+
+    @Override
+    public Router execute(HttpServletRequest request) {
+        Router router = new Router(PathConstant.PATH_PAGE_EMPLOYER_INTERVIEW_VIEW_CANDIDATE_SEND_EMAIL,
+                Router.RouteType.FORWARD);
+
+        String to = request.getParameter(ParameterConstant.PARAM_TO);
+        String theme = request.getParameter(ParameterConstant.PARAM_THEME);
+        String message = request.getParameter(ParameterConstant.PARAM_MESSAGE);
+        String password = request.getParameter(ParameterConstant.PARAM_PASSWORD);
+
+        if (!Objects.equals(to, "") & !Objects.equals(theme, "") & !Objects.equals(message, "")) {
+            HttpSession session = request.getSession(true);
+            Account employerAccount = (Account) session.getAttribute("role");
+            int accountId = accountService.findAccountIdByLoginPasswordAttachment(employerAccount);
+
+            if (accountId != 0) {
+                Employer employer = employerService.findByAccountId(accountId);
+                Properties properties = new Properties();
+                properties.setProperty("mail.smtp.host", "smtp.gmail.com");
+                properties.setProperty("mail.smtp.port", "465");
+                properties.setProperty("mail.user.name", employer.getEmail());
+                properties.setProperty("mail.user.password", password);
+
+                MailThread mailOperator = new MailThread(to, employer.getEmail(), theme, message, properties);
+                mailOperator.start();
+
+                Command command = new EmployerInterviewViewCommand(accountService, employerService,
+                        interviewService);
+                router = command.execute(request);
+            } else {
+                router.setPagePath(PathConstant.PATH_PAGE_EMPLOYER);
+                Object language = request.getSession(true).getAttribute("language");
+                String errorMessage = MessageManager.getMessage(language.toString(), MessageConstant.ERROR_ON_WEBSITE);
+                request.setAttribute("errorMessage", errorMessage);
+            }
+        } else {
+            Command command = new EmployerInterviewViewCandidateSendEmailCommand(candidateService);
+            router = command.execute(request);
+            Object language = request.getSession(true).getAttribute("language");
+            String errorMessage = MessageManager.getMessage(language.toString(), MessageConstant.INCORRECT_DATA);
+            request.setAttribute("errorMessage", errorMessage);
+        }
+
+        return router;
+    }
+}

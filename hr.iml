@@ -46,5 +46,8 @@
     <orderEntry type="library" name="Maven: org.apache.tomcat:tomcat-jdbc:8.5.11" level="project" />
     <orderEntry type="library" name="Maven: org.apache.tomcat:tomcat-juli:8.5.11" level="project" />
     <orderEntry type="library" name="Maven: org.apache.commons:commons-lang3:3.4" level="project" />
+    <orderEntry type="library" name="Maven: javax.mail:mail:1.4.7" level="project" />
+    <orderEntry type="library" name="Maven: com.sun.mail:smtp:1.6.0" level="project" />
+    <orderEntry type="library" name="Maven: javax.activation:activation:1.1.1" level="project" />
   </component>
 </module>

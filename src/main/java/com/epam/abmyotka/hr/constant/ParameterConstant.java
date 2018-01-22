@@ -21,6 +21,8 @@ public class ParameterConstant {
     public static final String PARAM_EMPLOYER_INTERVIEW_DELETE = "employerInterviewDelete";
     public static final String PARAM_EMPLOYER_INTERVIEW_EDIT = "employerInterviewEdit";
     public static final String PARAM_EMPLOYER_INTERVIEW_VIEW_CANDIDATE = "employerInterviewViewCandidate";
+    public static final String PARAM_EMPLOYER_INTERVIEW_VIEW_CANDIDATE_SEND_EMAIL =
+            "employerInterviewViewCandidateSendEmail";
     public static final String PARAM_EMPLOYER_INTERVIEW_VIEW_VACANCY = "employerInterviewViewVacancy";
     public static final String PARAM_EMPLOYER_ID = "employerId";
     public static final String PARAM_CANDIDATE_ID = "candidateId";
@@ -46,4 +48,8 @@ public class ParameterConstant {
     public static final String PARAM_CONDITION_VACANCY = "conditionVacancy";
     public static final String PARAM_PRE_RESULT = "preResult";
     public static final String PARAM_FINAL_RESULT = "finalResult";
+    public static final String PARAM_SEARCH = "search";
+    public static final String PARAM_TO = "to";
+    public static final String PARAM_THEME = "theme";
+    public static final String PARAM_MESSAGE = "message";
 }

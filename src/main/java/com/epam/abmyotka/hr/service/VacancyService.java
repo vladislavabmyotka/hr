@@ -36,6 +36,15 @@ public class VacancyService {
         return vacancies;
     }
 
+    public List<Vacancy> findAllByKeyword(String keyword) {
+        DBPool pool = DBPool.getInstance();
+        Connection connection = pool.getConnection();
+        VacancyDAO vacancyDAO = new VacancyDAO(connection);
+        List<Vacancy> vacancies = vacancyDAO.findAllByKeyword(keyword);
+        pool.putConnection(connection);
+        return vacancies;
+    }
+
     public boolean delete(int vacancyId) {
         DBPool pool = DBPool.getInstance();
         Connection connection = pool.getConnection();

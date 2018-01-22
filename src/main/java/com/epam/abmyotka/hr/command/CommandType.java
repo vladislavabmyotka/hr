@@ -41,6 +41,7 @@ public enum CommandType {
     CANDIDATE_VACANCY_VIEW(new CandidateVacancyViewCommand(new VacancyService(), new EmployerService())),
     CANDIDATE_VACANCY_APPLY(new CandidateVacancyApplyCommand(new AccountService(), new CandidateService(),
             new VacancyService(), new EmployerService(), new InterviewService())),
+    CANDIDATE_VACANCY_SEARCH(new CandidateVacancySearchCommand(new VacancyService(),new EmployerService())),
     EMPLOYER_ADD_INFORMATION(new EmployerAddInformationCommand(new AccountService(), new EmployerService())),
     EMPLOYER_ADD_INFORMATION_SAVE(new EmployerAddInformationSaveCommand(new EmployerService())),
     EMPLOYER_ADD_VACANCY(new EmployerAddVacancyCommand(new AccountService(), new EmployerService(),
@@ -63,6 +64,10 @@ public enum CommandType {
     EMPLOYER_INTERVIEW_EDIT_SAVE(new EmployerInterviewEditSaveCommand(new AccountService(), new EmployerService(),
             new InterviewService())),
     EMPLOYER_INTERVIEW_VIEW_CANDIDATE(new EmployerInterviewViewCandidateCommand(new CandidateService())),
+    EMPLOYER_INTERVIEW_VIEW_CANDIDATE_SEND_EMAIL(new EmployerInterviewViewCandidateSendEmailCommand(
+            new CandidateService())),
+    EMPLOYER_INTERVIEW_VIEW_CANDIDATE_SEND_EMAIL_SUBMIT(new EmployerInterviewViewCandidateSendEmailSubmitCommand(
+            new AccountService(), new CandidateService(), new EmployerService(), new InterviewService())),
     EMPLOYER_INTERVIEW_VIEW_VACANCY(new EmployerInterviewViewVacancyCommand(new VacancyService()));
 
     private Command command;

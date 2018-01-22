@@ -23,6 +23,7 @@ public class VacancyDAO extends AbstractDAO<Vacancy> {
     private static final String TEXT = "text";
     private static final String CONDITION_VACANCY = "conditionVacancy";
     private static final String V_EMPLOYER_ID = "v_idEmployer";
+    private static final String PROCENT_SYMBOL = "%";
 
     public VacancyDAO(Connection connection) {
         super(connection);
@@ -81,6 +82,29 @@ public class VacancyDAO extends AbstractDAO<Vacancy> {
             }
         } catch (SQLException e) {
             LOGGER.log(Level.ERROR, "Error while trying find vacancy by v_idEmployer in database! Detail: " +
+                    e.getMessage());
+        } finally {
+            this.closeStatement(statement);
+        }
+        return vacancies;
+    }
+
+    public List<Vacancy> findAllByKeyword(String keyword) {
+        List<Vacancy> vacancies = new ArrayList<>();
+        PreparedStatement statement = null;
+        try {
+            statement = this.getPreparedStatement(SQLConstant.SQL_SELECT_VACANCY_BY_KEYWORD);
+            statement.setString(1, PROCENT_SYMBOL + keyword + PROCENT_SYMBOL);
+            statement.setString(2, PROCENT_SYMBOL + keyword + PROCENT_SYMBOL);
+            statement.setString(3, keyword);
+            statement.setString(4, PROCENT_SYMBOL + keyword + PROCENT_SYMBOL);
+            ResultSet resultSet = statement.executeQuery();
+            while(resultSet.next()) {
+                Vacancy vacancy = createVacancyByResultSet(resultSet);
+                vacancies.add(vacancy);
+            }
+        } catch (SQLException e) {
+            LOGGER.log(Level.ERROR, "Error while trying find vacancy by keyword in database! Detail: " +
                     e.getMessage());
         } finally {
             this.closeStatement(statement);

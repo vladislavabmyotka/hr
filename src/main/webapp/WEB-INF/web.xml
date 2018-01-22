@@ -151,6 +151,15 @@
     </servlet-mapping>
 
     <servlet>
+        <servlet-name>Employer Interview View Candidate Send Email</servlet-name>
+        <jsp-file>/WEB-INF/jsp/employerInterviewViewCandidateSendEmail.jsp</jsp-file>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>Employer Interview View Candidate Send Email</servlet-name>
+        <url-pattern>/employerInterviewViewCandidateSendEmail</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
         <servlet-name>Employer Interview View Vacancy</servlet-name>
         <jsp-file>/WEB-INF/jsp/employerInterviewViewVacancy.jsp</jsp-file>
     </servlet>
