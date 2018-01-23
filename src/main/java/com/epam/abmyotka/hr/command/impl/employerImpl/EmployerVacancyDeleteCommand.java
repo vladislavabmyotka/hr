@@ -60,20 +60,12 @@ public class EmployerVacancyDeleteCommand implements Command {
 
         if(accountId != 0) {
             Employer employer = employerService.findByAccountId(accountId);
-            if (employer != null) {
-                int employerId = employer.getEmployerId();
-                List<Vacancy> vacancies = vacancyService.findAllByEmployerId(employerId);
-                if (vacancies.size() != 0) {
-                    request.setAttribute("vacancyList", vacancies);
-                } else {
-                    router.setPagePath(PathConstant.PATH_PAGE_EMPLOYER);
-                }
+            int employerId = employer.getEmployerId();
+            List<Vacancy> vacancies = vacancyService.findAllByEmployerId(employerId);
+            if (vacancies.size() != 0) {
+                request.setAttribute("vacancyList", vacancies);
             } else {
                 router.setPagePath(PathConstant.PATH_PAGE_EMPLOYER);
-                Object language = request.getSession(true).getAttribute("language");
-                String message = MessageManager.getMessage(language.toString(),
-                        MessageConstant.NON_EMPLOYER_INFORMATION);
-                request.setAttribute("errorMessage", message);
             }
         } else {
             router.setPagePath(PathConstant.PATH_PAGE_EMPLOYER);

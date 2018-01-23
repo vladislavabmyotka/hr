@@ -15,6 +15,8 @@
         <%@include file='../css/bootstrap.min.css' %>
         <%@include file='../css/main.css' %>
     </style>
+    <script src='https://www.google.com/recaptcha/api.js?hl=en'></script>
+    <%--<script src='https://www.google.com/recaptcha/api.js'></script>--%>
 </head>
 <body>
 
@@ -80,7 +82,8 @@
                     <input type="radio" name="attachment" id="optionsRadios2" value="e">
                     <fmt:message key="register.container.attachment.employer" />
                 </label>
-            </div>
+            </div><br/>
+            <div class="g-recaptcha" data-sitekey="6LenFEIUAAAAAIofSHxlWmPwJw6gFUqnkKxtesst"></div>
 
             <br/>
             <h6 class="form-signin-heading error"> ${errorMessage} </h6>

@@ -10,7 +10,7 @@
 <html lang="${language}">
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-    <title><fmt:message key="vacancies" /></title>
+    <title><fmt:message key="send.email" /></title>
     <style>
         <%@include file='../css/bootstrap.min.css' %>
         <%@include file='../css/main.css' %>
@@ -27,12 +27,8 @@
         <div class="collapse navbar-collapse" id="navbarsExampleDefault">
 
             <ul class="navbar-nav mr-auto">
-                <li class="nav-item active">
-                    <a class="nav-link" href="#"><fmt:message key="vacancies" />
-                        <span class="sr-only">(current)</span></a>
-                </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="candidateHome"><fmt:message key="home" /></a>
+                    <a class="nav-link" href="#"><fmt:message key="home" /></a>
                 </li>
                 <form action="FrontController" method="post">
                     <input type="hidden" name="command" value="candidate_add">
@@ -48,6 +44,13 @@
                             <fmt:message key="candidate.view.edit" /></button>
                     </li>
                 </form>
+                <form action="FrontController" method="post">
+                    <input type="hidden" name="command" value="candidate_vacancy_view">
+                    <li class="nav-item">
+                        <button type="submit" class="btn btn-link nav-link cursor">
+                            <fmt:message key="vacancies" /></button>
+                    </li>
+                </form>
             </ul>
 
             <ul class="nav navbar-nav navbar-right">
@@ -61,7 +64,8 @@
                 </li>
                 <li>
                     <form class="margin" action="FrontController" method="post">
-                        <input type="hidden" name="command" value="candidate_vacancy_view">
+                        <input type="hidden" name="command" value="candidate_vacancy_send_email">
+                        <input type="hidden" name="employerId" value="${employer.employerId}">
                         <select class="form-control" title="language" id="language" name="language" onchange="submit()">
                             <option value="ru" ${language == 'ru' ? 'selected' : ''}>Русский</option>
                             <option value="en" ${language == 'en' ? 'selected' : ''}>English</option>
@@ -78,63 +82,56 @@
             </ul>
         </div>
     </nav>
+
     <br/><br/>
     <div class="container">
-        <form class="form-inline my-2 my-lg-0 search" action="FrontController" method="post">
-            <input type="hidden" name="command" value="candidate_vacancy_search">
-            <input name="search" class="form-control mr-sm-2" type="text" placeholder="<fmt:message key="search" />"
-                   aria-label="Search">
-            <button class="btn btn-outline-success my-2 my-sm-0" type="submit"><fmt:message key="search" /></button>
+        <form class="form-horizontal" action="FrontController" method="post">
+            <input type="hidden" name="command" value="candidate_vacancy_send_email_submit">
+            <input type="hidden" name="employerId" value="${employer.employerId}">
+            <div class="form-group">
+                <label class="control-label col-sm-2" for="to"><fmt:message key="to" />:
+                </label>
+                <div class="col-sm-10">
+                    <input name="to" type="text" class="form-control" id="to"
+                           pattern="^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$"
+                           placeholder="<fmt:message key="enter.email" />" value="${employer.email}">
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="control-label col-sm-2" for="theme"><fmt:message key="theme" />:
+                </label>
+                <div class="col-sm-10">
+                    <input name="theme" type="text" class="form-control" id="theme">
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="control-label col-sm-2" for="message"><fmt:message key="message" />:
+                </label>
+                <div class="col-sm-10">
+                    <textarea name="message" class="form-control" id="message" rows="6"></textarea>
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="control-label col-sm-2" for="password"><fmt:message key="password.for.email" />:
+                </label>
+                <div class="col-sm-10">
+                    <input type="password" name="password" class="form-control" id="password">
+                </div>
+            </div>
+
+            <br/>
+            <h6 class="form-signin-heading error"> ${errorMessage} </h6>
+            <br/>
+
+            <button class="btn btn-lg btn-primary btn-block" type="submit">
+                <fmt:message key="send"/></button>
+            <button class="btn btn-lg btn-primary btn-block" type="reset"><fmt:message key="reset" /></button>
         </form>
-        <h6 class="form-signin-heading error"> ${errorMessage} </h6> <br/>
-        <h6 class="form-signin-heading"> ${notificationMessage} </h6> <br/>
-        <table class="table table-bordered table-hover table-sm table-mrgn">
-            <thead class="thead-default">
-            <tr>
-                <th>#</th>
-                <th><fmt:message key="post" /></th>
-                <th><fmt:message key="company" /></th>
-                <th><fmt:message key="salary" /></th>
-                <th><fmt:message key="location" /></th>
-                <th><fmt:message key="experience" /></th>
-                <th><fmt:message key="english" /></th>
-                <th><fmt:message key="text" /></th>
-                <th><fmt:message key="condition" /></th>
-                <th><fmt:message key="info.employer" /></th>
-                <th><fmt:message key="action" /></th>
-            </tr>
-            </thead>
-            <tbody>
-            <c:forEach var="vacancy" items="${vacancyList}" varStatus="id">
-                <tr>
-                    <th scope="row"><c:out value="${id.count}"/></th>
-                    <td><c:out value="${vacancy.post}"/></td>
-                    <td><c:out value="${vacancy.company}"/></td>
-                    <td><c:out value="${vacancy.salary}"/></td>
-                    <td><c:out value="${vacancy.location}"/></td>
-                    <td><c:out value="${vacancy.experience}"/></td>
-                    <td><c:out value="${vacancy.english}"/></td>
-                    <td><c:out value="${vacancy.text}"/></td>
-                    <td><c:out value="${vacancy.conditionVacancy}"/></td>
-                    <td>
-                        <form action="FrontController" method="post">
-                            <input type="hidden" name="command" value="candidate_vacancy_send_email">
-                            <c:out value="${vacancy.employerInfo}"/><br/>
-                            <button name="employerId" class="btn btn-link" type="submit"
-                                    value="${vacancy.employerId}"><fmt:message key="send.email" />
-                            </button>
-                        </form>
-                    </td>
-                    <td><form action="FrontController" method="post">
-                        <input type="hidden" name="command" value="candidate_vacancy_apply">
-                        <button name="candidateVacancyApply" class="btn btn-link" type="submit"
-                                value="${vacancy.vacancyId}"><fmt:message key="vacancy.apply" />
-                        </button></form>
-                    </td>
-                </tr>
-            </c:forEach>
-            </tbody>
-        </table>
+        <form class="margin" action="FrontController" method="post">
+            <input type="hidden" name="command" value="candidate_vacancy_view">
+            <button type="submit" class="btn btn-lg btn-primary btn-block cancel-mrgn"><fmt:message key="back" />
+            </button>
+        </form>
     </div>
     <c:import url="/WEB-INF/jsp/footer.jsp"/>
 </body>

@@ -10,7 +10,7 @@
 <html lang="${language}">
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-    <title><fmt:message key="employer.interview.view.candidate.send.email" /></title>
+    <title><fmt:message key="send.email" /></title>
     <style>
         <%@include file='../css/bootstrap.min.css' %>
         <%@include file='../css/main.css' %>

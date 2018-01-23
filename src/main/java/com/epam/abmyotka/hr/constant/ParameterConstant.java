@@ -7,6 +7,7 @@ public class ParameterConstant {
     public static final String PARAM_REPEAT_PASSWORD = "repeatPassword";
     public static final String PARAM_OLD_PASSWORD = "oldPassword";
     public static final String PARAM_ATTACHMENT = "attachment";
+    public static final String PARAM_RECAPTCHA = "g-recaptcha-response";
     public static final String PARAM_ADMIN_CANDIDATE_DELETE = "adminCandidateDelete";
     public static final String PARAM_ADMIN_CANDIDATE_EDIT = "adminCandidateEdit";
     public static final String PARAM_ADMIN_EMPLOYER_DELETE = "adminEmployerDelete";
@@ -21,8 +22,6 @@ public class ParameterConstant {
     public static final String PARAM_EMPLOYER_INTERVIEW_DELETE = "employerInterviewDelete";
     public static final String PARAM_EMPLOYER_INTERVIEW_EDIT = "employerInterviewEdit";
     public static final String PARAM_EMPLOYER_INTERVIEW_VIEW_CANDIDATE = "employerInterviewViewCandidate";
-    public static final String PARAM_EMPLOYER_INTERVIEW_VIEW_CANDIDATE_SEND_EMAIL =
-            "employerInterviewViewCandidateSendEmail";
     public static final String PARAM_EMPLOYER_INTERVIEW_VIEW_VACANCY = "employerInterviewViewVacancy";
     public static final String PARAM_EMPLOYER_ID = "employerId";
     public static final String PARAM_CANDIDATE_ID = "candidateId";

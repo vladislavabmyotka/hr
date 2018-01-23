@@ -10,6 +10,7 @@ import com.epam.abmyotka.hr.entity.Account;
 import com.epam.abmyotka.hr.manager.MessageManager;
 import com.epam.abmyotka.hr.service.AccountService;
 import com.epam.abmyotka.hr.validator.AccountValidator;
+import com.epam.abmyotka.hr.validator.VerifyValidator;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -28,30 +29,39 @@ public class RegisterCommand implements Command {
         String password = request.getParameter(ParameterConstant.PARAM_PASSWORD);
         String repeatPassword = request.getParameter(ParameterConstant.PARAM_REPEAT_PASSWORD);
         String attachment = request.getParameter(ParameterConstant.PARAM_ATTACHMENT);
+        String gRecaptchaResponse = request.getParameter(ParameterConstant.PARAM_RECAPTCHA);
 
         HttpSession session = request.getSession(true);
 
         if(AccountValidator.checkLogin(login) && AccountValidator.checkPassword(password) &&
                 AccountValidator.checkAttachment(attachment) && password.equals(repeatPassword)) {
-            Account user = new Account(login, password, attachment);
-            if (!service.checkCoincidenceByLogin(login)) {
-                if(service.add(user)) {
-                    session.setAttribute("role", user);
-                    if (attachment.equals(AccountAttachmentConstant.CANDIDATE_ATTACHMENT)) {
-                        router.setRoute(Router.RouteType.REDIRECT);
-                        router.setPagePath(PathConstant.PATH_PAGE_CANDIDATE);
+            if (VerifyValidator.verify(gRecaptchaResponse)) {
+                Account user = new Account(login, password, attachment);
+                if (!service.checkCoincidenceByLogin(login)) {
+                    if (service.add(user)) {
+                        session.setAttribute("role", user);
+                        if (attachment.equals(AccountAttachmentConstant.CANDIDATE_ATTACHMENT)) {
+                            router.setRoute(Router.RouteType.REDIRECT);
+                            router.setPagePath(PathConstant.PATH_PAGE_CANDIDATE);
+                        } else {
+                            router.setRoute(Router.RouteType.REDIRECT);
+                            router.setPagePath(PathConstant.PATH_PAGE_EMPLOYER);
+                        }
                     } else {
-                        router.setRoute(Router.RouteType.REDIRECT);
-                        router.setPagePath(PathConstant.PATH_PAGE_EMPLOYER);
+                        Object language = request.getSession(true).getAttribute("language");
+                        String message = MessageManager.getMessage(language.toString(),
+                                MessageConstant.ERROR_ON_WEBSITE);
+                        request.setAttribute("errorMessage", message);
                     }
                 } else {
                     Object language = request.getSession(true).getAttribute("language");
-                    String message = MessageManager.getMessage(language.toString(), MessageConstant.ERROR_ON_WEBSITE);
+                    String message = MessageManager.getMessage(language.toString(), MessageConstant.USED_LOGIN_MESSAGE);
                     request.setAttribute("errorMessage", message);
                 }
             } else {
                 Object language = request.getSession(true).getAttribute("language");
-                String message = MessageManager.getMessage(language.toString(), MessageConstant.USED_LOGIN_MESSAGE);
+                String message = MessageManager.getMessage(language.toString(),
+                        MessageConstant.INVALID_RECAPTCHA);
                 request.setAttribute("errorMessage", message);
             }
         } else {

@@ -52,7 +52,7 @@ public class EmployerInterviewViewCommand implements Command {
                 router.setPagePath(PathConstant.PATH_PAGE_EMPLOYER);
                 Object language = request.getSession(true).getAttribute("language");
                 String message = MessageManager.getMessage(language.toString(),
-                        MessageConstant.NON_EMPLOYER_INFORMATION);
+                        MessageConstant.EMPLOYER_NON_INFO_BEFORE_VIEW_INTERVIEW);
                 request.setAttribute("errorMessage", message);
             }
         } else {
