@@ -51,6 +51,9 @@
                             <fmt:message key="vacancies" /></button>
                     </li>
                 </form>
+                <li class="nav-item">
+                    <a href="contact" class="nav-link" target="_blank"><fmt:message key="contact" /></a>
+                </li>
             </ul>
 
             <ul class="nav navbar-nav navbar-right">

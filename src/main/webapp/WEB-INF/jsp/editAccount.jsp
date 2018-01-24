@@ -27,18 +27,19 @@
         <div class="collapse navbar-collapse" id="navbarsExampleDefault">
 
             <ul class="navbar-nav mr-auto">
-                <li class="nav-item active">
+                <li class="nav-item">
                         <c:set var="attachment" value="${pageContext.session.getAttribute(\"role\").attachment}"/>
                        <c:choose>
                            <c:when test="${attachment == 'c'}">
-                               <a class="nav-link" href="candidateHome"><fmt:message key="home" />
-                                   <span class="sr-only">(current)</span></a>
+                               <a class="nav-link" href="candidateHome"><fmt:message key="home" /></a>
                            </c:when>
                            <c:otherwise>
-                               <a class="nav-link" href="employerHome"><fmt:message key="home" />
-                                   <span class="sr-only">(current)</span></a>
+                               <a class="nav-link" href="employerHome"><fmt:message key="home" /></a>
                            </c:otherwise>
                        </c:choose>
+                </li>
+                <li class="nav-item">
+                    <a href="contact" class="nav-link" target="_blank"><fmt:message key="contact" /></a>
                 </li>
             </ul>
 

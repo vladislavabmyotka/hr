@@ -27,9 +27,8 @@
         <div class="collapse navbar-collapse" id="navbarsExampleDefault">
 
             <ul class="navbar-nav mr-auto">
-                <li class="nav-item active">
-                    <a class="nav-link" href="adminHome"><fmt:message key="home" />
-                        <span class="sr-only">(current)</span></a>
+                <li class="nav-item">
+                    <a class="nav-link" href="adminHome"><fmt:message key="home" /></a>
                 </li>
                 <form action="FrontController" method="post">
                     <input type="hidden" name="command" value="admin_candidate_view">
@@ -54,11 +53,14 @@
                 </form>
                 <form action="FrontController" method="post">
                     <input type="hidden" name="command" value="admin_interview_view">
-                    <li class="nav-item">
+                    <li class="nav-item active">
                         <button type="submit" class="btn btn-link nav-link cursor"><fmt:message key="interview"/>
                         </button>
                     </li>
                 </form>
+                <li class="nav-item">
+                    <a href="contact" class="nav-link" target="_blank"><fmt:message key="contact" /></a>
+                </li>
             </ul>
 
             <ul class="nav navbar-nav navbar-right">

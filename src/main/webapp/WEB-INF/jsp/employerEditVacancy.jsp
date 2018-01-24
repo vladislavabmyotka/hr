@@ -27,9 +27,8 @@
         <div class="collapse navbar-collapse" id="navbarsExampleDefault">
 
             <ul class="navbar-nav mr-auto">
-                <li class="nav-item active">
-                    <a class="nav-link" href="#"><fmt:message key="home" />
-                        <span class="sr-only">(current)</span></a>
+                <li class="nav-item">
+                    <a class="nav-link" href="#"><fmt:message key="home" /></a>
                 </li>
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" href="#" id="dropdown01" data-toggle="dropdown"
@@ -47,9 +46,10 @@
                         </form>
                     </div>
                 </li>
-                <li class="nav-item dropdown">
+                <li class="nav-item active dropdown">
                     <a class="nav-link dropdown-toggle" href="#" id="dropdown02" data-toggle="dropdown"
-                       aria-haspopup="true" aria-expanded="false"><fmt:message key="view.edit" /></a>
+                       aria-haspopup="true" aria-expanded="false"><fmt:message key="view.edit" />
+                        <span class="sr-only">(current)</span></a>
                     <div class="dropdown-menu" aria-labelledby="dropdown01">
                         <form action="FrontController" method="post">
                             <input type="hidden" name="command" value="employer_view_edit_information">
@@ -70,6 +70,9 @@
                         </button>
                     </li>
                 </form>
+                <li class="nav-item">
+                    <a href="contact" class="nav-link" target="_blank"><fmt:message key="contact" /></a>
+                </li>
             </ul>
 
             <ul class="nav navbar-nav navbar-right">

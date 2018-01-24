@@ -37,9 +37,11 @@
         <div class="collapse navbar-collapse" id="navbarsExampleDefault">
 
             <ul class="navbar-nav mr-auto">
-                <li class="nav-item active">
-                    <a class="nav-link" href="${page}"><fmt:message key="home" />
-                        <span class="sr-only">(current)</span></a>
+                <li class="nav-item">
+                    <a class="nav-link" href="${page}"><fmt:message key="home" /></a>
+                </li>
+                <li class="nav-item">
+                    <a href="contact" class="nav-link" target="_blank"><fmt:message key="contact" /></a>
                 </li>
             </ul>
 
