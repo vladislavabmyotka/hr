@@ -145,7 +145,7 @@ public class VacancyDAO extends AbstractDAO<Vacancy> {
 
     @Override
     public int delete(Vacancy entity) {
-        return 0;
+        throw new UnsupportedOperationException();
     }
 
     @Override

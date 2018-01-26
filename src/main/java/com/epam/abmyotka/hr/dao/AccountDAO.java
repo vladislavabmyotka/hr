@@ -86,14 +86,33 @@ public class AccountDAO extends AbstractDAO<Account> {
         return accountId;
     }
 
+    public String findPasswordByLogin(String login) {
+        String password = null;
+        PreparedStatement statement = null;
+        try {
+            statement = this.getPreparedStatement(SQLConstant.SQL_SELECT_FIND_PASSWORD_BY_LOGIN);
+            statement.setString(1, login);
+            ResultSet resultSet = statement.executeQuery();
+            if (resultSet.next()) {
+                password = resultSet.getString(PASSWORD);
+            }
+        } catch (SQLException e) {
+            LOGGER.log(Level.ERROR, "Error while trying find password by password into database! Detail: " +
+                    e.getMessage());
+        } finally {
+            this.closeStatement(statement);
+        }
+        return password;
+    }
+
     @Override
     public Account findById(int id) {
-        return null;
+        throw new UnsupportedOperationException();
     }
 
     @Override
     public int delete(int id) {
-        return 0;
+        throw new UnsupportedOperationException();
     }
 
     @Override

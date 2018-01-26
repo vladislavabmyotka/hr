@@ -12,6 +12,7 @@ public enum CommandType {
     INDEX(new IndexCommand()),
     REGISTER_RELOAD(new RegisterReloadCommand()),
     AUTHORIZATION(new AuthorizationCommand(new AccountService())),
+    FORGOT_PASSWORD(new ForgotPasswordCommand(new AccountService())),
     REGISTER(new RegisterCommand(new AccountService())),
     EDIT_ACCOUNT_DATA(new AccountEditCommand(new AccountService())),
     DELETE_ACCOUNT(new AccountDeleteCommand(new AccountService())),

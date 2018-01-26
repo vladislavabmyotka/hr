@@ -127,24 +127,9 @@ public class CandidateDAO extends AbstractDAO<Candidate> {
         return countRowsAffected;
     }
 
-    public int deleteByAccountId(int accountId) {
-        int countRowsAffected = 0;
-        PreparedStatement statement = null;
-        try {
-            statement = this.getPreparedStatement(SQLConstant.SQL_DELETE_CANDIDATE_BY_ACCOUNT_ID);
-            statement.setInt(1, accountId);
-            countRowsAffected = statement.executeUpdate();
-        } catch (SQLException e) {
-            LOGGER.log(Level.ERROR, "Error while trying delete candidate from database! Detail: " + e.getMessage());
-        } finally {
-            this.closeStatement(statement);
-        }
-        return countRowsAffected;
-    }
-
     @Override
     public int delete(Candidate entity) {
-        return 0;
+        throw new UnsupportedOperationException();
     }
 
     @Override

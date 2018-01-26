@@ -7,6 +7,7 @@ public class SQLConstant {
             "SELECT idAccount FROM account WHERE password = ?";
     public static final String SQL_SELECT_FIND_ACCOUNT_ID_BY_LOGIN_PASSWORD_ATTACHMENT = "SELECT idAccount " +
             "FROM account WHERE login = ? and password = ? and attachment = ?";
+    public static final String SQL_SELECT_FIND_PASSWORD_BY_LOGIN = "SELECT password FROM account WHERE login = ?";
     public static final String SQL_INSERT_ADD_ACCOUNT =
             "INSERT INTO account (login, password, attachment) VALUES (?, ?, ?)";
     public static final String SQL_UPDATE_ACCOUNT =

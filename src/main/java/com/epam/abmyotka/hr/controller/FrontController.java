@@ -3,6 +3,7 @@ package com.epam.abmyotka.hr.controller;
 import com.epam.abmyotka.hr.command.ActionFactory;
 import com.epam.abmyotka.hr.command.Command;
 import com.epam.abmyotka.hr.command.impl.ExitCommand;
+import com.epam.abmyotka.hr.constant.PathConstant;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -52,7 +53,7 @@ public class FrontController extends HttpServlet{
             }
         } else {
             request.getSession().invalidate();
-            response.sendRedirect(request.getContextPath() + "/index.jsp");
+            response.sendRedirect(request.getContextPath() + PathConstant.PATH_PAGE_MAIN);
         }
     }
 }

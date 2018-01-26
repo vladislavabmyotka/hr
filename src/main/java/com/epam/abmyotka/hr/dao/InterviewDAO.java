@@ -121,7 +121,7 @@ public class InterviewDAO extends AbstractDAO<Interview>{
 
     @Override
     public int delete(Interview entity) {
-        return 0;
+        throw new UnsupportedOperationException();
     }
 
     @Override

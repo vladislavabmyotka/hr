@@ -286,6 +286,15 @@
     </servlet-mapping>
 
     <servlet>
+        <servlet-name>Forgot Password</servlet-name>
+        <jsp-file>/WEB-INF/jsp/forgotPassword.jsp</jsp-file>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>Forgot Password</servlet-name>
+        <url-pattern>/forgotPassword</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
         <servlet-name>Error</servlet-name>
         <jsp-file>/WEB-INF/jsp/error.jsp</jsp-file>
     </servlet>

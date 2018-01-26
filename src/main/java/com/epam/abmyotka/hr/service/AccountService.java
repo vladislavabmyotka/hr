@@ -1,7 +1,6 @@
 package com.epam.abmyotka.hr.service;
 
 import com.epam.abmyotka.hr.dao.AccountDAO;
-import com.epam.abmyotka.hr.dao.CandidateDAO;
 import com.epam.abmyotka.hr.dao.DBPool;
 import com.epam.abmyotka.hr.entity.Account;
 
@@ -44,6 +43,15 @@ public class AccountService {
         int accountId = accountDAO.findAccountIdByLoginPasswordAttachment(account);
         pool.putConnection(connection);
         return accountId;
+    }
+
+    public String findPasswordByLogin(String login) {
+        DBPool pool = DBPool.getInstance();
+        Connection connection = pool.getConnection();
+        AccountDAO accountDAO = new AccountDAO(connection);
+        String password = accountDAO.findPasswordByLogin(login);
+        pool.putConnection(connection);
+        return password;
     }
 
     public boolean add(Account account) {

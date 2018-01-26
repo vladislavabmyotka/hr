@@ -42,11 +42,6 @@
                         <option value="ru" ${language == 'ru' ? 'selected' : ''}>Русский</option>
                         <option value="en" ${language == 'en' ? 'selected' : ''}>English</option>
                     </select>
-                    <%--<select class="form-control" title="language" id="language" name="language"
-                            onchange="location=this.options[this.selectedIndex].value">
-                        <option value="http://localhost:8080/hr/index.jsp?language=ru" ${language == 'ru' ? 'selected' : ''}>Русский</option>
-                        <option value="http://localhost:8080/hr/index.jsp?language=en" ${language == 'en' ? 'selected' : ''}>English</option>
-                    </select>--%>
                 </form>
             </ul>
         </div>
@@ -66,9 +61,11 @@
             <input name="password" type="password" id="inputPassword" class="form-control"
                    pattern="^(?=.*\d)(?=.*[a-zA-Z])[0-9a-zA-Z]{8,25}$"
                    placeholder=<fmt:message key="index.container.password" /> required="" autocomplete="no">
+            <a href="forgotPassword"><fmt:message key="password.forgot" /></a>
 
             <br/>
             <h6 class="form-signin-heading error"> ${errorMessage} </h6>
+            <h6 class="form-signin-heading"> ${notificationMessage} </h6>
             <br/>
 
             <button class="btn btn-lg btn-primary btn-block" type="submit"><fmt:message key="index.container.log" />

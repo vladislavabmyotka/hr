@@ -16,7 +16,6 @@
         <%@include file='../css/main.css' %>
     </style>
     <script src='https://www.google.com/recaptcha/api.js?hl=en'></script>
-    <%--<script src='https://www.google.com/recaptcha/api.js'></script>--%>
 </head>
 <body>
 

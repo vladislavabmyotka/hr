@@ -1,7 +1,6 @@
 package com.epam.abmyotka.hr.dao;
 
 import com.epam.abmyotka.hr.constant.SQLConstant;
-import com.epam.abmyotka.hr.entity.Candidate;
 import com.epam.abmyotka.hr.entity.Employer;
 import org.apache.logging.log4j.Level;
 import org.apache.logging.log4j.LogManager;
@@ -142,24 +141,9 @@ public class EmployerDAO extends AbstractDAO<Employer> {
         return countRowsAffected;
     }
 
-    public int deleteByAccountId(int accountId) {
-        int countRowsAffected = 0;
-        PreparedStatement statement = null;
-        try {
-            statement = this.getPreparedStatement(SQLConstant.SQL_DELETE_EMPLOYER_BY_ACCOUNT_ID);
-            statement.setInt(1, accountId);
-            countRowsAffected = statement.executeUpdate();
-        } catch (SQLException e) {
-            LOGGER.log(Level.ERROR, "Error while trying delete employer from database! Detail: " + e.getMessage());
-        } finally {
-            this.closeStatement(statement);
-        }
-        return countRowsAffected;
-    }
-
     @Override
     public int delete(Employer entity) {
-        return 0;
+        throw new UnsupportedOperationException();
     }
 
     @Override

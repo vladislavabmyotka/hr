@@ -31,4 +31,5 @@ public class PathConstant {
     public static final String PATH_PAGE_ADMIN_VACANCY_EDIT = "/adminVacancyEdit";
     public static final String PATH_PAGE_ADMIN_INTERVIEW = "/adminInterview";
     public static final String PATH_PAGE_ADMIN_INTERVIEW_EDIT = "/adminInterviewEdit";
+    public static final String PATH_PAGE_FORGOT_PASSWORD = "/forgotPassword";
 }
