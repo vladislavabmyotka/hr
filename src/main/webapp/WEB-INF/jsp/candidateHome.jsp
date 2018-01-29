@@ -1,6 +1,7 @@
 <%@ page contentType="text/html; charset=UTF-8" language="java" pageEncoding="UTF-8" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ taglib prefix="ctg" uri="/WEB-INF/tld/custom.tld" %>
 <c:set var="language"
        value="${not empty param.language ? param.language : not empty language ? language : pageContext.request.locale}"
        scope="session" />
@@ -88,40 +89,9 @@
         </div>
     </nav>
 
-    <main role="main">
+    <ctg:mainPage language="${language}" attachment="c" login="${pageContext.session.getAttribute(\"role\").login}"
+        error="${errorMessage}"/>
 
-        <!-- Main jumbotron for a primary marketing message or call to action -->
-        <div class="jumbotron">
-            <div class="container">
-                <h1 class="display-3"><fmt:message key="hello" /> ${pageContext.session.getAttribute("role").login}!
-                </h1>
-                <p><fmt:message key="home.main.title" /></p><br/>
-                <h6 class="form-signin-heading error">${errorMessage}</h6>
-            </div>
-        </div>
-
-        <div class="container">
-            <!-- Example row of columns -->
-            <div class="row">
-                <div class="col-md-4">
-                    <h2><fmt:message key="candidate.home.8second" /></h2>
-                    <p><fmt:message key="candidate.home.8second.main" /></p>
-                </div>
-                <div class="col-md-4">
-                    <h2><fmt:message key="candidate.home.want.rich" /></h2>
-                    <p><fmt:message key="candidate.home.want.rich.main" /></p>
-                </div>
-                <div class="col-md-4">
-                    <h2><fmt:message key="candidate.home.motivation" /></h2>
-                    <p><fmt:message key="candidate.home.motivation.main" /></p>
-                </div>
-            </div>
-
-            <hr>
-
-        </div>
-
-    </main>
     <c:import url="/WEB-INF/jsp/footer.jsp"/>
     <script>
         <%@include file='../js/bootstrapDropdown.js' %>
