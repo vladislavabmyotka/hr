@@ -17,6 +17,17 @@ import org.apache.logging.log4j.Logger;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
+/**
+ * Implementation of the "candidate_vacancy_apply" command.
+ *
+ * <p>
+ *     Represents the implementation of clicking on the "Apply" button to the vacancy for the candidate.
+ *     After clicking on the button, in the database searching information about this candidate, retrieved his id
+ *     and created a new interview based on the candidate's id and the id of the vacancy that was apply.
+ * </p>
+ *
+ * @see Command#execute(HttpServletRequest)
+ */
 public class CandidateVacancyApplyCommand implements Command {
     private final static Logger LOGGER = LogManager.getLogger(CandidateVacancyApplyCommand.class);
 
@@ -26,6 +37,15 @@ public class CandidateVacancyApplyCommand implements Command {
     private EmployerService employerService;
     private InterviewService interviewService;
 
+    /**
+     *  Constructs and initialize commands type of 'candidate_vacancy_apply'
+     *
+     * @param accountService - instance of the service type of "Account" to access the database table "account"
+     * @param candidateService - instance of the service type of "Candidate" to access the database table "candidate"
+     * @param vacancyService - instance of the service type of "Vacancy" to access the database table "vacancy"
+     * @param employerService - instance of the service type of "Employer" to access the database table "employer"
+     * @param interviewService - instance of the service type of "Interview" to access the database table "interview"
+     */
     public CandidateVacancyApplyCommand(AccountService accountService, CandidateService candidateService,
                                         VacancyService vacancyService, EmployerService employerService,
                                         InterviewService interviewService) {

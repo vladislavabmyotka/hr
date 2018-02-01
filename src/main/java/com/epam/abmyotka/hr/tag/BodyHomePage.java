@@ -10,6 +10,10 @@ import com.epam.abmyotka.hr.manager.MessageManager;
 
 import java.io.IOException;
 
+/**
+ * The tag class for displaying the basic information of the tag 'body' for the Administrator's home pages,
+ * Candidates and HR's.
+ */
 @SuppressWarnings("serial")
 public class BodyHomePage extends TagSupport {
     private Object language;

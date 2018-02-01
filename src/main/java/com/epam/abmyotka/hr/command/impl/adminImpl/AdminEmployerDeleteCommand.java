@@ -13,11 +13,25 @@ import org.apache.logging.log4j.Logger;
 
 import javax.servlet.http.HttpServletRequest;
 
+/**
+ * Implementation of the "admin_employer_delete" command.
+ *
+ * <p>
+ *     Removes the employer by his id by Administrator.
+ * </p>
+ *
+ * @see Command#execute(HttpServletRequest)
+ */
 public class AdminEmployerDeleteCommand implements Command {
     private final static Logger LOGGER = LogManager.getLogger(AdminEmployerDeleteCommand.class);
 
     private EmployerService service;
 
+    /**
+     *  Constructs and initialize commands type of 'admin_employer_delete'
+     *
+     * @param service - instance of the service type of "Employer" to access the database table "employer"
+     */
     public AdminEmployerDeleteCommand(EmployerService service) {
         this.service = service;
     }

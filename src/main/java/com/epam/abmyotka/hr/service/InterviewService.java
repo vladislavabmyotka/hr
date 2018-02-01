@@ -7,6 +7,9 @@ import com.epam.abmyotka.hr.entity.Interview;
 import java.sql.Connection;
 import java.util.List;
 
+/**
+ * Class-service for working with the table "interview" of the database.
+ */
 public class InterviewService {
 
     public List<Interview> takeAll() {

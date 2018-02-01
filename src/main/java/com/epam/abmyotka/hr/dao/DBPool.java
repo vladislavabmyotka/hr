@@ -17,6 +17,9 @@ public class DBPool {
     private static DBPool instance;
     private static BlockingQueue<Connection> pool = new ArrayBlockingQueue<>(16, true);
 
+    /**
+     * Takes from the file-property URL, username and password to get the connections and add them to the pool.
+     */
     private DBPool() {
         ResourceBundle resource = ResourceBundle.getBundle("database");
         String url = resource.getString("db.url");
@@ -44,6 +47,11 @@ public class DBPool {
         return instance;
     }
 
+    /**
+     * Take connection from connection pool from any service's to work with database.
+     *
+     * @return connection from connection pool.
+     */
     public Connection getConnection() {
         Connection connection = null;
         try {
@@ -54,6 +62,11 @@ public class DBPool {
         return connection;
     }
 
+    /**
+     * Returns the transferred connection to the connection pool.
+     *
+     * @param connection that will be get earlier from connection pool.
+     */
     public void putConnection(Connection connection) {
         if (connection != null) {
             try {

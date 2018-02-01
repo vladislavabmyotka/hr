@@ -14,9 +14,23 @@ import javax.servlet.http.HttpSession;
 
 import static com.epam.abmyotka.hr.validator.CandidateEmployerVacancyValidator.*;
 
+/**
+ * Implementation of the "employer_add_information_save" command.
+ *
+ * <p>
+ *     Accepts all information about the HR to add in database, having previously passed validation.
+ * </p>
+ *
+ * @see Command#execute(HttpServletRequest)
+ */
 public class EmployerAddInformationSaveCommand implements Command {
     private EmployerService service;
 
+    /**
+     *  Constructs and initialize commands type of 'employer_add_information_save'
+     *
+     * @param service - instance of the service type of "Employer" to access the database table "employer"
+     */
     public EmployerAddInformationSaveCommand(EmployerService service) {
         this.service = service;
     }

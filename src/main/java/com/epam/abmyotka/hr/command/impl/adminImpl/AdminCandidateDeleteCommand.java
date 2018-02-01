@@ -13,11 +13,25 @@ import org.apache.logging.log4j.Logger;
 
 import javax.servlet.http.HttpServletRequest;
 
+/**
+ * Implementation of the "admin_candidate_delete" command.
+ *
+ * <p>
+ *     Removes the candidate by his id by Administrator.
+ * </p>
+ *
+ * @see Command#execute(HttpServletRequest)
+ */
 public class AdminCandidateDeleteCommand implements Command {
     private final static Logger LOGGER = LogManager.getLogger(AdminCandidateDeleteCommand.class);
 
     private CandidateService service;
 
+    /**
+     *  Constructs and initialize commands type of 'admin_candidate_delete'
+     *
+     * @param service - instance of the service type of "Candidate" to access the database table "candidate"
+     */
     public AdminCandidateDeleteCommand(CandidateService service) {
         this.service = service;
     }

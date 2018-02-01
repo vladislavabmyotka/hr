@@ -15,9 +15,24 @@ import com.epam.abmyotka.hr.validator.CandidateEmployerVacancyValidator;
 import javax.servlet.http.HttpServletRequest;
 import java.util.Properties;
 
+/**
+ * Implementation of the "forgot_password" command
+ *
+ * <p>
+ *     Takes a login and user e-mail. If the data is correct a confirmation e-mail will be sent the user's
+ *     password, otherwise you will receive a message about incorrect input data.
+ * </p>
+ *
+ * @see Command#execute(HttpServletRequest)
+ */
 public class ForgotPasswordCommand implements Command {
     private AccountService service;
 
+    /**
+     *  Constructs and initialize commands type of 'forgot_password'
+     *
+     * @param service - instance of the service type of "Account" to access the database table "account"
+     */
     public ForgotPasswordCommand(AccountService service) {
         this.service = service;
     }

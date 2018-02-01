@@ -11,9 +11,24 @@ import com.epam.abmyotka.hr.service.AccountService;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
+/**
+ * Implementation of the "delete_account" command
+ *
+ * <p>
+ *     It takes an object of type "Account" from the session and, based on it, removes the corresponding account
+ *     from the database.
+ * </p>
+ *
+ * @see Command#execute(HttpServletRequest)
+ */
 public class AccountDeleteCommand implements Command {
     private AccountService accountService;
 
+    /**
+     *  Constructs and initialize commands type of 'register'
+     *
+     * @param accountService - instance of the service type of "Account" to access the database table "account"
+     */
     public AccountDeleteCommand(AccountService accountService) {
         this.accountService = accountService;
     }

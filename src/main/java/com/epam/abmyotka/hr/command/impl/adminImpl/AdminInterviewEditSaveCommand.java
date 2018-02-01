@@ -14,12 +14,29 @@ import com.epam.abmyotka.hr.service.VacancyService;
 
 import javax.servlet.http.HttpServletRequest;
 
+/**
+ * Implementation of the "admin_interview_edit_save" command.
+ *
+ * <p>
+ *     Accepts all information about the interview to update by Administrator, having previously passed validation.
+ * </p>
+ *
+ * @see Command#execute(HttpServletRequest)
+ */
 public class AdminInterviewEditSaveCommand implements Command {
     private InterviewService interviewService;
     private CandidateService candidateService;
     private VacancyService vacancyService;
     private EmployerService employerService;
 
+    /**
+     *  Constructs and initialize commands type of 'admin_interview_edit_save'
+     *
+     * @param interviewService - instance of the service type of "Interview" to access the database table "interview"
+     * @param candidateService - instance of the service type of "Candidate" to access the database table "candidate"
+     * @param vacancyService - instance of the service type of "Vacancy" to access the database table "vacancy"
+     * @param employerService - instance of the service type of "Employer" to access the database table "employer"
+     */
     public AdminInterviewEditSaveCommand(InterviewService interviewService, CandidateService candidateService,
                                          VacancyService vacancyService, EmployerService employerService) {
         this.interviewService = interviewService;

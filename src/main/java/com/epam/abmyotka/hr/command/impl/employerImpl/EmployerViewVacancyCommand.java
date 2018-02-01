@@ -16,11 +16,29 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import java.util.List;
 
+/**
+ * Implementation of the "employer_view_vacancy" command.
+ *
+ * <p>
+ *     Retrieves from the database information about all the vacancies created by this HR, and brief information
+ *     about the candidate for each interview and puts in a request attribute to display on the page to view
+ *     information about the interviews.
+ * </p>
+ *
+ * @see Command#execute(HttpServletRequest)
+ */
 public class EmployerViewVacancyCommand implements Command {
     private AccountService accountService;
     private EmployerService employerService;
     private VacancyService vacancyService;
 
+    /**
+     *  Constructs and initialize commands type of 'employer_view_vacancy'
+     *
+     * @param accountService - instance of the service type of "Account" to access the database table "account"
+     * @param employerService - instance of the service type of "Employer" to access the database table "employer"
+     * @param vacancyService - instance of the service type of "Vacancy" to access the database table "vacancy"
+     */
     public EmployerViewVacancyCommand(AccountService accountService, EmployerService employerService,
                                       VacancyService vacancyService) {
         this.accountService = accountService;

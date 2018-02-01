@@ -5,6 +5,9 @@ import javax.mail.PasswordAuthentication;
 import javax.mail.Session;
 import java.util.Properties;
 
+/**
+ * Mail session configuration.
+ */
 public class SessionCreator {
     private String smtpHost;
     private String smtpPort;

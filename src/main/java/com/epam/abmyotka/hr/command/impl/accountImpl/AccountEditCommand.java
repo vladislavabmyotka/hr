@@ -14,9 +14,25 @@ import com.epam.abmyotka.hr.validator.AccountValidator;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
+/**
+ * Implementation of the "edit_account_data" command
+ *
+ * <p>
+ *     Accepts login, old password, new password, repeated new password for changing account data. If they are
+ *     validated, in the database searching account by old password, and the data is updated based on it.
+ *     Otherwise - error message.
+ * </p>
+ *
+ * @see Command#execute(HttpServletRequest)
+ */
 public class AccountEditCommand implements Command {
     private AccountService service;
 
+    /**
+     *  Constructs and initialize commands type of 'register'
+     *
+     * @param service - instance of the service type of "Account" to access the database table "account"
+     */
     public AccountEditCommand(AccountService service) {
         this.service = service;
     }

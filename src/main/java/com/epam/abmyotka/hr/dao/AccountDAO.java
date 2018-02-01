@@ -10,6 +10,9 @@ import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Implementation of abstract methods AbstractDAO class for working with the 'account' table in database.
+ */
 public class AccountDAO extends AbstractDAO<Account> {
     private final static Logger LOGGER = LogManager.getLogger(AccountDAO.class);
 

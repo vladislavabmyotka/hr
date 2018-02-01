@@ -14,11 +14,26 @@ import org.apache.logging.log4j.Logger;
 
 import javax.servlet.http.HttpServletRequest;
 
+/**
+ * Implementation of the "employer_interview_view_vacancy" command.
+ *
+ * <p>
+ *     Retrieves from request vacancy id, finds vacancy in the database, writes it into the request attribute and
+ *     throws to the page view information about the vacancy from the view of the interview page.
+ * </p>
+ *
+ * @see Command#execute(HttpServletRequest)
+ */
 public class EmployerInterviewViewVacancyCommand implements Command {
     private final static Logger LOGGER = LogManager.getLogger(EmployerInterviewViewVacancyCommand.class);
 
     private VacancyService service;
 
+    /**
+     *  Constructs and initialize commands type of 'employer_interview_view_vacancy'
+     *
+     * @param service - instance of the service type of "Vacancy" to access the database table "vacancy"
+     */
     public EmployerInterviewViewVacancyCommand(VacancyService service) {
         this.service = service;
     }

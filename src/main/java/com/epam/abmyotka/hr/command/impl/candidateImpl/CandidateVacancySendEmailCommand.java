@@ -16,11 +16,25 @@ import org.apache.logging.log4j.Logger;
 
 import javax.servlet.http.HttpServletRequest;
 
+/**
+ * Implementation of the "candidate_vacancy_send_email" command.
+ *
+ * <p>
+ *     Goes to the page for sending a letter to a HR.
+ * </p>
+ *
+ * @see Command#execute(HttpServletRequest)
+ */
 public class CandidateVacancySendEmailCommand implements Command {
     private final static Logger LOGGER = LogManager.getLogger(CandidateVacancySendEmailCommand.class);
 
     private EmployerService employerService;
 
+    /**
+     *  Constructs and initialize commands type of 'candidate_vacancy_send_email'
+     *
+     * @param employerService - instance of the service type of "Employer" to access the database table "employer"
+     */
     public CandidateVacancySendEmailCommand(EmployerService employerService) {
         this.employerService = employerService;
     }

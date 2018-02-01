@@ -14,12 +14,27 @@ import org.apache.logging.log4j.Logger;
 
 import javax.servlet.http.HttpServletRequest;
 
+/**
+ * Implementation of the "admin_vacancy_delete" command.
+ *
+ * <p>
+ *     Removes the vacancy by it's id by Administrator.
+ * </p>
+ *
+ * @see Command#execute(HttpServletRequest)
+ */
 public class AdminVacancyDeleteCommand implements Command {
     private final static Logger LOGGER = LogManager.getLogger(AdminVacancyDeleteCommand.class);
 
     private VacancyService vacancyService;
     private EmployerService employerService;
 
+    /**
+     *  Constructs and initialize commands type of 'admin_vacancy_delete'
+     *
+     * @param vacancyService - instance of the service type of "Vacancy" to access the database table "vacancy"
+     * @param employerService - instance of the service type of "Employer" to access the database table "employer"
+     */
     public AdminVacancyDeleteCommand(VacancyService vacancyService, EmployerService employerService) {
         this.vacancyService = vacancyService;
         this.employerService = employerService;

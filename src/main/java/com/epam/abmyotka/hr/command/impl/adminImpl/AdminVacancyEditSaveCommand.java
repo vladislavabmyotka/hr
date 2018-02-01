@@ -20,12 +20,27 @@ import static com.epam.abmyotka.hr.validator.CandidateEmployerVacancyValidator.c
 import static com.epam.abmyotka.hr.validator.CandidateEmployerVacancyValidator.checkID;
 import static com.epam.abmyotka.hr.validator.CandidateEmployerVacancyValidator.checkSalary;
 
+/**
+ * Implementation of the "admin_vacancy_edit_save" command.
+ *
+ * <p>
+ *     Accepts all information about the vacancy to update by Administrator, having previously passed validation.
+ * </p>
+ *
+ * @see Command#execute(HttpServletRequest)
+ */
 public class AdminVacancyEditSaveCommand implements Command {
     private final static Logger LOGGER = LogManager.getLogger(AdminVacancyEditSaveCommand.class);
 
     private VacancyService vacancyService;
     private EmployerService employerService;
 
+    /**
+     *  Constructs and initialize commands type of 'admin_vacancy_edit_save'
+     *
+     * @param vacancyService - instance of the service type of "Vacancy" to access the database table "vacancy"
+     * @param employerService - instance of the service type of "Employer" to access the database table "employer"
+     */
     public AdminVacancyEditSaveCommand(VacancyService vacancyService, EmployerService employerService) {
         this.vacancyService = vacancyService;
         this.employerService = employerService;

@@ -14,11 +14,25 @@ import org.apache.logging.log4j.Logger;
 
 import javax.servlet.http.HttpServletRequest;
 
+/**
+ * Implementation of the "employer_interview_view_candidate_send_email" command.
+ *
+ * <p>
+ *     Goes to the page for sending a letter to a Candidate.
+ * </p>
+ *
+ * @see Command#execute(HttpServletRequest)
+ */
 public class EmployerInterviewViewCandidateSendEmailCommand implements Command {
     private final static Logger LOGGER = LogManager.getLogger(EmployerInterviewViewCandidateSendEmailCommand.class);
 
     private CandidateService service;
 
+    /**
+     *  Constructs and initialize commands type of 'employer_interview_view_candidate_send_email'
+     *
+     * @param service - instance of the service type of "Candidate" to access the database table "candidate"
+     */
     public EmployerInterviewViewCandidateSendEmailCommand(CandidateService service) {
         this.service = service;
     }

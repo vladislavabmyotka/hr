@@ -19,12 +19,31 @@ import javax.servlet.http.HttpSession;
 import java.util.Objects;
 import java.util.Properties;
 
+/**
+ * Implementation of the "employer_interview_view_candidate_send_email_submit" command.
+ *
+ * <p>
+ *     Accepts the data: to whom to send the letter, the subject of the letter, the message of the letter and
+ *     the password from the e-mail of the HR. Based on these data, it forms an object of the MailTread
+ *     class to send a message to Candidate.
+ * </p>
+ *
+ * @see Command#execute(HttpServletRequest)
+ */
 public class EmployerInterviewViewCandidateSendEmailSubmitCommand implements Command {
     private AccountService accountService;
     private CandidateService candidateService;
     private EmployerService employerService;
     private InterviewService interviewService;
 
+    /**
+     *  Constructs and initialize commands type of 'employer_interview_view_candidate_send_email_submit'
+     *
+     * @param accountService - instance of the service type of "Account" to access the database table "account"
+     * @param candidateService - instance of the service type of "Candidate" to access the database table "candidate"
+     * @param employerService - instance of the service type of "Employer" to access the database table "employer"
+     * @param interviewService - instance of the service type of "Interview" to access the database table "interview"
+     */
     public EmployerInterviewViewCandidateSendEmailSubmitCommand(AccountService accountService,
                 CandidateService candidateService, EmployerService employerService, InterviewService interviewService) {
         this.accountService = accountService;

@@ -7,6 +7,9 @@ import com.epam.abmyotka.hr.entity.Account;
 import java.sql.Connection;
 import java.util.List;
 
+/**
+ * Class-service for working with the table "account" of the database.
+ */
 public class AccountService {
 
     public Account find(Account user) {

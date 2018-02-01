@@ -1,5 +1,9 @@
 package com.epam.abmyotka.hr.controller;
 
+/**
+ * An instance of this class is used as return value of all Command classes.
+ * The object of this class holds the path where you want to go and transfer method: forward or redirect.
+ */
 public class Router {
     public enum RouteType {
         FORWARD, REDIRECT

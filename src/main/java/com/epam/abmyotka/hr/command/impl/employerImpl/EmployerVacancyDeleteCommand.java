@@ -20,6 +20,15 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import java.util.List;
 
+/**
+ * Implementation of the "employer_vacancy_delete" command.
+ *
+ * <p>
+ *     Removes the vacancy by it's id by HR.
+ * </p>
+ *
+ * @see Command#execute(HttpServletRequest)
+ */
 public class EmployerVacancyDeleteCommand implements Command {
     private final static Logger LOGGER = LogManager.getLogger(EmployerVacancyDeleteCommand.class);
 
@@ -27,6 +36,13 @@ public class EmployerVacancyDeleteCommand implements Command {
     private EmployerService employerService;
     private VacancyService vacancyService;
 
+    /**
+     *  Constructs and initialize commands type of 'employer_vacancy_delete'
+     *
+     * @param accountService - instance of the service type of "Account" to access the database table "account"
+     * @param employerService - instance of the service type of "Employer" to access the database table "employer"
+     * @param vacancyService - instance of the service type of "Vacancy" to access the database table "vacancy"
+     */
     public EmployerVacancyDeleteCommand(AccountService accountService, EmployerService employerService,
                                         VacancyService vacancyService) {
         this.accountService = accountService;

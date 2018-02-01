@@ -16,6 +16,15 @@ import org.apache.logging.log4j.Logger;
 
 import javax.servlet.http.HttpServletRequest;
 
+/**
+ * Implementation of the "admin_interview_delete" command.
+ *
+ * <p>
+ *     Removes the interview by it's id by Administrator.
+ * </p>
+ *
+ * @see Command#execute(HttpServletRequest)
+ */
 public class AdminInterviewDeleteCommand implements Command {
     private final static Logger LOGGER = LogManager.getLogger(AdminInterviewDeleteCommand.class);
 
@@ -24,6 +33,14 @@ public class AdminInterviewDeleteCommand implements Command {
     private VacancyService vacancyService;
     private EmployerService employerService;
 
+    /**
+     *  Constructs and initialize commands type of 'admin_interview_delete'
+     *
+     * @param interviewService - instance of the service type of "Interview" to access the database table "interview"
+     * @param candidateService - instance of the service type of "Candidate" to access the database table "candidate"
+     * @param vacancyService - instance of the service type of "Vacancy" to access the database table "vacancy"
+     * @param employerService - instance of the service type of "Employer" to access the database table "employer"
+     */
     public AdminInterviewDeleteCommand(InterviewService interviewService, CandidateService candidateService,
                                        VacancyService vacancyService, EmployerService employerService) {
         this.interviewService = interviewService;

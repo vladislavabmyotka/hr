@@ -10,6 +10,9 @@ import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Implementation of abstract methods AbstractDAO class for working with the 'interview' table in database.
+ */
 public class InterviewDAO extends AbstractDAO<Interview>{
     private final static Logger LOGGER = LogManager.getLogger(InterviewDAO.class);
 

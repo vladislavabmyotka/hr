@@ -6,6 +6,10 @@ import org.apache.logging.log4j.Logger;
 
 import java.util.Optional;
 
+/**
+ * Class, to select a command from the enum 'CommandType' combing by the string value of the command that came with
+ * jsp.
+ */
 public class ActionFactory {
     private final static Logger LOGGER = LogManager.getLogger(ActionFactory.class);
 

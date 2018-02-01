@@ -1,7 +1,9 @@
 package com.epam.abmyotka.hr.constant;
 
+/**
+ * Class constants for the parameters that are passed to the server along with request.
+ */
 public class ParameterConstant {
-    public static final String PARAM_LANGUAGE = "language";
     public static final String PARAM_LOGIN = "login";
     public static final String PARAM_PASSWORD = "password";
     public static final String PARAM_REPEAT_PASSWORD = "repeatPassword";

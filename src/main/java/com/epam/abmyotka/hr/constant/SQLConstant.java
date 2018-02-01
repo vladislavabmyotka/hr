@@ -1,5 +1,8 @@
 package com.epam.abmyotka.hr.constant;
 
+/**
+ * Class constants for all SQL queries used in the corresponding DAO classes.
+ */
 public class SQLConstant {
     public static final String SQL_SELECT_ALL_ACCOUNT = "SELECT * FROM account";
     public static final String SQL_SELECT_SINGLE_LOGIN = "SELECT login FROM account WHERE login = ?";

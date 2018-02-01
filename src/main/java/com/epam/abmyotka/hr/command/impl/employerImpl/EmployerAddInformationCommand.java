@@ -12,10 +12,28 @@ import com.epam.abmyotka.hr.service.EmployerService;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
+/**
+ * Implementation of the "employer_add_information" command.
+ *
+ * <p>
+ *     Extracts from the session object of type "Account" and it finds a match in the database and returns
+ *     account id which is checked if there is already a information of this HR in the database and, if successful,
+ *     throws to the page adding a information about HR, otherwise gives an error message that the information
+ *     already exists.
+ * </p>
+ *
+ * @see Command#execute(HttpServletRequest)
+ */
 public class EmployerAddInformationCommand implements Command {
     private AccountService accountService;
     private EmployerService employerService;
 
+    /**
+     *  Constructs and initialize commands type of 'employer_add_information'
+     *
+     * @param accountService - instance of the service type of "Account" to access the database table "account"
+     * @param employerService - instance of the service type of "Employer" to access the database table "employer"
+     */
     public EmployerAddInformationCommand(AccountService accountService, EmployerService employerService) {
         this.accountService = accountService;
         this.employerService = employerService;

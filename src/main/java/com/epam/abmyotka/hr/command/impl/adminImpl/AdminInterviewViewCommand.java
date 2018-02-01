@@ -19,12 +19,31 @@ import static com.epam.abmyotka.hr.constant.MessageConstant.CANDIDATE_HAS_BEEN_R
 import static com.epam.abmyotka.hr.constant.MessageConstant.EMPLOYER_NOT_ASSIGNED;
 import static com.epam.abmyotka.hr.constant.MessageConstant.VACANCY_HAS_BEEN_REMOVED;
 
+/**
+ * Implementation of the "admin_interview_view" command.
+ *
+ * <p>
+ *     Retrieves from the database information about all the interviews, and brief information about the candidate and
+ *     the HR for each interview and puts in a request attribute to display on the page to view information about
+ *     the interviews.
+ * </p>
+ *
+ * @see Command#execute(HttpServletRequest)
+ */
 public class AdminInterviewViewCommand implements Command {
     private InterviewService interviewService;
     private CandidateService candidateService;
     private VacancyService vacancyService;
     private EmployerService employerService;
 
+    /**
+     *  Constructs and initialize commands type of 'admin_interview_view'
+     *
+     * @param interviewService - instance of the service type of "Interview" to access the database table "interview"
+     * @param candidateService - instance of the service type of "Candidate" to access the database table "candidate"
+     * @param vacancyService - instance of the service type of "Vacancy" to access the database table "vacancy"
+     * @param employerService - instance of the service type of "Employer" to access the database table "employer"
+     */
     public AdminInterviewViewCommand(InterviewService interviewService, CandidateService candidateService,
                                      VacancyService vacancyService, EmployerService employerService) {
         this.interviewService = interviewService;

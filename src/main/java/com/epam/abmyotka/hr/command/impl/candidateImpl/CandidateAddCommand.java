@@ -12,10 +12,27 @@ import com.epam.abmyotka.hr.service.CandidateService;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
+/**
+ * Implementation of the "candidate_add" command.
+ *
+ * <p>
+ *     Extracts from the session object of type "Account" and it finds a match in the database and returns
+ *     account id which is checked if there is already a CV of this candidate in the database and, if successful,
+ *     throws to the page adding a CV, otherwise gives an error message that the resume already exists.
+ * </p>
+ *
+ * @see Command#execute(HttpServletRequest)
+ */
 public class CandidateAddCommand implements Command {
     private AccountService accountService;
     private CandidateService candidateService;
 
+    /**
+     *  Constructs and initialize commands type of 'candidate_add'
+     *
+     * @param accountService - instance of the service type of "Account" to access the database table "account"
+     * @param candidateService - instance of the service type of "Candidate" to access the database table "candidate"
+     */
     public CandidateAddCommand(AccountService accountService, CandidateService candidateService) {
         this.accountService = accountService;
         this.candidateService = candidateService;

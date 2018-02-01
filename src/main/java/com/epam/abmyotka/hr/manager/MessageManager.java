@@ -3,6 +3,9 @@ package com.epam.abmyotka.hr.manager;
 import java.util.Locale;
 import java.util.ResourceBundle;
 
+/**
+ * Manager of the message.
+ */
 public class MessageManager {
     public enum LanguageType {
         RU(ResourceBundle.getBundle("lang.app", new Locale("ru"))),
@@ -19,6 +22,13 @@ public class MessageManager {
         }
     }
 
+    /**
+     * Gets the necessary message from the file-properties by the key, based on the transferred string value of the
+     * user selected language.
+     * @param language - user selected language.
+     * @param key - key to get a message.
+     * @return right message.
+     */
     public static String getMessage(String language, String key) {
         LanguageType type;
         if (language != null) {

@@ -16,11 +16,25 @@ import javax.servlet.http.HttpServletRequest;
 
 import static com.epam.abmyotka.hr.validator.CandidateEmployerVacancyValidator.*;
 
+/**
+ * Implementation of the "candidate_view_edit_save" command
+ *
+ * <p>
+ *     Accepts all information about the candidate to update, having previously passed validation.
+ * </p>
+ *
+ * @see Command#execute(HttpServletRequest)
+ */
 public class CandidateViewEditSaveCommand implements Command {
     private final static Logger LOGGER = LogManager.getLogger(CandidateViewEditSaveCommand.class);
 
     private CandidateService service;
 
+    /**
+     *  Constructs and initialize commands type of 'candidate_view_edit_save'
+     *
+     * @param service - instance of the service type of "Candidate" to access the database table "candidate"
+     */
     public CandidateViewEditSaveCommand(CandidateService service) {
         this.service = service;
     }

@@ -14,11 +14,26 @@ import org.apache.logging.log4j.Logger;
 
 import javax.servlet.http.HttpServletRequest;
 
+/**
+ * Implementation of the "admin_interview_edit" command.
+ *
+ * <p>
+ *     According to the interview id from the request is searched in the database and the formation of the object,
+ *     which is stored in an attribute request to display on a new page of editing the information of the interview.
+ * </p>
+ *
+ * @see Command#execute(HttpServletRequest)
+ */
 public class AdminInterviewEditCommand implements Command {
     private final static Logger LOGGER = LogManager.getLogger(AdminInterviewEditCommand.class);
 
     private InterviewService service;
 
+    /**
+     *  Constructs and initialize commands type of 'admin_interview_edit'
+     *
+     * @param service - instance of the service type of "Interview" to access the database table "interview"
+     */
     public AdminInterviewEditCommand(InterviewService service) {
         this.service = service;
     }

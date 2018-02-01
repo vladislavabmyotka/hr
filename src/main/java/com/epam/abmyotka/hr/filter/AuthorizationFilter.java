@@ -20,6 +20,10 @@ import static com.epam.abmyotka.hr.constant.AccountAttachmentConstant.ADMIN_ATTA
 import static com.epam.abmyotka.hr.constant.AccountAttachmentConstant.CANDIDATE_ATTACHMENT;
 import static com.epam.abmyotka.hr.constant.AccountAttachmentConstant.EMPLOYER_ATTACHMENT;
 
+/**
+ * A filter designed to transfer an authorized user whose role is stored in the session to the corresponding
+ * home page.
+ */
 @WebFilter(filterName = "AuthFilter", urlPatterns = { "/index.jsp" })
 public class AuthorizationFilter implements Filter {
 

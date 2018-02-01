@@ -10,6 +10,9 @@ import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Implementation of abstract methods AbstractDAO class for working with the 'vacancy' table in database.
+ */
 public class VacancyDAO extends AbstractDAO<Vacancy> {
     private final static Logger LOGGER = LogManager.getLogger(VacancyDAO.class);
 

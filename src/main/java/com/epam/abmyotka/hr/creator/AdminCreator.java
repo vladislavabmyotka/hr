@@ -4,6 +4,10 @@ import com.epam.abmyotka.hr.entity.Account;
 
 import java.util.ResourceBundle;
 
+/**
+ * The class whose only method is "createAdmin()" returns an administrator object of type "Account", formed on the
+ * basis of information stored in the corresponding file-property.
+ */
 public class AdminCreator {
 
     public Account createAdmin() {

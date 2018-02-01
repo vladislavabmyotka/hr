@@ -75,21 +75,6 @@ public class Account extends Entity{
                 && (attachment != null ? attachment.equals(account.attachment) : account.attachment == null);
     }
 
-    public boolean equalsIgnoreAccountId(Object o) {
-        if (this == o) {
-            return true;
-        }
-        if (o == null || getClass() != o.getClass()) {
-            return false;
-        }
-
-        Account account = (Account) o;
-
-        return (login != null ? login.equals(account.login) : account.login == null) &&
-                (password != null ? password.equals(account.password) : account.password == null) &&
-                (attachment != null ? attachment.equals(account.attachment) : account.attachment == null);
-    }
-
     @Override
     public int hashCode() {
         int result = accountId;

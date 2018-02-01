@@ -12,6 +12,10 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.List;
 
+/**
+ * The root abstract class in the DAO hierarchy.
+ * @param <T> - It is assumed that T is the class of the hierarchy that is in the Entity package.
+ */
 public abstract class AbstractDAO <T extends Entity> {
     private final static Logger LOGGER = LogManager.getLogger(AbstractDAO.class);
 

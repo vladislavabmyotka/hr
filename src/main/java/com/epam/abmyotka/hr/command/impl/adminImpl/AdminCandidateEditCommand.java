@@ -14,11 +14,26 @@ import org.apache.logging.log4j.Logger;
 
 import javax.servlet.http.HttpServletRequest;
 
+/**
+ * Implementation of the "admin_candidate_edit" command.
+ *
+ * <p>
+ *     According to the candidate id from the request is searched in the database and the formation of the object,
+ *     which is stored in an attribute request to display on a new page of editing the information of the candidate.
+ * </p>
+ *
+ * @see Command#execute(HttpServletRequest)
+ */
 public class AdminCandidateEditCommand implements Command {
     private final static Logger LOGGER = LogManager.getLogger(AdminCandidateEditCommand.class);
 
     private CandidateService service;
 
+    /**
+     *  Constructs and initialize commands type of 'admin_candidate_edit'
+     *
+     * @param service - instance of the service type of "Candidate" to access the database table "candidate"
+     */
     public AdminCandidateEditCommand(CandidateService service) {
         this.service = service;
     }

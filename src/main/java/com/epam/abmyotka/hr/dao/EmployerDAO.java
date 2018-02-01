@@ -10,6 +10,9 @@ import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Implementation of abstract methods AbstractDAO class for working with the 'employer' table in database.
+ */
 public class EmployerDAO extends AbstractDAO<Employer> {
     private final static Logger LOGGER = LogManager.getLogger(EmployerDAO.class);
 

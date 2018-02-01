@@ -14,11 +14,26 @@ import org.apache.logging.log4j.Logger;
 
 import javax.servlet.http.HttpServletRequest;
 
+/**
+ * Implementation of the "admin_vacancy_edit" command.
+ *
+ * <p>
+ *     According to the vacancy id from the request is searched in the database and the formation of the object,
+ *     which is stored in an attribute request to display on a new page of editing the information of the vacancy.
+ * </p>
+ *
+ * @see Command#execute(HttpServletRequest)
+ */
 public class AdminVacancyEditCommand implements Command {
     private final static Logger LOGGER = LogManager.getLogger(AdminVacancyEditCommand.class);
 
     private VacancyService service;
 
+    /**
+     *  Constructs and initialize commands type of 'admin_vacancy_edit'
+     *
+     * @param service - instance of the service type of "Vacancy" to access the database table "vacancy"
+     */
     public AdminVacancyEditCommand(VacancyService service) {
         this.service = service;
     }

@@ -1,5 +1,8 @@
 package com.epam.abmyotka.hr.constant;
 
+/**
+ * Class constants for all regular expressions used in validators classes.
+ */
 public class ValidationRegExConstant {
     public static final String LOGIN_REGEX = "[a-zA-Z][\\s\\w]{4,25}";
     public static final String PASSWORD_REGEX = "^(?=.*\\d)(?=.*[a-zA-Z])[0-9a-zA-Z]{8,25}$";

@@ -18,9 +18,25 @@ import static com.epam.abmyotka.hr.constant.AccountAttachmentConstant.ADMIN_ATTA
 import static com.epam.abmyotka.hr.constant.AccountAttachmentConstant.CANDIDATE_ATTACHMENT;
 import static com.epam.abmyotka.hr.constant.AccountAttachmentConstant.EMPLOYER_ATTACHMENT;
 
+/**
+ * Implementation of the "authorization" command
+ *
+ * <p>
+ *     Takes a username and password. If the data are validated, and they are available in the database
+ *     (i.e. the account was indeed created earlier) based on them it creates an object of type "Account" and saved
+ *     in the session. Otherwise, you will receive a message about invalid data.
+ * </p>
+ *
+ * @see Command#execute(HttpServletRequest)
+ */
 public class AuthorizationCommand implements Command {
     private AccountService service;
 
+    /**
+     *  Constructs and initialize commands type of 'authorization'
+     *
+     * @param service - instance of the service type of "Account" to access the database table "account"
+     */
     public AuthorizationCommand(AccountService service) {
         this.service = service;
     }

@@ -15,9 +15,23 @@ import javax.servlet.http.HttpSession;
 import static com.epam.abmyotka.hr.validator.CandidateEmployerVacancyValidator.*;
 import static com.epam.abmyotka.hr.validator.CandidateEmployerVacancyValidator.checkExperience;
 
+/**
+ * Implementation of the "candidate_add_save" command.
+ *
+ * <p>
+ *     Accepts all information about the candidate to add in database, having previously passed validation.
+ * </p>
+ *
+ * @see Command#execute(HttpServletRequest)
+ */
 public class CandidateAddSaveCommand implements Command {
     private CandidateService service;
 
+    /**
+     *  Constructs and initialize commands type of 'candidate_add_save'
+     *
+     * @param service - instance of the service type of "Candidate" to access the database table "candidate"
+     */
     public CandidateAddSaveCommand(CandidateService service) {
         this.service = service;
     }

@@ -14,11 +14,26 @@ import org.apache.logging.log4j.Logger;
 
 import javax.servlet.http.HttpServletRequest;
 
+/**
+ * Implementation of the "admin_employer_edit" command.
+ *
+ * <p>
+ *     According to the employer id from the request is searched in the database and the formation of the object,
+ *     which is stored in an attribute request to display on a new page of editing the information of the employer.
+ * </p>
+ *
+ * @see Command#execute(HttpServletRequest)
+ */
 public class AdminEmployerEditCommand implements Command {
     private final static Logger LOGGER = LogManager.getLogger(AdminEmployerEditCommand.class);
 
     private EmployerService service;
 
+    /**
+     *  Constructs and initialize commands type of 'admin_employer_edit'
+     *
+     * @param service - instance of the service type of "Employer" to access the database table "employer"
+     */
     public AdminEmployerEditCommand(EmployerService service) {
         this.service = service;
     }

@@ -16,6 +16,9 @@ import java.net.ProtocolException;
 import java.net.URL;
 import javax.json.Json;
 
+/**
+ * Utility class for validation ReCaptcha.
+ */
 public class VerifyValidator {
     private final static Logger LOGGER = LogManager.getLogger(VerifyValidator.class);
 

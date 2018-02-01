@@ -20,6 +20,15 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import java.util.List;
 
+/**
+ * Implementation of the "employer_interview_delete" command.
+ *
+ * <p>
+ *     Removes the interview by it's id by HR.
+ * </p>
+ *
+ * @see Command#execute(HttpServletRequest)
+ */
 public class EmployerInterviewDeleteCommand implements Command {
     private final static Logger LOGGER = LogManager.getLogger(EmployerInterviewDeleteCommand.class);
 
@@ -27,6 +36,13 @@ public class EmployerInterviewDeleteCommand implements Command {
     private EmployerService employerService;
     private InterviewService interviewService;
 
+    /**
+     *  Constructs and initialize commands type of 'employer_interview_delete'
+     *
+     * @param accountService - instance of the service type of "Account" to access the database table "account"
+     * @param employerService - instance of the service type of "Employer" to access the database table "employer"
+     * @param interviewService - instance of the service type of "Interview" to access the database table "interview"
+     */
     public EmployerInterviewDeleteCommand(AccountService accountService, EmployerService employerService,
                                           InterviewService interviewService) {
         this.accountService = accountService;

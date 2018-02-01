@@ -13,6 +13,9 @@ import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
 import java.util.Properties;
 
+/**
+ * Class for sending mail messages.
+ */
 public class MailThread extends Thread{
     private final static Logger LOGGER = LogManager.getLogger(MailThread.class);
 
@@ -22,6 +25,15 @@ public class MailThread extends Thread{
     private String mailText;
     private Properties properties;
 
+    /**
+     *  Constructs and initialize MailThread object.
+     *
+     * @param sendToEmail - the e-mail address to which you want to send a message.
+     * @param fromEmail - the e-mail address from which the message is sent.
+     * @param mailTheme - the headline of the message.
+     * @param mailText - the main text of the message.
+     * @param properties - host, port, username, password.
+     */
     public MailThread(String sendToEmail, String fromEmail, String mailTheme, String mailText, Properties properties) {
         this.sendToEmail = sendToEmail;
         this.fromEmail = fromEmail;
@@ -30,6 +42,9 @@ public class MailThread extends Thread{
         this.properties = properties;
     }
 
+    /**
+     * Thread that sends mail messages.
+     */
     @Override
     public void run() {
         Session mailSession = (new SessionCreator(properties)).createSession();

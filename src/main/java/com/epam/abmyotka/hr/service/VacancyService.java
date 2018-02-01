@@ -7,6 +7,9 @@ import com.epam.abmyotka.hr.entity.Vacancy;
 import java.sql.Connection;
 import java.util.List;
 
+/**
+ * Class-service for working with the table "vacancy" of the database.
+ */
 public class VacancyService {
 
     public List<Vacancy> takeAll() {

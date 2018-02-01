@@ -7,6 +7,9 @@ import com.epam.abmyotka.hr.entity.Candidate;
 import java.sql.Connection;
 import java.util.List;
 
+/**
+ * Class-service for working with the table "candidate" of the database.
+ */
 public class CandidateService {
 
     public List<Candidate> takeAll() {

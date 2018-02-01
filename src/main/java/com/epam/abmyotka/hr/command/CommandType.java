@@ -8,6 +8,10 @@ import com.epam.abmyotka.hr.command.impl.candidateImpl.*;
 import com.epam.abmyotka.hr.command.impl.employerImpl.*;
 import com.epam.abmyotka.hr.service.*;
 
+/**
+ *  In this enumeration lists the values in uppercase are located in the hidden field of the command type in all jsp.
+ */
+
 public enum CommandType {
     INDEX(new IndexCommand()),
     REGISTER_RELOAD(new RegisterReloadCommand()),
@@ -76,6 +80,10 @@ public enum CommandType {
 
     private Command command;
 
+    /**
+     * Constructs and initializes a Command.
+     * @param command - command that came with jsp.
+     */
     CommandType(Command command) {
         this.command = command;
     }

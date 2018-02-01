@@ -1,5 +1,9 @@
 package com.epam.abmyotka.hr.constant;
 
+/**
+ * Class constants for messages whose values are taken from the file-properties to display on JSP, informational
+ * in nature.
+ */
 public class MessageConstant {
     public static final String INCORRECT_LOGIN_PASSWORD_MESSAGE = "message.incorrect.login.password";
     public static final String USED_LOGIN_MESSAGE = "message.used.login";

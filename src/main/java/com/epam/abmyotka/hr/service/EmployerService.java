@@ -7,6 +7,9 @@ import com.epam.abmyotka.hr.entity.Employer;
 import java.sql.Connection;
 import java.util.List;
 
+/**
+ * Class-service for working with the table "employer" of the database.
+ */
 public class EmployerService {
 
     public List<Employer> takeAll() {

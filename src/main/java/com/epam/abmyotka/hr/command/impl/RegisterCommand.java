@@ -15,9 +15,27 @@ import com.epam.abmyotka.hr.validator.VerifyValidator;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
+/**
+ * Implementation of the "register" command.
+ *
+ * <p>
+ *     Accepts from the page login, password, re-password, role and value of the ReCaptcha for registration of a new
+ *     user of the system. The validation of the above fields for validity occurs, in case of failure, the user
+ *     receives a corresponding message on the page. Also, registration will fail for the user if the login is
+ *     already use.
+ * </p>
+ *
+ * @see Command#execute(HttpServletRequest)
+ */
 public class RegisterCommand implements Command {
     private AccountService service;
 
+
+    /**
+     *  Constructs and initialize commands type of 'register'.
+     *
+     * @param service - instance of the service type of "Account" to access the database table "account".
+     */
     public RegisterCommand(AccountService service) {
         this.service = service;
     }
